@@ -1,4 +1,4 @@
-# FresherNote
+# SoundsAllAround
 
 [Heroku link][heroku] **NB:** This should be a link to your production site
 
@@ -6,18 +6,19 @@
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote built using Ruby on Rails
-and React.js. FresherNote allows users to:
+SoundsAllAround is a web application inspired by SoundCloud built using Ruby on Rails and React.js.
+
+SoundsAllAround allows users to:
 
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
 
 - [ ] Create an account
 - [ ] Log in / Log out
-- [ ] Create, read, edit, and delete notes
-- [ ] Organize notes within Notebooks
-- [ ] Tag notes with multiple tags
-- [ ] Apply complex styling to notes while editing
+- [ ] Create, edit, view, and delete playlists of tracks
+- [ ] Follow other users
+- [ ] Like tracks
+- [ ] Upload tracks
 
 ## Design Docs
 * [View Wireframes][views]
