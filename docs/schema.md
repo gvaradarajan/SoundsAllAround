@@ -8,7 +8,7 @@ title       | string    | not null, indexed
 artist_id   | integer   | not null, foreign key (references users), indexed
 album_name  | string    | indexed
 photo_url   | string    |
-song_url    | string    | not_null, to access blob data
+sound_url   | string    | not_null, to access blob data
 
 ## playlists
 column name | data type | details
@@ -47,4 +47,4 @@ username        | string    | not null, indexed, unique
 email           | string    | not null, indexed, unique
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
-photo_url       | string    | not null
+photo_url       | string    |

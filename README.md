@@ -45,75 +45,77 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] user signup/signin pages
 - [ ] blank landing page after signin
 
-### Phase 2: Notes Model, API, and basic APIUtil (1.5 days)
+### Phase 2: Playlists and Tracks (Models, API) (2 days)
 
-**Objective:** Notes can be created, read, edited and destroyed through
-the API.
+**Objective:** Playlists can be created, read, edited and destroyed through
+the API. Tracks can be added to playlists.
 
-- [ ] create `Note` model
+- [ ] create `Playlist` and `Track` model
 - [ ] seed the database with a small amount of test data
-- [ ] CRUD API for notes (`NotesController`)
-- [ ] jBuilder views for notes
+- [ ] CRUD API for playlists (`NotesController`)
+- [ ] jBuilder views for playlists and tracks
 - [ ] setup Webpack & Flux scaffold
 - [ ] setup `APIUtil` to interact with the API
 - [ ] test out API interaction in the console.
 
-### Phase 3: Flux Architecture and Router (1.5 days)
+### Phase 3: Flux Architecture and Router (2 days)
 
-**Objective:** Notes can be created, read, edited and destroyed with the
+**Objective:** Playlists can be created, read, edited and destroyed with the
 user interface.
 
 - [ ] setup the flux loop with skeleton files
 - [ ] setup React Router
-- implement each note component, building out the flux loop as needed.
-  - [ ] `NotesIndex`
-  - [ ] `NoteIndexItem`
-  - [ ] `NoteForm`
-- [ ] save Notes to the DB when the form loses focus or is left idle
-  after editing.
+- implement each Playlist and Track component, building out the flux loop as needed.
+  - [ ] `PlaylistIndex`
+  - [ ] `PlaylistIndexItem`
+  - [ ] `PlaylistForm`
+  - [ ] `AllTrackIndex`
+  - [ ] `TrackIndexItem`
+  - [ ] `LandscapeTrackItem`
+- setup simple belongs_to/has_many association between playlists and tracks for testing purposes
 
-### Phase 4: Start Styling (0.5 days)
 
-**Objective:** Existing pages (including singup/signin) will look good.
+### Phase 4: Basic Styling (0.5 days)
+
+**Objective:** Existing pages (including signup/signin) will look good.
 
 - [ ] create a basic style guide
 - [ ] position elements on the page
 - [ ] add basic colors & styles
 
-### Phase 5: Notebooks (1 day)
+### Phase 5: tracks_of_playlists, follows and likes (1 day)
 
-**Objective:** Notes belong to Notebooks, and can be viewed by notebook.
+**Objective:** Playlists have many tracks, tracks can be on many playlists. Users can follow other users, and like tracks. Tracks and playlists can be searched
 
-- [ ] create `Notebook` model
+- [ ] create `follows` and `likes` joins tables and concerns
+- [ ] do the same for tracks_of_playlists, replacing previous playlist-track associations
 - build out API, Flux loop, and components for:
-  - [ ] Notebook CRUD
-  - [ ] adding notes requires a notebook
-  - [ ] moving notes to a different notebook
-  - [ ] viewing notes by notebook
+  - [ ] `follow` and `like` CRUD
+  - [ ] `FollowedTracksIndex`
+  - [ ] `LikedTrackIndex`
+  - [ ] `SearchIndex`
+  - [ ] `LandscapeTrackItem` (preliminary, to be finished later)
+	- [ ] searching for tracks and playlists
 - Use CSS to style new views
+- create more seed data
 
-Phase 3 adds organization to the Notes. Notes belong to a Notebook,
-which has its own `Index` view.
+### Phase 6: Sound (1.5 days)
 
-### Phase 6: Tags (1.5 days)
+**Objective:** Tracks and Playlists can be played
 
-**Objective:** Notes can be tagged with multiple tags, and tags are searchable.
-
-- [ ] create `Tag` model and join table
+- [ ] give tracks a sound_url column, to which a `GET` request can be made for playing sound (using Web Audio API, or that's how I hope it works)
 - build out API, Flux loop, and components for:
-  - [ ] fetching tags for notebook
-  - [ ] adding tags to notebook
-  - [ ] creating tags while adding to notebooks
-  - [ ] searching notebooks by tag
-- [ ] Style new elements
+  - [ ] playing a track
+  - [ ] playing a playlist
 
-### Phase 7: Allow Complex Styling in Notes (0.5 days)
 
-**objective:** Enable complex styling of notes.
+### Phase 7: Advanced Styling (0.5 days)
 
-- [ ] Integrate `react-quill` (based on Quill.js).
-- [ ] Use Rails helpers to sanitize HTML before rendering.
-- [ ] Style the new Quill elements.
+**objective:** Make more prettier. (Users have profile pictures, tracks have photos and waveform visuals)
+
+- [ ] add photo_url column for track and user
+- [ ] use wavesurfer.js to produce waveform visualization
+- [ ] Style all of the new elements
 
 ### Phase 8: Styling Cleanup and Seeding (1 day)
 
@@ -122,13 +124,13 @@ which has its own `Index` view.
 - [ ] Get feedback on my UI from others
 - [ ] Refactor HTML classes & CSS rules
 - [ ] Add modals, transitions, and other styling flourishes.
+- [ ] possible animations
 
 ### Bonus Features (TBD)
-- [ ] Search through notes for blocks of text
-- [ ] Pagination / infinite scroll for Notes Index
-- [ ] Set reminders on notes
-- [ ] Changelogs for Notes
-- [ ] Multiple sessions
+- [ ] Pagination / infinite scroll
+- [ ] Users can record sound to upload as tracks
+- [ ] Multiple Sessions
+- [ ] Implement an algorithm for track suggestions (I have an idea for this).
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

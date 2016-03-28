@@ -2,8 +2,12 @@
 
 ## Rails
 ### Models
+* Playlist
+* Track
 
 ### Controllers
+* Api::PlaylistsController (create, destroy, index, show, update)
+* Api::TracksController (index, show, update(with playlist_id temporarily))
 
 ### Views
 
@@ -21,9 +25,9 @@
 * ApiActions.receiveSingleNote
 * ApiActions.deleteNote
 * NoteActions.fetchAllNotes -> triggers ApiUtil
-* NoteActions.fetchSingleNote 
+* NoteActions.fetchSingleNote
 * NoteActions.createNote
-* NoteActions.editNote 
+* NoteActions.editNote
 * NoteActions.destroyNote
 
 ### ApiUtil
