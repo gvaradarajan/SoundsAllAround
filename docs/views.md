@@ -21,6 +21,9 @@
 ## PlaylistIndexItem / FollowedTracksIndex
 ![landscape-track-holder]
 
+## PlaylistForm
+![playlist-form]
+
 ##TrackIndexItem
 ![track-index-item]
 
@@ -39,4 +42,5 @@
 [track-index-item]: ./wireframes/track_index_item.jpg
 [track-index]: ./wireframes/track_index.jpg
 [playlist-index]: ./wireframes/playlist_index.jpg
+[playlist-form]: ./wireframes/playlist_form.jpg
 [track-form]: ./wireframes/track_form.jpg
