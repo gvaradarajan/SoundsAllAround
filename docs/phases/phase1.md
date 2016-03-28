@@ -11,6 +11,8 @@
 
 ### Views
 * users/new.html.erb
+* users/show.json.jbuilder
+* users/index.json.jbuilder
 * session/new.html.erb
 
 ## Flux

@@ -13,30 +13,37 @@
 
 ## Flux
 ### Views (React Components)
-* NotesIndex
-  - NotesIndexItem
-* NoteForm
+* PlaylistIndex
+  - PlaylistsIndexItem
+* AllTrackIndex
+	-TrackIndexItem
 
 ### Stores
-* Note
+* Track
+* Playlist
 
 ### Actions
-* ApiActions.receiveAllNotes -> triggered by ApiUtil
-* ApiActions.receiveSingleNote
-* ApiActions.deleteNote
-* NoteActions.fetchAllNotes -> triggers ApiUtil
-* NoteActions.fetchSingleNote
-* NoteActions.createNote
-* NoteActions.editNote
-* NoteActions.destroyNote
+* ApiActions.receiveAllPlaylists -> triggered by ApiUtil
+* ApiActions.receiveSinglePlaylist
+* ApiActions.deletePlaylist
+* ApiActions.receiveAllTracks -> triggered by ApiUtil
+* ApiActions.receiveSingleTrack
+* TrackActions.fetchAllTracks -> triggers ApiUtil
+* TrackActions.fetchSingleTrack -> triggers ApiUtil
+* PlaylistActions.fetchAllPlaylists -> triggers ApiUtil
+* PlaylistActions.fetchSinglePlaylist
+* PlaylistActions.createPlaylist
+* PlaylistActions.editPlaylist
+* PlaylistActions.destroyPlaylist
 
 ### ApiUtil
-* ApiUtil.fetchAllNotes
-* ApiUtil.fetchSingleNote
-* ApiUtil.createNote
-* ApiUtil.editNote
-* ApiUtil.destroyNote
+* ApiUtil.fetchAllTracks
+* ApiUtil.fetchSingleTrack
+* ApiUtil.fetchAllPlaylists
+* ApiUtil.fetchSinglePlaylist
+* ApiUtil.createPlaylist
+* ApiUtil.editPlaylist
+* ApiUtil.destroyPlaylist
 
 ## Gems/Libraries
 * Flux Dispatcher (npm)
-* Twitter Bootstrap
