@@ -15,8 +15,8 @@
 ## AllTrackIndex / LikedTrackIndex
 ![track-index]
 
-## TrackUploadForm
-![track-form]
+## PlaylistIndex
+![playlist-index]
 
 ## PlaylistIndexItem / FollowedTracksIndex
 ![landscape-track-holder]
@@ -27,8 +27,8 @@
 ##LandscapeTrackItem
 ![landscape-track]
 
-## PlaylistIndex
-![notebook-form]
+## TrackUploadForm
+![track-form]
 
 [before-sign-in]: ./wireframes/before_sign_in.jpg
 [new-user]: ./wireframes/new_user.jpg
