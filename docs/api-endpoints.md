@@ -13,8 +13,6 @@
 - `POST /session`
 - `DELETE /session`
 
-## JSON API
-
 ### Users
 
 - `GET /users/new`
@@ -22,43 +20,7 @@
 - `POST /users`
 - `PATCH /users`
 
-### FollowedUsers
-
-- `GET /users/:id/followedusers`
-- `GET /users/:id/followedusers/:id`
-- `POST /users/:id/followedusers`
-	- creates a new follow
-- `DELETE /users/:id/followedusers/:id`
-	- unfollows
-
-
-### LikedTracks
-
-- `GET /api/users/:id/likedtracks`
-  - uses likes table to find tracks
-  - accepts pagination params (if I get there)
-- `POST /api/users/:id/likedtracks`
-	- creates a new like
-- `GET /api/users/:id/likedtracks/:id`
-- `PATCH /api/users/:id/likedtracks/`
-- `DELETE /api/users/:id/likedtracks/:id`
-
-### FollowedTracks
-
-- `GET /api/users/:id/followedtracks`
-	- Uses has_many_through association of current user to followed users to followed user's tracks
-	- accepts pagination params (if I get there)
-- `GET /api/users/:id/followedtracks/:id`
-
-
-### UploadedTracks
-
-- `GET /api/users/:id/uploadedtracks`
-	- accepts pagination params (if I get there)
-- `POST /api/users/:id/uploadedtracks`
-- `GET /api/users/:id/uploadedtracks/:id`
-- `PATCH /api/users/:id/uploadedtracks/`
-- `DELETE /api/users/:id/uploadedtracks/:id`
+## JSON API
 
 
 ### AllTracks
@@ -71,13 +33,49 @@
 - `PATCH /api/tracks/:id`
 - `DELETE /api/tracks/:id`
 
+***** The following are based on the current user *****
+
+### FollowedUsers
+
+- `GET /followedusers`
+- `GET /followedusers/:id`
+  - links to a user's profile
+- `POST /followedusers`
+	- creates a new follow
+- `DELETE /followedusers/:id`
+	- unfollows
+
+
+### LikedTracks
+
+- `GET /likedtracks`
+  - uses likes table to find tracks
+  - accepts pagination params (if I get there)
+- `POST /likedtracks`
+	- creates a new like
+- `DELETE /likedtracks/:id`
+
+### FollowedTracks
+
+- `GET /followedtracks`
+	- Uses has_many_through association of current user to followed users to followed user's tracks
+	- accepts pagination params (if I get there)
+
+
+### UploadedTracks
+
+- `GET /uploadedtracks`
+	- accepts pagination params (if I get there)
+- `POST /uploadedtracks`
+- `DELETE /uploadedtracks/:id`
+
 ### Playlists
 
-- `GET /api/users/:id/playlists`
-- `POST /api/users/:id/playlists`
-- `GET /api/users/:id/playlists/:id`
-- `PATCH /api/users/:id/playlists/:id`
-- `DELETE /api/users/:id/playlists/:id`
-- `GET /api/users/:id/playlists/:id/tracks`
-  - index of all tracks for a playlist
-  - accepts pagination params (if I get there)
+- `GET /playlists`
+- `POST /playlists`
+- `GET /playlists/:id`
+- `PATCH /playlists/:id`
+- `DELETE /playlists/:id`
+- `GET /playlists/:id/tracks`
+- index of all tracks for a playlist
+- accepts pagination params (if I get there)
