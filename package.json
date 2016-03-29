@@ -1,0 +1,33 @@
+{
+  "name": "SoundsAllAround",
+  "version": "1.0.0",
+  "description": "[Heroku link][heroku] **NB:** This should be a link to your production site",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gvaradarajan/SoundsAllAround.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gvaradarajan/SoundsAllAround/issues"
+  },
+  "homepage": "https://github.com/gvaradarajan/SoundsAllAround#readme",
+  "dependencies": {
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "flux": "^2.1.1",
+    "react": "^0.14.8",
+    "react-dom": "^0.14.8",
+    "webpack": "^1.12.14"
+  }
+}
