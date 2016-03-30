@@ -15,7 +15,8 @@
  */
 
 
- /*html, body, header, nav, h1, a, ul, li,
+
+ html, body, header, nav, h1, a, ul, li,
  strong, main, section, img, div, h2, p,
  form, fieldset, label, input, textarea,
  button, article, footer, small {
@@ -32,8 +33,51 @@
    background: transparent;
  }
 
+ body {
+   font-family: sans-serif;
+   box-sizing: content-box;
+   font-size: 16px;
+ }
+
  .group:after {
    content: "";
    clear: both;
    display: block;
- }*/
+ }
+
+ .header {
+   font-weight: bold;
+   font-size: 36px;
+   width: 600px;
+   margin: 20px auto;
+ }
+
+ .cred-form {
+   width: 300px;
+   margin: auto;
+   background: #ccc;
+   padding: 19px;
+ }
+
+ .label {
+   display: block;
+   font-weight: bold;
+   padding-bottom: 5px;
+ }
+
+ .field {
+   display: block;
+   background: white;
+   border: 1px solid #eee;
+   padding: 5px;
+   width: 270px;
+   margin: 10px;
+ }
+
+ .submit-button {
+   background: #f50;
+   color: white;
+   padding: 10px 20px;
+   border-radius: 10%;
+   box-sizing: border-box;
+ }

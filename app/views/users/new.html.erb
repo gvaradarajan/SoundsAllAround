@@ -1,22 +1,22 @@
-<h1>Sign Up</h1>
+<h1 class="sign-up header">Sign Up</h1>
 
-<form class="" action="<%= users_url %>" method="post">
+<form class="sign-up cred-form" action="<%= users_url %>" method="post">
   <%= auth_token_input %>
 
-  <label>
+  <label class="username label">
     Username
-    <input type="text" name="user[username]" value="">
   </label>
+    <input class="username field" type="text" name="user[username]" value="">
 
-  <label>
+  <label class="email label">
     Email
-    <input type="text" name="user[email]" value="">
   </label>
+    <input class="email field" type="text" name="user[email]" value="">
 
-  <label>
+  <label class="password label">
     Password
-    <input type="password" name="user[password]" value="">
   </label>
+    <input class="password field" type="password" name="user[password]" value="">
 
-  <input type="submit" value="Sign Up">
+  <input class="submit-button" type="submit" value="Sign Up">
 </form>
