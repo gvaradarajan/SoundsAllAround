@@ -39,6 +39,10 @@
    font-size: 16px;
  }
 
+ ul {
+   list-style: none;
+ }
+
  .group:after {
    content: "";
    clear: both;
@@ -79,5 +83,24 @@
    color: white;
    padding: 10px 20px;
    border-radius: 10%;
+   box-sizing: border-box;
+ }
+
+ .playlists-index {
+   width: 600px;
+   margin: auto;
+   font-weight: bold;
+ }
+
+ .playlists-header {
+   font-size: 24px;
+   padding-bottom: 20px;
+ }
+
+ li {
+   width: 600px;
+   height: 180px;
+   display: block;
+   margin: auto;
    box-sizing: border-box;
  }

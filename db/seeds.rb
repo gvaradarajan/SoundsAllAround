@@ -15,3 +15,27 @@ test_users = User.create!([{username: 'Kirk',
                            {username: 'Uhura',
                             email: 'thebest@enterprise.io',
                             password: 'clearly'}])
+
+
+scotty = User.create!({username: 'Scotty',
+                       email: 'beamMeup@enterprise.io',
+                       password: 'allshesgot'})
+
+scotty.playlists.create!({title: 'Music of the Highlanders',
+                          description: 'The music of my people'})
+scotty.playlists.create!({title: 'People Yelling Things'})
+
+
+spock = test_users[1]
+kirk = test_users[0]
+uhura = test_users[2]
+
+spock.playlists.create!({title: 'Sounds that Volcanoes Make'})
+
+scotty.uploaded_tracks.create!([{title: 'Loch Lomond'},
+                                {title: 'Whoa Nessie'}])
+
+kirk.uploaded_tracks.create!([{title: 'Alien Strange'},
+                              {title: 'I Shatnered Myself'}])
+
+uhura.uploaded_tracks.create!([{title: 'Zoe Saldana is Overrated'}])

@@ -5,8 +5,9 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    render 'show.json.jbuilder'
+    @user = User.includes(playlists: :user)
+                .includes(uploaded_tracks: :artist)
+                .find(params[:id])
   end
 
 end

@@ -9,6 +9,13 @@ class User < ActiveRecord::Base
 
   has_many :playlists
 
+  has_many(
+    :uploaded_tracks,
+    class_name: "Track",
+    primary_key: :id,
+    foreign_key: :artist_id
+  )
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     user && (user.is_password?(password) ? user : nil)

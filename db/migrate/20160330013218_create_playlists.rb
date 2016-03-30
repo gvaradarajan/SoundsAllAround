@@ -8,6 +8,8 @@ class CreatePlaylists < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :user_id, :title
+    add_index :playlists, :user_id
+    add_index :playlists, :title
+
   end
 end
