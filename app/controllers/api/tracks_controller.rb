@@ -18,6 +18,7 @@ class Api::TracksController < ApplicationController
   private
 
   def track_params
+    params.require(:track).permit(:title)
   end
 
 
