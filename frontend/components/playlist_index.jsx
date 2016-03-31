@@ -2,20 +2,17 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var PlaylistIndexItem = require('./playlist_index_item');
 var PlaylistForm = require('./playlist_form');
-var UserPlaylistStore = require('../stores/user_playlist_store');
 
 var PlaylistIndex = React.createClass({
   getInitialState: function () {
-    return { playlists: this.props.user && this.props.user.playlists };
+    return { };
   },
   componentDidMount: function () {
-    UserPlaylistStore.addListener(this.resetIndex);
   },
   resetIndex: function () {
-    this.setState({ playlists: UserPlaylistStore.all() });
   },
   render: function() {
-    var playlists = this.state.playlists;
+    var playlists = this.props.user && this.props.user.playlists;
     var playlistItems = playlists && playlists.map(function (playlist) {
       return <PlaylistIndexItem key={playlist.id} playlist={playlist} />;
     });

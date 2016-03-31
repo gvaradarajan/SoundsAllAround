@@ -8,8 +8,29 @@ var BrowserHistory = require('react-router').browserHistory;
 
 var App = require('./components/app');
 var UserHome = require('./components/user_home');
+var Login = require('./components/login');
 var PlaylistIndex = require('./components/playlist_index');
 var Playlists = require('./components/all_playlists');
+
+var CurrentUserStore = require("./stores/current_user_store");
+
+var ApiUtil = require('./util/api_util');
+
+var _requireLoggedIn = function (nextState, replace, asyncCallback) {
+  if (CurrentUserStore.currentUserFetched()) {
+    _notLoggedInRedirect(replace, asyncCallback);
+  }
+  else {
+    ApiUtil.fetchCurrentUser(_notLoggedInRedirect.bind(null, replace, asyncCallback));
+  }
+};
+
+var _notLoggedInRedirect = function (replace, asyncCallback) {
+  if (!CurrentUserStore.isLoggedIn()) {
+    replace("/login");
+  }
+  asyncCallback();
+};
 
 var NotFound = React.createClass({
   render: function () {
@@ -19,7 +40,8 @@ var NotFound = React.createClass({
 
 var routes = (
   <Route path="/" component={App}>
-    <Route path="users/:id" component={UserHome}>
+    <Route path="login" component={Login} />
+    <Route path="users/:id" component={UserHome} onEnter={_requireLoggedIn}>
       <Route path="playlists" component={PlaylistIndex} />
     </Route>
     <Route path="playlists" component={Playlists} />

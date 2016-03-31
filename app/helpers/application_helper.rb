@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def sign_out_button
     <<-HTML.html_safe
-    <form class="sign-out" action="#{session_url}" method="post">
+    <form class="sign-out" action="#{api_session_url}" method="post">
       <input
           type=\"hidden\"
           name=\"authenticity_token\"

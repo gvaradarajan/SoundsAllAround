@@ -5,7 +5,15 @@ var PlaylistForm = React.createClass({
   
   render: function() {
     return (
-      <div />
+      <form>
+        <div>
+          <input></input>
+        </div>
+        <div>
+          <textarea></textarea>
+        </div>
+        <button>Create Playlist</button>
+      </form>
     );
   }
 

@@ -26,4 +26,10 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  private
+
+  def ensure_signed_in
+    redirect_to root_url unless signed_in?
+  end
+
 end

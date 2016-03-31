@@ -27,6 +27,10 @@ UserStore.__onDispatch = function (payload) {
       resetUser(payload.user);
       UserStore.__emitChange();
       break;
+    case "PLAYLIST_CREATED":
+      resetUser(payload.user);
+      UserStore.__emitChange();
+      break;
     default:
 
   }

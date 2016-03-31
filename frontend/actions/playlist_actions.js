@@ -6,5 +6,11 @@ module.exports = {
       actionType: "PLAYLISTS_RECEIVED",
       playlists: playlists
     });
+  },
+  receivePlaylistCreation: function (playlist) {
+    AppDispatcher.dispatch({
+      actionType: "PLAYLIST_CREATED",
+      playlists: playlist
+    });
   }
 };

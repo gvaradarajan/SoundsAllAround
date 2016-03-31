@@ -1,7 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var UserStore = require('../stores/user_store');
-var UserPlaylistStore = require('../stores/user_playlist_store');
 var ApiUtil = require('../util/api_util');
 var PlaylistIndex = require('./playlist_index');
 
