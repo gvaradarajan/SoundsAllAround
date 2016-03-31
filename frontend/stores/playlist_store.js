@@ -1,5 +1,6 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher/dispatcher');
+var PlaylistConstants = require('../constants/playlist_constants');
 
 var PlaylistStore = new Store(AppDispatcher);
 
@@ -30,7 +31,7 @@ PlaylistStore.find = function (id) {
 
 PlaylistStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case "PLAYLISTS_RECEIVED":
+    case PlaylistConstants.PLAYLISTS_RECEIVED:
       resetPlaylists(payload.playlists);
       PlaylistStore.__emitChange();
       break;

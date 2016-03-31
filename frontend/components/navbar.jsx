@@ -22,16 +22,9 @@ var NavBar = React.createClass({
     var router = this.context.router;
     router.push("/login");
   },
-  toggleState: function () {
-    this.setState({ signedIn: CurrentUserStore.isLoggedIn()});
-  },
-  render: function() {
-    var welcomeMessage = "";
+  makeSignInOrSignOut: function () {
     var signoutOrSignIn = "";
     if (this.state.signedIn) {
-      welcomeMessage = (
-        <li>Welcome {CurrentUserStore.currentUser.username}!</li>
-      );
       signoutOrSignIn = (
         <li>
           <a onClick={this.beginSignOut}>Sign Out</a>
@@ -45,10 +38,25 @@ var NavBar = React.createClass({
         </li>
       );
     }
+    return signoutOrSignIn;
+  },
+  toggleState: function () {
+    this.setState({ signedIn: CurrentUserStore.isLoggedIn()});
+  },
+  render: function() {
+    var welcomeMessage = "";
+    if (this.state.signedIn) {
+      welcomeMessage = (
+        <li>Welcome {CurrentUserStore.currentUser.username}!</li>
+      );
+    }
+    else {
+
+    }
     return (
       <ul>
         {welcomeMessage}
-        {signoutOrSignIn}
+        {this.makeSignInOrSignOut()}
       </ul>
     );
   }

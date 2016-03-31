@@ -1,5 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher/dispatcher');
+var PlaylistConstants = require('../constants/playlist_constants');
+var UserConstants = require('../constants/user_constants');
 
 var UserStore = new Store(AppDispatcher);
 
@@ -23,11 +25,11 @@ UserStore.find = function (id) {
 
 UserStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case "USER_RECEIVED":
+    case UserConstants.USER_RECEIVED:
       resetUser(payload.user);
       UserStore.__emitChange();
       break;
-    case "PLAYLIST_CREATED":
+    case PlaylistConstants.PLAYLIST_CREATED:
       resetUser(payload.user);
       UserStore.__emitChange();
       break;
