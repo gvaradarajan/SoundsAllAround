@@ -6,8 +6,12 @@ var PlaylistIndexItem = React.createClass({
   render: function() {
     var title = this.props.playlist && this.props.playlist.title;
     var des = this.props.playlist && this.props.playlist.description;
+    var artist = this.props.playlist && this.props.playlist.artist;
     return (
-      <li>{title}: {des}</li>
+      <li>
+        <h1>{title}: {des}</h1>
+        <p>{artist}</p>
+      </li>
     );
   }
 

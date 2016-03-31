@@ -9,10 +9,11 @@ var BrowserHistory = require('react-router').browserHistory;
 var App = require('./components/app');
 var UserHome = require('./components/user_home');
 var PlaylistIndex = require('./components/playlist_index');
+var Playlists = require('./components/all_playlists');
 
 var NotFound = React.createClass({
   render: function () {
-    return <div></div>;
+    return <div>404 Not Found</div>;
   }
 });
 
@@ -21,6 +22,7 @@ var routes = (
     <Route path="users/:id" component={UserHome}>
       <Route path="playlists" component={PlaylistIndex} />
     </Route>
+    <Route path="playlists" component={Playlists} />
     <Route path='*' component={NotFound} />
   </Route>
 );
