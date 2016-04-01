@@ -26,12 +26,30 @@ module.exports = {
       }
     });
   },
-  createAPlaylist: function (playlist) {
+  createAPlaylist: function (data, callback) {
     $.ajax({
-      method: 'POST',
+      type: 'POST',
       url: '/api/playlists',
-      success: function () {
+      data: data,
+      dataType: 'json',
+      success: function (playlist) {
         PlaylistActions.receivePlaylistCreation(playlist);
+        callback && callback(playlist);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#deletePlaylist");
+      }
+    });
+  },
+  deletePlaylist: function (id, callback) {
+    $.ajax({
+      type: 'DELETE',
+      url: '/api/playlists/' + id,
+      data: id,
+      dataType: 'json',
+      success: function (user_id) {
+        PlaylistActions.receivePlaylistDeletion(user_id);
+        callback && callback(user_id);
       },
       error: function () {
         console.log("YOU DONE FUCKED UP IN ApiUtil#createAPlaylist");

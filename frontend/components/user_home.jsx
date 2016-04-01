@@ -24,8 +24,8 @@ var UserHome = React.createClass({
   render: function() {
     var name = this.state.user ? this.state.user.username : "";
     return (
-      <div>
-        <h1 className="header">Welcome {name}!</h1>
+      <div className="user-profile">
+        <h1 className="user-profile page-header">Welcome {name}!</h1>
         <PlaylistIndex user={this.state.user} />
       </div>
     );

@@ -22,6 +22,7 @@ var PlaylistIndex = React.createClass({
         <ul>
           {playlistItems}
         </ul>
+        <PlaylistForm id={this.props.user.id} />
       </div>
     );
   }

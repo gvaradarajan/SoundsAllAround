@@ -28,9 +28,9 @@ var Login = React.createClass({
   render: function() {
     return (
       <section>
-        <h1 className="sign-in header">Sign In</h1>
+        <h1 className="sign-in page-header">Sign In</h1>
 
-        <form className="sign-in cred-form ">
+        <form className="sign-in cred-form">
           <label className="email label" htmlFor="email">
             Email
           </label>

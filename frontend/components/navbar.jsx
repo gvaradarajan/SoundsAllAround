@@ -47,17 +47,24 @@ var NavBar = React.createClass({
     var welcomeMessage = "";
     if (this.state.signedIn) {
       welcomeMessage = (
-        <li>Welcome {CurrentUserStore.currentUser.username}!</li>
+        <li><a>Welcome {CurrentUserStore.currentUser().username}!</a></li>
       );
     }
     else {
 
     }
     return (
-      <ul>
-        {welcomeMessage}
-        {this.makeSignInOrSignOut()}
-      </ul>
+      <header className="header group">
+        <nav className="header-nav group">
+          <h1 className="header-logo">
+            <a href="#">SoundsAllAround</a>
+          </h1>
+          <ul className="nav-bar group">
+            {welcomeMessage}
+            {this.makeSignInOrSignOut()}
+          </ul>
+        </nav>
+      </header>
     );
   }
 

@@ -27,13 +27,14 @@ class Api::PlaylistsController < ApplicationController
 
   def destroy
     @playlist = Playlist.find(params[:id])
+    id = @playlist.user_id
     @playlist.destroy
-    render :show
+    render json: id
   end
 
   private
 
   def playlist_params
-    params.require(:playlist).permit(:title, :description)
+    params.require(:playlist).permit(:title, :description, :user_id)
   end
 end

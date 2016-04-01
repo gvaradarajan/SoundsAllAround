@@ -34,7 +34,9 @@ UserStore.__onDispatch = function (payload) {
       UserStore.__emitChange();
       break;
     case PlaylistConstants.PLAYLIST_CREATED:
-      resetUser(payload.user);
+      UserStore.__emitChange();
+      break;
+    case PlaylistConstants.PLAYLIST_DELETED:
       UserStore.__emitChange();
       break;
     case UserConstants.USER_CREATED:
@@ -42,7 +44,6 @@ UserStore.__onDispatch = function (payload) {
       UserStore.__emitChange();
       break;
     default:
-
   }
 };
 

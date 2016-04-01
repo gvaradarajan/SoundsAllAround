@@ -34,7 +34,7 @@
  }
 
  body {
-   font-family: sans-serif;
+   font-family: Open Sans, sans-serif;
    box-sizing: content-box;
    font-size: 16px;
  }
@@ -49,7 +49,7 @@
    display: block;
  }
 
- .header {
+ .page-header {
    font-weight: bold;
    font-size: 36px;
    width: 600px;
@@ -97,10 +97,54 @@
    padding-bottom: 20px;
  }
 
- li {
+ .playlist {
    width: 600px;
    height: 180px;
    display: block;
    margin: auto;
    box-sizing: border-box;
+ }
+
+ .header {
+   background: #333;
+   color: #fff;
+   border-bottom: 1px solid #ccc;
+ }
+
+ .header-nav {
+   margin: 0 auto;
+   width: 900px;
+   border-left: 1px solid #111;
+   border-right: 1px solid #111;
+ }
+
+ .header-logo {
+   background: #f50;
+   float: left;
+   font-weight: bold;
+ }
+
+ .nav-bar {
+   float: right;
+ }
+
+ .nav-bar > li {
+   float: left;
+   border-left: 1px solid #111;
+   color: #ccc;
+ }
+
+ .header a {
+   display: block;
+   padding: 10px 20px;
+ }
+
+ .header a:hover {
+   background: black;
+   cursor: pointer;
+ }
+
+ .playlist-form-header {
+   font-size: 24px;
+   padding-bottom: 20px;
  }
