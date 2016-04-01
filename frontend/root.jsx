@@ -11,6 +11,7 @@ var UserHome = require('./components/user_home');
 var Login = require('./components/login');
 var PlaylistIndex = require('./components/playlist_index');
 var Playlists = require('./components/all_playlists');
+var SignUpForm = require('./components/sign_up');
 
 var CurrentUserStore = require("./stores/current_user_store");
 
@@ -40,6 +41,7 @@ var NotFound = React.createClass({
 
 var routes = (
   <Route path="/" component={App}>
+    <Route path="signup" component={SignUpForm} />
     <Route path="login" component={Login} />
     <Route path="users/:id" component={UserHome} onEnter={_requireLoggedIn}>
       <Route path="playlists" component={PlaylistIndex} />

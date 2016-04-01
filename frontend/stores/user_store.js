@@ -29,7 +29,15 @@ UserStore.__onDispatch = function (payload) {
       resetUser(payload.user);
       UserStore.__emitChange();
       break;
+    case UserConstants.CURRENT_USER_RECEIVED:
+      resetUser(payload.user);
+      UserStore.__emitChange();
+      break;
     case PlaylistConstants.PLAYLIST_CREATED:
+      resetUser(payload.user);
+      UserStore.__emitChange();
+      break;
+    case UserConstants.USER_CREATED:
       resetUser(payload.user);
       UserStore.__emitChange();
       break;

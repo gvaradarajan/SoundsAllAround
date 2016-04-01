@@ -2,7 +2,8 @@ class Api::SessionsController < ApplicationController
 
   def show
     if current_user
-      render "/api/users/#{current_user.id}"
+      @user = current_user
+      render '/api/users/show'
     else
       render text: "AIN'T NOBODY HERE"
     end
@@ -15,7 +16,8 @@ class Api::SessionsController < ApplicationController
       render json: { message: "YOU AIN'T ALLOWED!" }, status: 401
     else
       login_user(user)
-      redirect_to "/api/users/#{user.id}"
+      @user = user
+      render '/api/users/show'
     end
   end
 

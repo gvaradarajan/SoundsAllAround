@@ -44,9 +44,9 @@ module.exports = {
       url: '/api/session',
       dataType: 'json',
       data: credentials,
-      success: function (current_user) {
-        SessionActions.receiveCurrentUser(current_user);
-        callback && callback(current_user.id);
+      success: function (currentUser) {
+        SessionActions.receiveCurrentUser(currentUser);
+        callback && callback(currentUser.id);
       }
     });
   },
@@ -66,11 +66,26 @@ module.exports = {
       type: 'GET',
       url: '/api/session',
       dataType: 'json',
-      success: function () {
-        SessionActions.receiveCurrentUser(current_user);
+      success: function (currentUser) {
+        UserActions.receiveCurrentUser(currentUser);
       },
       complete: function () {
         callback && callback();
+      }
+    });
+  },
+  createNewUser: function (data, callback) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/users',
+      data: data,
+      dataType: 'json',
+      success: function (createdUser) {
+        UserActions.receiveCreatedUser(createdUser);
+        callback && callback();
+      },
+      error: function () {
+        console.log('nope');
       }
     });
   }

@@ -12,9 +12,12 @@ var UserHome = React.createClass({
     ApiUtil.fetchSingleUser(newProps.params.id);
   },
   componentDidMount: function () {
-    UserStore.addListener(this._onChange);
+    this.listenerToken = UserStore.addListener(this._onChange);
     ApiUtil.fetchSingleUser(this.props.params.id);
   },
+  // componentWillUnmount: function () {
+  //   this.listenerToken.remove();
+  // },
   _onChange: function () {
     this.setState ({ user: UserStore.find(this.props.params.id) });
   },

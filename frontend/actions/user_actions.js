@@ -7,5 +7,17 @@ module.exports = {
       actionType: UserConstants.USER_RECEIVED,
       user: user
     });
+  },
+  receiveCreatedUser: function (user) {
+    AppDispatcher.dispatch({
+      actionType: UserConstants.USER_CREATED,
+      user: user
+    });
+  },
+  receiveCurrentUser: function (user) {
+    AppDispatcher.dispatch({
+      actionType: UserConstants.CURRENT_USER_RECEIVED,
+      user: user
+    });
   }
 };
