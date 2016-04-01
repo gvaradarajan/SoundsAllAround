@@ -89,10 +89,10 @@
  .playlists-index {
    width: 600px;
    margin: auto;
-   font-weight: bold;
  }
 
  .playlists-header {
+   font-weight: bold;
    font-size: 24px;
    padding-bottom: 20px;
  }
@@ -148,3 +148,19 @@
    font-size: 24px;
    padding-bottom: 20px;
  }
+
+ .ReactModal__Overlay--after-open {
+   opacity: 1;
+   transition: opacity 150ms ease-out;
+ }
+
+ .ReactModal__Content {
+  -webkit-transform: scale(0.5) rotateX(-30deg);
+  transform: scale(0.5) rotateX(-30deg);
+}
+
+ .ReactModal__Content--after-open {
+  -webkit-transform: scale(1) rotateX(0deg);
+  transform: scale(1) rotateX(0deg);
+  transition: all 150ms ease-in;
+}

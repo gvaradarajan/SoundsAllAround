@@ -1,14 +1,46 @@
 var React = require('react');
+var Modal = require('react-modal');
 var PropTypes = React.PropTypes;
+
 var CurrentUserStore = require('../stores/current_user_store');
+
 var ApiUtil = require('../util/api_util');
+
+var Login = require('./login');
+
+var modalStyleOptions = {
+  overlay : {
+    position          : 'fixed',
+    top               : 0,
+    left              : 0,
+    right             : 0,
+    bottom            : 0,
+    backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+  },
+  content : {
+    position                   : 'absolute',
+    width                      : '600px',
+    height                     : '600px',
+    border                     : '1px solid #ccc',
+    background                 : '#fff',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px',
+    margin                     : 'auto'
+  }
+};
 
 var NavBar = React.createClass({
   contextTypes: {
     router: PropTypes.object.isRequired
   },
   getInitialState: function () {
-    return { signedIn: CurrentUserStore.isLoggedIn() };
+    return { signedIn: CurrentUserStore.isLoggedIn(), modalIsOpen: false };
+  },
+  componentWillMount: function () {
+    Modal.setAppElement(document.body);
   },
   componentDidMount: function () {
     CurrentUserStore.addListener(this.toggleState);
@@ -22,21 +54,34 @@ var NavBar = React.createClass({
     var router = this.context.router;
     router.push("/login");
   },
-  makeSignInOrSignOut: function () {
+  openModal: function () {
+    this.setState({modalIsOpen: true});
+  },
+  closeModal: function () {
+    this.setState({modalIsOpen: false});
+  },
+  createSessionModal: function () {
+    return (
+      <Modal isOpen={this.state.modalIsOpen}
+             onRequestClose={this.closeModal}
+             style={modalStyleOptions}
+             closeTimeoutMS={150}>
+        <Login />
+      </Modal>
+    );
+  },
+  createSessionButton : function () {
     var signoutOrSignIn = "";
-    if (this.state.signedIn) {
+    if (!this.state.signedIn) {
       signoutOrSignIn = (
         <li>
-          <a onClick={this.beginSignOut}>Sign Out</a>
+          <a onClick={this.openModal}>Sign In</a>
+          {this.createSessionModal()}
         </li>
       );
     }
     else {
-      signoutOrSignIn = (
-        <li>
-          <a onClick={this.linkToSignIn}>Sign In</a>
-        </li>
-      );
+      signoutOrSignIn = <li><a onClick={this.beginSignOut}>Sign Out</a></li>;
     }
     return signoutOrSignIn;
   },
@@ -45,6 +90,7 @@ var NavBar = React.createClass({
   },
   render: function() {
     var welcomeMessage = "";
+
     if (this.state.signedIn) {
       welcomeMessage = (
         <li><a>Welcome {CurrentUserStore.currentUser().username}!</a></li>
@@ -61,7 +107,7 @@ var NavBar = React.createClass({
           </h1>
           <ul className="nav-bar group">
             {welcomeMessage}
-            {this.makeSignInOrSignOut()}
+            {this.createSessionButton()}
           </ul>
         </nav>
       </header>

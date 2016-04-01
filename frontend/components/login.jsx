@@ -1,4 +1,5 @@
 var React = require('react');
+var Modal = require('react-modal');
 var PropTypes = React.PropTypes;
 var ApiUtil = require('../util/api_util');
 
@@ -7,13 +8,14 @@ var Login = React.createClass({
     router: PropTypes.object.isRequired
   },
   getInitialState: function () {
-    return { email: "", password: "" };
+    return { email: "", password: "", modalIsOpen: false };
   },
   handleSubmit: function(e) {
     e.preventDefault();
 
     var router = this.context.router;
-    var credentials = { user: this.state };
+    var credentials = { user: { email: this.state.email,
+                                password: this.state.password } };
     ApiUtil.login(credentials, function(id) {
       router.push("/users/" + id);
     });
@@ -25,11 +27,12 @@ var Login = React.createClass({
   updatePassword: function(e) {
     this.setState({ password: e.currentTarget.value });
   },
+
+
   render: function() {
     return (
       <section>
         <h1 className="sign-in page-header">Sign In</h1>
-
         <form className="sign-in cred-form">
           <label className="email label" htmlFor="email">
             Email

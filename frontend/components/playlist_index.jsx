@@ -12,6 +12,7 @@ var PlaylistIndex = React.createClass({
   resetIndex: function () {
   },
   render: function() {
+    var id = this.props.user && this.props.user.id;
     var playlists = this.props.user && this.props.user.playlists;
     var playlistItems = playlists && playlists.map(function (playlist) {
       return <PlaylistIndexItem key={playlist.id} playlist={playlist} />;
@@ -22,7 +23,7 @@ var PlaylistIndex = React.createClass({
         <ul>
           {playlistItems}
         </ul>
-        <PlaylistForm id={this.props.user.id} />
+        <PlaylistForm id={id} />
       </div>
     );
   }
