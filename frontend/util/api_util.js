@@ -82,7 +82,7 @@ module.exports = {
       dataType: 'json',
       success: function (createdUser) {
         UserActions.receiveCreatedUser(createdUser);
-        callback && callback();
+        callback && callback(createdUser.id);
       },
       error: function () {
         console.log('nope');
