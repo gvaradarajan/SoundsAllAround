@@ -1,5 +1,6 @@
 var UserActions = require('../actions/user_actions');
 var PlaylistActions = require('../actions/playlist_actions');
+var TrackActions = require('../actions/track_actions');
 var SessionActions = require('../actions/session_actions');
 
 module.exports = {
@@ -23,6 +24,18 @@ module.exports = {
       },
       error: function () {
         console.log("YOU DONE FUCKED UP IN ApiUtil#fetchAllPlaylists");
+      }
+    });
+  },
+  fetchAllTracks: function () {
+    $.ajax({
+      method: 'GET',
+      url: '/api/tracks',
+      success: function (tracks) {
+        TrackActions.receiveTracks(tracks);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#fetchAllTracks");
       }
     });
   },

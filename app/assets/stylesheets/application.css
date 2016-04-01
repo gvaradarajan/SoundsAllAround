@@ -91,18 +91,35 @@
    margin: auto;
  }
 
+ .all-playlists {
+   width: 900px;
+   margin: auto;
+   padding: 20px;
+ }
+
  .playlists-header {
    font-weight: bold;
    font-size: 24px;
    padding-bottom: 20px;
  }
 
- .playlist {
+ .all-tracks {
+   width: 900px;
+   margin: auto;
+   padding: 20px;
+ }
+
+ .playlist, .track {
    width: 600px;
    height: 180px;
    display: block;
    margin: auto;
    box-sizing: border-box;
+ }
+
+ .track {
+   width: 180px;
+   float: left
  }
 
  .header {

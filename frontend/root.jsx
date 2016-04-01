@@ -11,6 +11,7 @@ var UserHome = require('./components/user_home');
 var Login = require('./components/login');
 var PlaylistIndex = require('./components/playlist_index');
 var Playlists = require('./components/all_playlists');
+var Tracks = require('./components/all_tracks');
 var SignUpForm = require('./components/sign_up');
 
 var CurrentUserStore = require("./stores/current_user_store");
@@ -47,6 +48,7 @@ var routes = (
       <Route path="playlists" component={PlaylistIndex} />
     </Route>
     <Route path="playlists" component={Playlists} />
+    <Route path="tracks" component={Tracks} />
     <Route path='*' component={NotFound} />
   </Route>
 );

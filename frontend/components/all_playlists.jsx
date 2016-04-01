@@ -21,7 +21,7 @@ var AllPlaylists = React.createClass({
       return <PlaylistIndexItem key={playlist.id} playlist={playlist} />;
     });
     return (
-      <ul>
+      <ul className="all-playlists">
         {playlistItems}
       </ul>
     );

@@ -1,12 +1,15 @@
 class Api::TracksController < ApplicationController
 
   def index
+    @tracks = Track.all
   end
 
   def show
+    @track = Track.includes(artist: :uploaded_tracks).find(params[:id])
   end
 
   def create
+
   end
 
   def update
@@ -20,6 +23,5 @@ class Api::TracksController < ApplicationController
   def track_params
     params.require(:track).permit(:title)
   end
-
 
 end
