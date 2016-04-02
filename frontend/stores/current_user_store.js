@@ -12,7 +12,9 @@ var currentUserFetched = false;
 
 
 var _setCurrentUser = function (user) {
-  _currentUser = user;
+  if(!jQuery.isEmptyObject(user)) {
+    _currentUser = user;
+  }
   currentUserFetched = true;
 };
 

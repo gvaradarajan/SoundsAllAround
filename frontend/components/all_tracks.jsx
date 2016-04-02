@@ -9,8 +9,11 @@ var Tracks = React.createClass({
     return { tracks: TrackStore.all() };
   },
   componentDidMount: function () {
-    TrackStore.addListener(this._onChange);
+    this.listenerToken = TrackStore.addListener(this._onChange);
     ApiUtil.fetchAllTracks();
+  },
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
   },
   _onChange: function () {
     this.setState({tracks: TrackStore.all()});

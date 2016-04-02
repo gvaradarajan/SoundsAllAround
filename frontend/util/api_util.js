@@ -45,12 +45,12 @@ module.exports = {
       url: '/api/playlists',
       data: data,
       dataType: 'json',
-      success: function (playlist) {
-        PlaylistActions.receivePlaylistCreation(playlist);
-        callback && callback(playlist);
+      success: function (data) {
+        PlaylistActions.receivePlaylistCreation(data);
+        callback && callback(data.playlist.user_id);
       },
       error: function () {
-        console.log("YOU DONE FUCKED UP IN ApiUtil#deletePlaylist");
+        console.log("YOU DONE FUCKED UP IN ApiUtil#createPlaylist");
       }
     });
   },
@@ -65,7 +65,7 @@ module.exports = {
         callback && callback(user_id);
       },
       error: function () {
-        console.log("YOU DONE FUCKED UP IN ApiUtil#createAPlaylist");
+        console.log("YOU DONE FUCKED UP IN ApiUtil#deleteAPlaylist");
       }
     });
   },

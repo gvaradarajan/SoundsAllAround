@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var ApiUtil = require('../util/api_util');
+var UserStore = require('../stores/user_store');
 
 var PlaylistForm = React.createClass({
   contextTypes: {
@@ -9,12 +10,15 @@ var PlaylistForm = React.createClass({
   getInitialState: function () {
     return { title: "", description: "", user_id: this.props.id };
   },
+  componentDidMount: function () {
+    UserStore.addListener(this.resetForm);
+  },
   handleSubmit: function(e) {
     e.preventDefault();
 
     var router = this.context.router;
-    var playlist = { playlist: this.state };
-    ApiUtil.createAPlaylist(playlist, function(id) {
+    var data = { playlist: this.state };
+    ApiUtil.createAPlaylist(data, function(id) {
       router.push("/users/" + id);
     });
   },
@@ -23,6 +27,9 @@ var PlaylistForm = React.createClass({
   },
   updateDescription: function(e) {
     this.setState({ description: e.currentTarget.value });
+  },
+  resetForm: function () {
+    this.setState({ title: "", description: "", user_id: this.props.id });
   },
   render: function() {
     return (

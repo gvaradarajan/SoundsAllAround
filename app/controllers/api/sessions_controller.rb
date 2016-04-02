@@ -5,7 +5,7 @@ class Api::SessionsController < ApplicationController
       @user = current_user
       render '/api/users/show'
     else
-      render text: "AIN'T NOBODY HERE"
+      render json: {}
     end
   end
 

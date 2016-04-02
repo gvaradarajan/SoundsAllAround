@@ -47,12 +47,12 @@ var NavBar = React.createClass({
   },
   beginSignOut: function () {
     ApiUtil.logout(function () {
-      this.linkToSignIn();
+      this.linkToHome();
     }.bind(this));
   },
-  linkToSignIn: function () {
+  linkToHome: function () {
     var router = this.context.router;
-    router.push("/login");
+    router.push("/");
   },
   openModal: function () {
     this.setState({modalIsOpen: true});
@@ -86,7 +86,7 @@ var NavBar = React.createClass({
     return signoutOrSignIn;
   },
   toggleState: function () {
-    this.setState({ signedIn: CurrentUserStore.isLoggedIn()});
+    this.setState({ signedIn: CurrentUserStore.isLoggedIn(), modalIsOpen: false });
   },
   render: function() {
     var welcomeMessage = "";

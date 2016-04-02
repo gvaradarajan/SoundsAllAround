@@ -7,6 +7,7 @@ var IndexRoute = require('react-router').IndexRoute;
 var BrowserHistory = require('react-router').browserHistory;
 
 var App = require('./components/app');
+var Home = require('./components/home');
 var UserHome = require('./components/user_home');
 var Login = require('./components/login');
 var PlaylistIndex = require('./components/playlist_index');
@@ -18,18 +19,36 @@ var CurrentUserStore = require("./stores/current_user_store");
 
 var ApiUtil = require('./util/api_util');
 
+// var _requireLoggedIn = function (nextState, replace, asyncCallback) {
+//   if (CurrentUserStore.currentUserFetched()) {
+//     _notLoggedInRedirect(replace, asyncCallback);
+//   }
+//   else {
+//     ApiUtil.fetchCurrentUser(_notLoggedInRedirect.bind(null, replace, asyncCallback));
+//   }
+// };
+//
+// var _notLoggedInRedirect = function (replace, asyncCallback) {
+//   if (!CurrentUserStore.isLoggedIn()) {
+//     replace("/login");
+//   }
+//   asyncCallback();
+// };
+
 var _requireLoggedIn = function (nextState, replace, asyncCallback) {
-  if (CurrentUserStore.currentUserFetched()) {
-    _notLoggedInRedirect(replace, asyncCallback);
-  }
-  else {
+  if (!CurrentUserStore.currentUserFetched()) {
     ApiUtil.fetchCurrentUser(_notLoggedInRedirect.bind(null, replace, asyncCallback));
   }
+  asyncCallback();
 };
 
 var _notLoggedInRedirect = function (replace, asyncCallback) {
   if (!CurrentUserStore.isLoggedIn()) {
-    replace("/login");
+    replace("/");
+  }
+  else {
+    var id = CurrentUserStore.currentUser().id;
+    replace("/users/" + id);
   }
   asyncCallback();
 };
@@ -40,15 +59,17 @@ var NotFound = React.createClass({
   }
 });
 
+// onEnter={_requireLoggedIn}
+
 var routes = (
-  <Route path="/" component={App}>
+  <Route path="/" component={App} onEnter={_requireLoggedIn}>
+    <IndexRoute component={Home} />
     <Route path="signup" component={SignUpForm} />
     <Route path="login" component={Login} />
-    <Route path="users/:id" component={UserHome} onEnter={_requireLoggedIn}>
+    <Route path="users/:id" component={UserHome} >
       <Route path="playlists" component={PlaylistIndex} />
     </Route>
     <Route path="playlists" component={Playlists} />
-    <Route path="tracks" component={Tracks} />
     <Route path='*' component={NotFound} />
   </Route>
 );
