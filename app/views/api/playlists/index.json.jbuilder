@@ -1,4 +1,5 @@
 json.array! @playlists do |playlist|
   json.extract! playlist, :id, :title, :description
-  json.user playlist.user.username
+  json.creator playlist.user.username
+  json.tracks playlist.tracks
 end

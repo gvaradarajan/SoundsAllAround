@@ -2,18 +2,41 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var PlaylistIndexItem = require('./playlist_index_item');
 var PlaylistForm = require('./playlist_form');
+var UserStore = require('../stores/user_store');
+var ApiUtil = require('../util/api_util');
+var CurrentUserStore = require('../stores/current_user_store');
 
 var PlaylistIndex = React.createClass({
   getInitialState: function () {
-    return { };
+    return { user: UserStore.find(parseInt(this.props.params.id)) };
+  },
+  componentWillReceiveProps: function () {
+    this._onChange();
   },
   componentDidMount: function () {
+    this.listenerToken = UserStore.addListener(this._onChange);
+    //ApiUtil.fetchSingleUser(parseInt(this.props.params.id));
   },
-  resetIndex: function () {
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
+  _onChange: function () {
+    this.setState ({ user: UserStore.find(parseInt(this.props.params.id)) });
+  },
+  createFormForCurrentUser: function () {
+    var form = "";
+    var currentUserId = (
+      !CurrentUserStore.currentUser() ? NaN : CurrentUserStore.currentUser().id
+    );
+    var thisUserId = !this.state.user ? NaN : this.state.user.id;
+    if (currentUserId === thisUserId) {
+      form = <PlaylistForm id={thisUserId} />;
+    }
+    return form;
   },
   render: function() {
-    var id = this.props.user && this.props.user.id;
-    var playlists = this.props.user && this.props.user.playlists;
+    var id = this.state.user && this.state.user.id;
+    var playlists = this.state.user && this.state.user.playlists;
     var playlistItems = playlists && playlists.map(function (playlist) {
       return <PlaylistIndexItem key={playlist.id} playlist={playlist} />;
     });
@@ -23,7 +46,7 @@ var PlaylistIndex = React.createClass({
         <ul>
           {playlistItems}
         </ul>
-        <PlaylistForm id={id} />
+        {this.createFormForCurrentUser()}
       </div>
     );
   }

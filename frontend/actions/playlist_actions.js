@@ -8,6 +8,12 @@ module.exports = {
       playlists: playlists
     });
   },
+  receiveSinglePlaylist: function (playlist) {
+    AppDispatcher.dispatch({
+      actionType: PlaylistConstants.PLAYLIST_RECEIVED,
+      playlist: playlist
+    });
+  },
   receivePlaylistCreation: function (playlist) {
     AppDispatcher.dispatch({
       actionType: PlaylistConstants.PLAYLIST_CREATED,

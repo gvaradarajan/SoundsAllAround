@@ -11,15 +11,17 @@ var PlaylistForm = React.createClass({
     return { title: "", description: "", user_id: this.props.id };
   },
   componentDidMount: function () {
-    UserStore.addListener(this.resetForm);
+    this.listenerToken = UserStore.addListener(this.resetForm);
+  },
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
   },
   handleSubmit: function(e) {
     e.preventDefault();
-
     var router = this.context.router;
     var data = { playlist: this.state };
     ApiUtil.createAPlaylist(data, function(id) {
-      router.push("/users/" + id);
+      router.push("/users/" + id + "/playlists");
     });
   },
   updateTitle: function(e) {

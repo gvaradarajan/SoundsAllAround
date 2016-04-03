@@ -27,6 +27,18 @@ module.exports = {
       }
     });
   },
+  fetchSinglePlaylist: function (id) {
+    $.ajax({
+      method: 'GET',
+      url: '/api/playlists/' + id,
+      success: function (playlist) {
+        PlaylistActions.receiveSinglePlaylist(playlist);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#fetchAllPlaylists");
+      }
+    });
+  },
   fetchAllTracks: function () {
     $.ajax({
       method: 'GET',

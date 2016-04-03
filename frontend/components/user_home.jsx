@@ -15,9 +15,9 @@ var UserHome = React.createClass({
     this.listenerToken = UserStore.addListener(this._onChange);
     ApiUtil.fetchSingleUser(this.props.params.id);
   },
-  // componentWillUnmount: function () {
-  //   this.listenerToken.remove();
-  // },
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+  },
   _onChange: function () {
     this.setState ({ user: UserStore.find(this.props.params.id) });
   },
@@ -26,11 +26,12 @@ var UserHome = React.createClass({
     return (
       <div className="user-profile">
         <h1 className="user-profile page-header">Welcome {name}!</h1>
-        <PlaylistIndex user={this.state.user} />
+        {this.props.children}
       </div>
     );
   }
 
 });
+// <PlaylistIndex user={this.state.user} />
 
 module.exports = UserHome;
