@@ -25,6 +25,7 @@ scotty.playlists.create!({title: 'Music of the Highlanders',
                           description: 'The music of my people'})
 scotty.playlists.create!({title: 'People Yelling Things'})
 
+scotPlay = scotty.playlists.first
 
 spock = test_users[1]
 kirk = test_users[0]
@@ -32,10 +33,17 @@ uhura = test_users[2]
 
 spock.playlists.create!({title: 'Sounds that Volcanoes Make'})
 
-scotty.playlists.tracks.create!([{title: 'Loch Lomond'},
+scotty.uploaded_tracks.create!([{title: 'Loch Lomond'},
                                 {title: 'Whoa Nessie'}])
+
 
 kirk.uploaded_tracks.create!([{title: 'Alien Strange'},
                               {title: 'I Shatnered Myself'}])
 
 uhura.uploaded_tracks.create!([{title: 'Zoe Saldana is Overrated'}])
+
+PlaylistTrack.create!(playlist_id: scotty.playlists.first.id,
+  track_id: scotty.uploaded_tracks.first.id)
+
+PlaylistTrack.create!(playlist_id: scotty.playlists.first.id,
+  track_id: scotty.uploaded_tracks.second.id)
