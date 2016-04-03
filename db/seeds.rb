@@ -32,7 +32,7 @@ uhura = test_users[2]
 
 spock.playlists.create!({title: 'Sounds that Volcanoes Make'})
 
-scotty.uploaded_tracks.create!([{title: 'Loch Lomond'},
+scotty.playlists.tracks.create!([{title: 'Loch Lomond'},
                                 {title: 'Whoa Nessie'}])
 
 kirk.uploaded_tracks.create!([{title: 'Alien Strange'},

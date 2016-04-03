@@ -31,8 +31,8 @@ module.exports = {
     $.ajax({
       method: 'GET',
       url: '/api/playlists/' + id,
-      success: function (playlist) {
-        PlaylistActions.receiveSinglePlaylist(playlist);
+      success: function (data) {
+        PlaylistActions.receiveSinglePlaylist(data.playlist);
       },
       error: function () {
         console.log("YOU DONE FUCKED UP IN ApiUtil#fetchAllPlaylists");

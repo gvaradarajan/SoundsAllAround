@@ -16,7 +16,7 @@ var Playlist = React.createClass({
     ApiUtil.fetchSinglePlaylist(this.props.params.id);
   },
   componentWillReceiveProps: function (newProps) {
-    this.setState({ playlist: Playlist.find(newProps.params.id) });
+    this.setState({ playlist: PlaylistStore.find(newProps.params.id) });
   },
   render: function() {
     var title = this.state.playlist && this.state.playlist.title;
@@ -24,18 +24,18 @@ var Playlist = React.createClass({
     var description = this.state.playlist && this.state.playlist.description;
     var trackItems = this.state.playlist && this.state.playlist.tracks.map(
       function (track) {
-        return <li><TrackIndexItem key={track.id} track={track}/></li>;
+        return <TrackIndexItem key={track.id} track={track}/>;
       }
     );
     return (
-      <div>
+      <article>
         <h1>{title}</h1>
         <h2>{creator}</h2>
         <p>{description}</p>
         <ul>
           {trackItems}
         </ul>
-      </div>
+      </article>
     );
   }
 

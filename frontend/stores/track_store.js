@@ -5,6 +5,7 @@ var TrackConstants = require('../constants/track_constants');
 var TrackStore = new Store(AppDispatcher);
 
 var _tracks = {};
+var _searchedTracks = [];
 
 var resetTrack = function (track) {
   _tracks[track.id] = track;
@@ -17,12 +18,20 @@ var resetTracks = function (tracks) {
   });
 };
 
+var resetSearchedTracks = function (tracks) {
+  _searchedTracks = tracks;
+};
+
 TrackStore.all = function () {
   var tracks = [];
   for (var id in _tracks) {
     tracks.push(_tracks[id]);
   }
   return tracks;
+};
+
+TrackStore.searchResults = function () {
+  return _searchedTracks.slice();
 };
 
 TrackStore.find = function (id) {
