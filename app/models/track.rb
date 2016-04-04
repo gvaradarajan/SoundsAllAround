@@ -4,7 +4,7 @@ class Track < ActiveRecord::Base
   pg_search_scope(:search_tracks,
                   :against => :title,
                   :associated_against => { :artist => [:username] },
-                  :using => :tsearch)
+                  :using => { :tsearch => {:prefix => true} })
 
   belongs_to(
     :artist,

@@ -23,7 +23,7 @@ var SearchTracksForm = React.createClass({
   render: function () {
     var searchArr = this.state.searchResults;
     var searchResultItems = searchArr && searchArr.map(function (track) {
-      return <li>{track.title}: {track.artist}</li>;
+      return <li key={track.id}>{track.title}: {track.artist}</li>;
     });
     return (
       <section>
