@@ -1,3 +1,9 @@
 // Place all the styles related to the Tracks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.banner {
+  width: 1240px;
+  height: 450px;
+  margin: auto;
+  background: asset-url("banner.jpg") no-repeat;
+}
