@@ -7,5 +7,11 @@ module.exports = {
       actionType: TrackConstants.TRACKS_RECEIVED,
       tracks: tracks
     });
+  },
+  receiveSearchResults: function (searchResults) {
+    AppDispatcher.dispatch({
+      actionType: TrackConstants.SEARCHED_TRACKS_RECEIVED,
+      searchResults: searchResults
+    });
   }
 };

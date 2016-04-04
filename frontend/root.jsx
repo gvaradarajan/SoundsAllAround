@@ -15,6 +15,7 @@ var PlaylistIndex = require('./components/playlist_index');
 var Playlists = require('./components/all_playlists');
 var TrackIndex = require('./components/user_track_index');
 var Tracks = require('./components/all_tracks');
+var SearchTracksForm = require('./components/search_tracks_form');
 var SignUpForm = require('./components/sign_up');
 
 var CurrentUserStore = require("./stores/current_user_store");
@@ -29,11 +30,11 @@ var _requireLoggedIn = function (nextState, replace, asyncCallback) {
 };
 
 var _notLoggedInRedirect = function (nextState, replace, asyncCallback) {
+  var intendedPath = nextState.location.pathname;
   if (!CurrentUserStore.isLoggedIn()) {
-    replace("/");
+    replace(intendedPath);
   }
   else {
-    var intendedPath = nextState.location.pathname;
     if (intendedPath === "/") {
       var id = CurrentUserStore.currentUser().id;
       replace("/users/" + id);
@@ -64,6 +65,7 @@ var routes = (
     </Route>
     <Route path="playlists/:id" component={Playlist} />
     <Route path="all_playlists" component={Playlists} />
+    <Route path="search" component={SearchTracksForm} />
     <Route path='*' component={NotFound} />
   </Route>
 );

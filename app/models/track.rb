@@ -1,8 +1,10 @@
 class Track < ActiveRecord::Base
   validates :title, :artist_id, presence: true
   include PgSearch
-  pg_search_scope :search_by_title, :against => :title
-  pg_search_scope :search_by_artist, :associated_against => { :artist => :username }
+  pg_search_scope(:search_tracks,
+                  :against => :title,
+                  :associated_against => { :artist => [:username] },
+                  :using => :tsearch)
 
   belongs_to(
     :artist,

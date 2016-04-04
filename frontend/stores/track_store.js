@@ -18,7 +18,7 @@ var resetTracks = function (tracks) {
   });
 };
 
-var resetSearchedTracks = function (tracks) {
+var _resetSearchedTracks = function (tracks) {
   _searchedTracks = tracks;
 };
 
@@ -42,6 +42,10 @@ TrackStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case TrackConstants.TRACKS_RECEIVED:
       resetTracks(payload.tracks);
+      TrackStore.__emitChange();
+      break;
+    case TrackConstants.SEARCHED_TRACKS_RECEIVED:
+      _resetSearchedTracks(payload.searchResults);
       TrackStore.__emitChange();
       break;
     default:

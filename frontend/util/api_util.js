@@ -128,7 +128,21 @@ module.exports = {
         callback && callback(createdUser.id);
       },
       error: function () {
-        console.log('nope');
+        console.log("YOU DONE FUCKED UP IN ApiUtil#createNewUser");
+      }
+    });
+  },
+  getSearchResults: function (searchParams) {
+    $.ajax({
+      type: 'GET',
+      url: '/api/search',
+      data: searchParams,
+      dataType: 'json',
+      success: function (searchResults) {
+        TrackActions.receiveSearchResults(searchResults);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#getSearchResults");
       }
     });
   }
