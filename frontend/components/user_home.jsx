@@ -26,6 +26,7 @@ var UserHome = React.createClass({
     return (
       <div className="user-profile">
         <h1 className="user-profile page-header">Welcome {name}!</h1>
+        <UserNav />
         {this.props.children}
       </div>
     );

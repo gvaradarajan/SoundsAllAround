@@ -2,6 +2,7 @@ var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher/dispatcher');
 var PlaylistConstants = require('../constants/playlist_constants');
 var UserConstants = require('../constants/user_constants');
+var TrackConstants = require('../constants/track_constants');
 
 var UserStore = new Store(AppDispatcher);
 
@@ -34,6 +35,9 @@ UserStore.__onDispatch = function (payload) {
       UserStore.__emitChange();
       break;
     case PlaylistConstants.PLAYLIST_CREATED:
+      UserStore.__emitChange();
+      break;
+    case TrackConstants.TRACK_CREATED:
       UserStore.__emitChange();
       break;
     case PlaylistConstants.PLAYLIST_DELETED:

@@ -66,6 +66,21 @@ module.exports = {
       }
     });
   },
+  createTrack: function (data, callback) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/tracks',
+      data: data,
+      dataType: 'json',
+      success: function (track) {
+        TrackActions.receiveTrackCreation(track);
+        callback && callback(track.artist_id);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#createTrack");
+      }
+    });
+  },
   deletePlaylist: function (id, callback) {
     $.ajax({
       type: 'DELETE',

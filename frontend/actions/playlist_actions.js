@@ -17,7 +17,7 @@ module.exports = {
   receivePlaylistCreation: function (playlist) {
     AppDispatcher.dispatch({
       actionType: PlaylistConstants.PLAYLIST_CREATED,
-      playlists: playlist
+      playlist: playlist
     });
   },
   receivePlaylistDeletion: function (user_id) {

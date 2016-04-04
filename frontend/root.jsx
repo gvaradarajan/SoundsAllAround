@@ -60,7 +60,7 @@ var routes = (
     <Route path="signup" component={SignUpForm} />
     <Route path="login" component={Login} />
     <Route path="users/:id" component={UserHome} >
-      <Route path="playlists" component={PlaylistIndex} />
+      <IndexRoute component={PlaylistIndex} />
       <Route path="tracks" component={TrackIndex} />
     </Route>
     <Route path="playlists/:id" component={Playlist} />

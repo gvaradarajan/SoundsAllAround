@@ -9,7 +9,12 @@ class Api::TracksController < ApplicationController
   end
 
   def create
-
+    @track = Track.new(track_params)
+    if @track.save
+      redirect_to "/api/tracks/#{@track.id}"
+    else
+      render @track.errors.full_messages, status: 422
+    end
   end
 
   def update
@@ -21,7 +26,7 @@ class Api::TracksController < ApplicationController
   private
 
   def track_params
-    params.require(:track).permit(:title)
+    params.require(:track).permit(:title, :artist_id)
   end
 
 end
