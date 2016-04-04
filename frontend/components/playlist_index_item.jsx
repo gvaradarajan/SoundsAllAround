@@ -28,13 +28,16 @@ var PlaylistIndexItem = React.createClass({
       router.push("/users/" + id + "/playlists");
     });
   },
+  linkToPlaylist: function (e) {
+    this.context.router.push("/playlists/" + this.props.playlist.id);
+  },
   render: function() {
     var title = this.props.playlist && this.props.playlist.title;
     var des = this.props.playlist && this.props.playlist.description;
     var creator = this.props.playlist && this.props.playlist.creator;
     return (
       <li className="playlist">
-        <h1>{title}: {des}</h1>
+        <h1 onClick={this.linkToPlaylist}>{title}: {des}</h1>
         <p>{creator}</p>
         {this.createDeleteForCurrentUser()}
       </li>

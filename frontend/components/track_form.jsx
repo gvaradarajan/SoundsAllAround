@@ -33,8 +33,8 @@ var TrackForm = React.createClass({
   render: function() {
     return (
       <section>
-        <h1 className="track-form-header">Add New Track</h1>
         <form className="track-form cred-form">
+          <h1 className="track-form-header">Add New Track</h1>
           <label className="track-title label" htmlFor="title">
             Title:
           </label>

@@ -8,6 +8,7 @@ var TrackIndexItem = React.createClass({
     var artist = this.props.track && this.props.track.artist;
     return (
       <li className="track">
+        <img></img>
         <h1>{title}</h1>
         <p>{artist}</p>
       </li>

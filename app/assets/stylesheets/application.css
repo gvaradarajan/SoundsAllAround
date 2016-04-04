@@ -17,7 +17,7 @@
 
 
  html, body, header, nav, h1, a, ul, li,
- strong, main, section, img, div, h2, p,
+ strong, main, section, div, h2, p,
  form, fieldset, label, input, textarea,
  button, article, footer, small {
    margin: 0;
@@ -111,7 +111,7 @@
 
  .playlist, .track {
    width: 600px;
-   height: 180px;
+   height: 260px;
    display: block;
    margin: auto;
    box-sizing: border-box;
@@ -119,7 +119,8 @@
 
  .track {
    width: 180px;
-   float: left
+   float: left;
+   text-align: center;
  }
 
  .header {
@@ -164,6 +165,41 @@
  .playlist-form-header {
    font-size: 24px;
    padding-bottom: 20px;
+ }
+
+ .user-header-nav {
+   margin: 0 auto;
+   width: 900px;
+   font-size: 24px;
+   padding-bottom: 20px;
+ }
+
+ .user-nav-bar {
+   display: block;
+   float: left;
+ }
+
+ .user-nav-bar > li {
+   display: block;
+   float: left;
+   padding-right: 20px;
+ }
+
+ .user-nav-bar li:hover {
+   color: #f50;
+ }
+
+ .content {
+   width: 900px;
+   margin: auto;
+ }
+
+ .index-track-header {
+   width: 900px;
+   font-size: 24px;
+   margin: auto;
+   text-align: center;
+   padding: 20px;
  }
 
  .ReactModal__Overlay--after-open {

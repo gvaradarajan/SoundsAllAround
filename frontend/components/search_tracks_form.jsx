@@ -32,16 +32,13 @@ var SearchTracksForm = React.createClass({
     var searchArr = this.state.searchResults;
     var searchResultItems = searchArr && searchArr.map(function (track) {
       return (
-        <li key={track.id} id={track.id} onClick={this.chooseTrack}>
+        <li key={track.id} id={track.id} onClick={this.props.chooseTrack}>
           {track.title}: {track.artist}
         </li>
       );
     }.bind(this));
-    var selectedTrack = this.state.chosenTrack;
-    var selectedTrackItem = selectedTrack && <TrackIndexItem track={selectedTrack} />;
     return (
-      <section>
-        <form className="cred-form">
+        <section className="cred-form">
           <h1 className="header">Add a track</h1>
           <label className="search label" >
             Search By Title or Artist:
@@ -51,9 +48,7 @@ var SearchTracksForm = React.createClass({
           <ul>
             {searchResultItems}
           </ul>
-        {selectedTrackItem}
-        </form>
-      </section>
+        </section>
     );
   }
 

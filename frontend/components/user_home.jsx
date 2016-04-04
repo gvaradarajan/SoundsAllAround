@@ -2,7 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var UserStore = require('../stores/user_store');
 var ApiUtil = require('../util/api_util');
-var PlaylistIndex = require('./playlist_index');
+var UserNav = require('./user_navbar');
 
 var UserHome = React.createClass({
   getInitialState: function () {
@@ -26,7 +26,7 @@ var UserHome = React.createClass({
     return (
       <div className="user-profile">
         <h1 className="user-profile page-header">Welcome {name}!</h1>
-        <UserNav />
+        <UserNav user={this.state.user}/>
         {this.props.children}
       </div>
     );

@@ -28,8 +28,9 @@ var Playlist = React.createClass({
       }
     );
     return (
-      <article>
-        <h1>{title}</h1>
+      <article className="playlist content">
+        <header></header>
+        <h1 className="playlists-header">{title}</h1>
         <h2>{creator}</h2>
         <p>{description}</p>
         <ul>

@@ -35,7 +35,7 @@ module.exports = {
         PlaylistActions.receiveSinglePlaylist(data.playlist);
       },
       error: function () {
-        console.log("YOU DONE FUCKED UP IN ApiUtil#fetchAllPlaylists");
+        console.log("YOU DONE FUCKED UP IN ApiUtil#fetchSinglePlaylist");
       }
     });
   },

@@ -9,6 +9,7 @@ var Home = React.createClass({
       <section>
         <header className="banner">
         </header>
+        <h1 className="index-track-header">Hear the latest hits!</h1>
         <AllTracks />
       </section>
     );

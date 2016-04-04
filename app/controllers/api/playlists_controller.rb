@@ -8,8 +8,11 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def create
-    @playlist = Playlist.new(playlist_params)
+    debugger
+    @playlist = Playlist.new(playlist_params[:creation_params])
+    initial_track_id = playlist_params[:track_id]
     if @playlist.save
+      PlaylistTrack.create(playlist_id: @playlist.id, track_id: initial_track_id)
       redirect_to "/api/playlists/#{@playlist.id}"
     else
       render @playlist.errors.full_messages, status: 422
@@ -35,6 +38,9 @@ class Api::PlaylistsController < ApplicationController
   private
 
   def playlist_params
-    params.require(:playlist).permit(:title, :description, :user_id)
+    #params.require(:playlist).permit(:title, :description, :user_id)
+    params.require(:playlist)
+          .permit(:track_id, :creation_params => [:title, :description, :user_id])
+
   end
 end
