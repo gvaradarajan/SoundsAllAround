@@ -39,6 +39,10 @@ PlaylistStore.__onDispatch = function (payload) {
       resetPlaylist(payload.playlist);
       PlaylistStore.__emitChange();
       break;
+    case PlaylistConstants.PLAYLIST_UPDATED:
+      resetPlaylist(payload.playlist.playlist);
+      PlaylistStore.__emitChange();
+      break;
     default:
 
   }

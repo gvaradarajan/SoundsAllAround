@@ -25,5 +25,11 @@ module.exports = {
       actionType: PlaylistConstants.PLAYLIST_DELETED,
       user_id: user_id
     });
+  },
+  receiveUpdatedPlaylist: function (playlist) {
+    AppDispatcher.dispatch({
+      actionType: PlaylistConstants.PLAYLIST_UPDATED,
+      playlist: playlist
+    });
   }
 };

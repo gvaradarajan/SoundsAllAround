@@ -66,6 +66,20 @@ module.exports = {
       }
     });
   },
+  updatePlaylist: function (id, data) {
+    $.ajax({
+      type: 'PATCH',
+      url: '/api/playlists/' + id,
+      data: data,
+      dataType: 'json',
+      success: function (playlist) {
+        PlaylistActions.receiveUpdatedPlaylist(playlist);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#updatePlaylist");
+      }
+    });
+  },
   createTrack: function (data, callback) {
     $.ajax({
       type: 'POST',

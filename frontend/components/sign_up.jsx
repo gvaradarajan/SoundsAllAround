@@ -30,7 +30,7 @@ var SignUpForm = React.createClass({
   render: function() {
     return (
       <section>
-        <h1 className="sign-up header">Sign Up</h1>
+        <h1 className="sign-up page-header">Sign Up</h1>
 
         <form className="sign-up cred-form ">
           <label className="username label" htmlFor="username">

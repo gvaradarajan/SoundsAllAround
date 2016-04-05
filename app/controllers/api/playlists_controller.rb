@@ -8,7 +8,6 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def create
-    debugger
     @playlist = Playlist.new(playlist_params[:creation_params])
     initial_track_id = playlist_params[:track_id]
     if @playlist.save
@@ -20,8 +19,9 @@ class Api::PlaylistsController < ApplicationController
   end
 
   def update
+    # debugger
     @playlist = Playlist.find(params[:id])
-    if @playlist.update(playlist_params)
+    if @playlist.update(playlist_params[:creation_params])
       render :show
     else
       render @playlist.errors.full_messages, status: 422

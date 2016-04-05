@@ -36,6 +36,7 @@
  body {
    font-family: Open Sans, sans-serif;
    box-sizing: content-box;
+   background: #eee;
    font-size: 16px;
  }
 
@@ -54,6 +55,8 @@
    font-size: 36px;
    width: 600px;
    margin: 20px auto;
+   margin-top: 0;
+   padding-top: 20px;
  }
 
  .cred-form {
@@ -106,6 +109,7 @@
  .all-tracks {
    width: 900px;
    margin: auto;
+   margin-right: 20px;
    padding: 20px;
  }
 
@@ -167,6 +171,14 @@
    padding-bottom: 20px;
  }
 
+ .playlist-form {
+   margin-bottom: 20px;
+ }
+
+ .user-header {
+   margin: 20px;
+ }
+
  .user-header-nav {
    margin: 0 auto;
    width: 900px;
@@ -192,6 +204,9 @@
  .content {
    width: 900px;
    margin: auto;
+   background: white;
+   padding: 20px;
+   padding-top: 0;
  }
 
  .index-track-header {
@@ -201,6 +216,25 @@
    text-align: center;
    padding: 20px;
  }
+
+ .search-result-item {
+   width: 300px;
+   height: 35px;
+   border: 1px solid #eee;
+   background: white;
+ }
+
+ .search-result-item:hover {
+   background: #f50;
+   color: white;
+   border: 1px solid black;
+   cursor: pointer
+ }
+
+ .search-result-list {
+   padding-bottom: 10px;
+ }
+
 
  .ReactModal__Overlay--after-open {
    opacity: 1;

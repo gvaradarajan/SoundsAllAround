@@ -32,20 +32,20 @@ var SearchTracksForm = React.createClass({
     var searchArr = this.state.searchResults;
     var searchResultItems = searchArr && searchArr.map(function (track) {
       return (
-        <li key={track.id} id={track.id} onClick={this.props.chooseTrack}>
+        <li key={track.id} id={track.id} onClick={this.props.chooseTrack}
+          className="search-result-item">
           {track.title}: {track.artist}
         </li>
       );
     }.bind(this));
     return (
-        <section className="cred-form">
-          <h1 className="header">Add a track</h1>
+        <section className="track-search">
           <label className="search label" >
-            Search By Title or Artist:
+            Search For A Track By Title or Artist:
           </label>
           <input onChange={this.updateField} className="search field"
             type="text" name="search[query]" value={this.state.field} />
-          <ul>
+          <ul className="search-result-list">
             {searchResultItems}
           </ul>
         </section>

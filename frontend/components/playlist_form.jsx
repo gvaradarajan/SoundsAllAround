@@ -72,6 +72,9 @@ var PlaylistForm = React.createClass({
           <textarea onChange={this.updateDescription} className="playlist-description field"
             type="text" name="playlist[description]" value={this.state.description} />
           <SearchTracksForm chooseTrack={this.chooseTrack} />
+          <label className="selected-track label">
+            Selected Track:
+          </label>
           {selectedTrackItem}
           <input className="submit-button"
             type="submit" value="Create Playlist" onClick={this.handleSubmit}/>
