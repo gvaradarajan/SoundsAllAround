@@ -6,7 +6,7 @@ var UserNav = require('./user_navbar');
 
 var UserHome = React.createClass({
   getInitialState: function () {
-    return { user: UserStore.find(this.props.params.id) };
+    return { user: UserStore.find(this.props.params.id), uploadModalIsOpen: false };
   },
   componentWillReceiveProps: function (newProps) {
     ApiUtil.fetchSingleUser(newProps.params.id);
@@ -25,7 +25,11 @@ var UserHome = React.createClass({
     var name = this.state.user ? this.state.user.username : "";
     return (
       <div className="user-profile">
-        <h1 className="user-profile page-header">Welcome {name}!</h1>
+        <header className="user-banner banner">
+          <h1 className="user-header page-header">{name}</h1>
+          <button className="upload-profile-pic">Upload Photo</button>
+          <img className="profile-pic home-profile-pic" src={this.state.user ? this.state.user.image : ""} />
+        </header>
         <UserNav user={this.state.user}/>
         {this.props.children}
       </div>

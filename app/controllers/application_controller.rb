@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :signed_in?
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :image)
   end
 
   def current_user

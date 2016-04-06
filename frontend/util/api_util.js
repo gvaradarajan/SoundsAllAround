@@ -51,6 +51,18 @@ module.exports = {
       }
     });
   },
+  fetchSingleTrack: function (id) {
+    $.ajax({
+      method: 'GET',
+      url: '/api/tracks/' + id,
+      success: function (track) {
+        TrackActions.receiveSingleTrack(track);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#fetchSingleTrack");
+      }
+    });
+  },
   createAPlaylist: function (data, callback) {
     $.ajax({
       type: 'POST',
@@ -150,6 +162,8 @@ module.exports = {
     $.ajax({
       type: 'POST',
       url: '/api/users',
+      processData: false,
+      contentType: false,
       data: data,
       dataType: 'json',
       success: function (createdUser) {

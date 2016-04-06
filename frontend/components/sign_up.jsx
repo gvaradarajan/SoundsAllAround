@@ -7,13 +7,19 @@ var SignUpForm = React.createClass({
     router: PropTypes.object.isRequired
   },
   getInitialState: function () {
-    return { username: "", email: "", password: "" };
+    return { username: "", email: "", password: "", imageUrl: "", imageFile: "" };
   },
   handleSubmit: function(e) {
     e.preventDefault();
 
     var router = this.context.router;
-    var credentials = { user: this.state };
+    // var credentials = { user: this.state };
+    var credentials = new FormData();
+    credentials.append("user[username]", this.state.username);
+    credentials.append("user[email]", this.state.email);
+    credentials.append("user[password]", this.state.password);
+    credentials.append("user[image]", this.state.imageFile);
+
     ApiUtil.createNewUser(credentials, function(id) {
       router.push("/users/" + id);
     });
@@ -26,6 +32,15 @@ var SignUpForm = React.createClass({
   },
   updatePassword: function(e) {
     this.setState({ password: e.currentTarget.value });
+  },
+  updateImage: function (e) {
+    var reader = new FileReader();
+    var file = e.currentTarget.files[0];
+    reader.onloadend = function () {
+      this.setState({ imageUrl: reader.result, imageFile: file });
+    }.bind(this);
+
+    reader.readAsDataURL(file);
   },
   render: function() {
     return (
@@ -50,6 +65,10 @@ var SignUpForm = React.createClass({
           </label>
           <input onChange={this.updatePassword} className="password field"
             type="password" name="user[password]" value={this.state.password} />
+
+          <input type="file" onChange={this.updateImage}/>
+
+          <img className="profile-pic" src={this.state.imageUrl} />
 
           <input className="submit-button"
             type="submit" value="Sign Up" onClick={this.handleSubmit}/>

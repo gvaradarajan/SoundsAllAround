@@ -13,5 +13,7 @@ class Track < ActiveRecord::Base
     foreign_key: :artist_id
   )
 
+  has_many :playlist_tracks
+
   has_many :playlists, :through => :playlist_tracks, :source => :playlist
 end

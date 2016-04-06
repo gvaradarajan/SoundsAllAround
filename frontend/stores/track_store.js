@@ -48,6 +48,10 @@ TrackStore.__onDispatch = function (payload) {
       _resetSearchedTracks(payload.searchResults);
       TrackStore.__emitChange();
       break;
+    case TrackConstants.TRACK_RECEIVED:
+      resetTrack(payload.track);
+      TrackStore.__emitChange();
+      break;
     default:
 
   }

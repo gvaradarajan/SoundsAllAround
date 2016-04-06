@@ -5,7 +5,9 @@ class Api::TracksController < ApplicationController
   end
 
   def show
-    @track = Track.includes(artist: :uploaded_tracks).find(params[:id])
+    @track = Track.includes(artist: :uploaded_tracks)
+                  .includes(playlists: :tracks)
+                  .find(params[:id])
   end
 
   def create

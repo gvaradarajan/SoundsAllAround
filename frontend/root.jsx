@@ -13,6 +13,7 @@ var Login = require('./components/login');
 var Playlist = require('./components/playlist');
 var PlaylistIndex = require('./components/playlist_index');
 var Playlists = require('./components/all_playlists');
+var Track = require('./components/track');
 var TrackIndex = require('./components/user_track_index');
 var Tracks = require('./components/all_tracks');
 var UserOverview = require('./components/user_overview');
@@ -66,6 +67,7 @@ var routes = (
       <Route path="tracks" component={TrackIndex} />
     </Route>
     <Route path="playlists/:id" component={Playlist} />
+    <Route path="tracks/:id" component={Track} />
     <Route path="all_playlists" component={Playlists} />
     <Route path="search" component={SearchTracksForm} />
     <Route path='*' component={NotFound} />

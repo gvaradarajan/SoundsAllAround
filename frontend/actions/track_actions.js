@@ -8,6 +8,12 @@ module.exports = {
       tracks: tracks
     });
   },
+  receiveSingleTrack: function (track) {
+    AppDispatcher.dispatch({
+      actionType: TrackConstants.TRACK_RECEIVED,
+      track: track
+    });
+  },
   receiveTrackCreation: function (track) {
     AppDispatcher.dispatch({
       actionType: TrackConstants.TRACK_CREATED,

@@ -44,6 +44,25 @@
    list-style: none;
  }
 
+ .profile-pic {
+   width: 200px;
+   height: 200px;
+   border-radius: 50%;
+   display: block;
+ }
+
+ .user-banner {
+   position: relative;
+   text-align: right;
+   color: white;
+ }
+
+ .home-profile-pic {
+   position: absolute;
+   top: 30px;
+   left: 30px;
+ }
+
  .group:after {
    content: "";
    clear: both;
@@ -107,9 +126,9 @@
  }
 
  .all-tracks {
-   width: 900px;
-   margin: auto;
-   margin-right: 20px;
+   width: 840px;
+   display: block;
+   margin: 0 auto;
    padding: 20px;
  }
 
@@ -120,6 +139,11 @@
    margin: auto;
    box-sizing: border-box;
  }
+
+ .all-tracks > li {
+   padding: 10px;
+ }
+
 
  .track {
    width: 180px;
@@ -203,14 +227,28 @@
 
  .content {
    width: 900px;
-   margin: auto;
+   margin: 0 auto;
    background: white;
    padding: 20px;
    padding-top: 0;
  }
 
+ .upload-profile-pic {
+   z-index: 1;
+   position: absolute;
+   right: 665px;
+   top: 220px;
+   width: 90px;
+   height: 30px;
+   text-align: center;
+   font-size: 13px;
+   border-radius: 5px;
+   color: white;
+   background: #f50;
+ }
+
  .index-track-header {
-   width: 900px;
+   width: 860px;
    font-size: 24px;
    margin: auto;
    text-align: center;
