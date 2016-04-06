@@ -1,5 +1,9 @@
 class Track < ActiveRecord::Base
   validates :title, :artist_id, presence: true
+  has_attached_file :audio, default_url: "Chain_Jingle.mp3"
+  #validates_attachment_presence :audio
+  validates_attachment_content_type :audio, content_type: /\Aaudio\/.*\Z/
+
   include PgSearch
   pg_search_scope(:search_tracks,
                   :against => :title,
