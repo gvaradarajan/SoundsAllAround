@@ -1,15 +1,25 @@
 var React = require('react');
+var Modal = require('react-modal');
 var PropTypes = React.PropTypes;
 var UserStore = require('../stores/user_store');
+var CurrentUserStore = require('../stores/current_user_store');
+var modalStyleOptions = require('../constants/modal_constants').uploadphoto;
 var ApiUtil = require('../util/api_util');
 var UserNav = require('./user_navbar');
+var UploadPhotoForm = require('./upload_photo_form');
 
 var UserHome = React.createClass({
   getInitialState: function () {
     return { user: UserStore.find(this.props.params.id), uploadModalIsOpen: false };
   },
+  _onChange: function () {
+    this.setState ({ user: UserStore.find(this.props.params.id) });
+  },
   componentWillReceiveProps: function (newProps) {
     ApiUtil.fetchSingleUser(newProps.params.id);
+  },
+  componentWillMount: function () {
+    Modal.setAppElement(document.body);
   },
   componentDidMount: function () {
     this.listenerToken = UserStore.addListener(this._onChange);
@@ -18,8 +28,27 @@ var UserHome = React.createClass({
   componentWillUnmount: function () {
     this.listenerToken.remove();
   },
-  _onChange: function () {
-    this.setState ({ user: UserStore.find(this.props.params.id) });
+  openModal: function () {
+    this.setState({ uploadModalIsOpen: true });
+  },
+  closeModal: function () {
+    this.setState({ uploadModalIsOpen: false });
+  },
+  generateUploadModal: function () {
+    var modal = "";
+    var currUser = CurrentUserStore.isLoggedIn();
+    var currentUserId = currUser ? currUser.id : NaN;
+    var pageUserId = this.props.params.id;
+    pageUserId = pageUserId || NaN;
+    if (currentUserId === pageUserId) {
+      modal = <Modal isOpen={this.state.uploadModalIsOpen}
+             onRequestClose={this.closeModal}
+             style={modalStyleOptions}
+             closeTimeoutMS={150}>
+                <UploadPhotoForm id={this.state.user.id} />
+              </Modal>;
+    }
+    return modal;
   },
   render: function() {
     var name = this.state.user ? this.state.user.username : "";
@@ -31,12 +60,13 @@ var UserHome = React.createClass({
           <img className="profile-pic home-profile-pic" src={this.state.user ? this.state.user.image : ""} />
         </header>
         <UserNav user={this.state.user}/>
+        {this.generateUploadModal()}
         {this.props.children}
       </div>
     );
   }
 
 });
-// <PlaylistIndex user={this.state.user} />
+
 
 module.exports = UserHome;

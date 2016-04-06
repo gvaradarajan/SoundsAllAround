@@ -29,6 +29,10 @@ PlaylistStore.find = function (id) {
   return _playlists[id];
 };
 
+PlaylistStore.addTrackToPlaylist = function (playlist_id, track) {
+  _playlists[playlist_id].tracks.push(track);
+},
+
 PlaylistStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case PlaylistConstants.PLAYLISTS_RECEIVED:
@@ -41,6 +45,13 @@ PlaylistStore.__onDispatch = function (payload) {
       break;
     case PlaylistConstants.PLAYLIST_UPDATED:
       resetPlaylist(payload.playlist.playlist);
+      PlaylistStore.__emitChange();
+      break;
+    case PlaylistConstants.TRACK_ADDED:
+      PlaylistStore.__emitChange();
+      break;
+    case PlaylistConstants.ADDED_TRACK_REGISTERED:
+      PlaylistStore.addTrackToPlaylist(payload.playlist_id, payload.track);
       PlaylistStore.__emitChange();
       break;
     default:

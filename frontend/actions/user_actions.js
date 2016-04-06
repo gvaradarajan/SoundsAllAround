@@ -19,5 +19,11 @@ module.exports = {
       actionType: UserConstants.CURRENT_USER_RECEIVED,
       user: user
     });
+  },
+  receiveUpdatedUser: function (user) {
+    AppDispatcher.dispatch({
+      actionType: UserConstants.USER_UPDATED,
+      user: user
+    });
   }
 };

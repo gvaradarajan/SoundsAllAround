@@ -39,7 +39,6 @@ var SignUpForm = React.createClass({
     reader.onloadend = function () {
       this.setState({ imageUrl: reader.result, imageFile: file });
     }.bind(this);
-
     reader.readAsDataURL(file);
   },
   render: function() {

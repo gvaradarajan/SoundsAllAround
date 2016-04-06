@@ -31,5 +31,18 @@ module.exports = {
       actionType: PlaylistConstants.PLAYLIST_UPDATED,
       playlist: playlist
     });
+  },
+  receiveAddedTrack: function (track) {
+    AppDispatcher.dispatch({
+      actionType: PlaylistConstants.TRACK_ADDED,
+      track: track
+    });
+  },
+  updateAddedTrack: function (playlist_id, track) {
+    AppDispatcher.dispatch({
+      actionType: PlaylistConstants.ADDED_TRACK_REGISTERED,
+      playlist_id: playlist_id,
+      track: track
+    });
   }
 };

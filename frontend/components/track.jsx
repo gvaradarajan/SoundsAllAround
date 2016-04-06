@@ -14,8 +14,11 @@ var Track = React.createClass({
     this.setState({ track: TrackStore.find(newProps.params.id) });
   },
   componentDidMount: function () {
-    TrackStore.addListener(this._onChange);
+    this.listenerToken = TrackStore.addListener(this._onChange);
     ApiUtil.fetchSingleTrack(this.props.params.id);
+  },
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
   },
   render: function() {
     var track = this.state.track;

@@ -97,6 +97,8 @@ module.exports = {
       type: 'POST',
       url: '/api/tracks',
       data: data,
+      contentType: false,
+      processData: false,
       dataType: 'json',
       success: function (track) {
         TrackActions.receiveTrackCreation(track);
@@ -175,6 +177,23 @@ module.exports = {
       }
     });
   },
+  updateUser: function (data, callback) {
+    $.ajax({
+      type: 'PATCH',
+      url: '/users/' + data.id,
+      processData: false,
+      contentType: false,
+      data: data.user,
+      dataType: 'json',
+      success: function (user) {
+        UserActions.receiveUpdatedUser(user);
+        callback && callback(user.id);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#updateUser");
+      }
+    });
+  },
   getSearchResults: function (searchParams) {
     $.ajax({
       type: 'GET',
@@ -188,5 +207,23 @@ module.exports = {
         console.log("YOU DONE FUCKED UP IN ApiUtil#getSearchResults");
       }
     });
+  },
+  addTrackToPlaylist: function (params, callback) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/playlist_tracks',
+      data: params,
+      dataType: 'json',
+      success: function (track) {
+        PlaylistActions.receiveAddedTrack(track);
+        callback && callback(track);
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#addTrackToPlaylist");
+      }
+    });
+  },
+  registerAddedTrack: function (playlist_id, track) {
+    PlaylistActions.updateAddedTrack(playlist_id, track);
   }
 };

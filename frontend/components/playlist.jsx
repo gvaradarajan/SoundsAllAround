@@ -5,6 +5,7 @@ var CurrentUserStore = require('../stores/user_store');
 var TrackIndexItem = require('./track_index_item');
 var EditField = require('./edit_field');
 var ApiUtil = require('../util/api_util');
+var PlaylistAddTrack = require('./playlist_add_track');
 
 var Playlist = React.createClass({
   getInitialState: function () {
@@ -14,7 +15,7 @@ var Playlist = React.createClass({
   },
 
   _belongsToCurrentUser: function () {
-    return CurrentUserStore.currentUser().id === this.state.playlists.user_id;
+    return CurrentUserStore.currentUser().id === this.state.playlist.user_id;
   },
 
   _onChange: function () {
@@ -103,6 +104,7 @@ var Playlist = React.createClass({
         );
       }.bind(this)
     );
+    var id = this.state.playlist && this.state.playlist.id;
 
     return (
       <article className="playlist content">
@@ -115,6 +117,7 @@ var Playlist = React.createClass({
         <ul>
           {trackItems}
         </ul>
+        <PlaylistAddTrack id={id}/>
       </article>
     );
   }
