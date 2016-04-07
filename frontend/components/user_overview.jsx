@@ -5,8 +5,8 @@ var Overview = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <h1>Overview:</h1>
+      <div className="overview-header">
+        <h1 className="page-header">Overview:</h1>
       </div>
     );
   }

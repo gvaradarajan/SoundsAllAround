@@ -69,7 +69,6 @@ var routes = (
     <Route path="playlists/:id" component={Playlist} />
     <Route path="tracks/:id" component={Track} />
     <Route path="all_playlists" component={Playlists} />
-    <Route path="search" component={SearchTracksForm} />
     <Route path='*' component={NotFound} />
   </Route>
 );

@@ -53,7 +53,7 @@
 
  .user-banner {
    position: relative;
-   text-align: right;
+   /*text-align: right;*/
    color: white;
  }
 
@@ -70,10 +70,10 @@
  }
 
  .page-header {
-   font-weight: bold;
+   font-weight: normal;
    font-size: 36px;
    width: 600px;
-   margin: 20px auto;
+   margin: 20px 80px;
    margin-top: 0;
    padding-top: 20px;
  }
@@ -102,9 +102,10 @@
 
  .submit-button {
    background: #f50;
+   text-align: center;
    color: white;
    padding: 10px 20px;
-   border-radius: 10%;
+   border-radius: 10px;
    box-sizing: border-box;
  }
 
@@ -130,6 +131,7 @@
    display: block;
    margin: 0 auto;
    padding: 20px;
+   padding-left: 90px;
  }
 
  .playlist, .track {
@@ -142,12 +144,18 @@
 
  .all-tracks > li {
    padding: 10px;
+   cursor: pointer;
  }
 
+ h2 {
+    font-size: 12px;
+
+  }
 
  .track {
    width: 180px;
    float: left;
+   display: block;
    text-align: center;
  }
 
@@ -199,15 +207,25 @@
    margin-bottom: 20px;
  }
 
- .user-header {
-   margin: 20px;
+ .user-heading {
+   /*margin: 20px;*/
+   position: absolute;
+   left: 250px;
+   top: 30px;
+   display: inline-block;
+   font-weight: normal;
+   font-size: 24px;
+   background: black;
+   padding: 4px 7px;
+   opacity: 0.8;
  }
 
  .user-header-nav {
    margin: 0 auto;
    width: 900px;
-   font-size: 24px;
-   padding-bottom: 20px;
+   padding: 20px 30px;
+   font-size: 18px;
+   /*padding-bottom: 20px;*/
  }
 
  .user-nav-bar {
@@ -229,8 +247,9 @@
    width: 900px;
    margin: 0 auto;
    background: white;
-   padding: 20px;
-   padding-top: 0;
+   padding-bottom: 20px;
+   /*padding: 20px;
+   padding-top: 0;*/
  }
 
  .upload-profile-pic {
@@ -271,6 +290,12 @@
 
  .search-result-list {
    padding-bottom: 10px;
+ }
+
+ .delete {
+   width: 70px;
+   height: 30px;
+   padding: 5px 2px;
  }
 
 

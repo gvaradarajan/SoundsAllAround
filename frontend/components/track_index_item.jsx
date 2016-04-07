@@ -7,14 +7,18 @@ var TrackIndexItem = React.createClass({
     router: PropTypes.object.isRequired
   },
   changePlayState: function (e) {
-    if (e.currentTarget.children[3].paused) {
-      // e.currentTarget.children[3].setAttribute("controls", "controls");
-      console.log(e.currentTarget.children[3].buffered.start());
-      console.log(e.currentTarget.children[3].buffered.end());
-      e.currentTarget.children[3].play();
+    var audio = document.getElementById("track-audio" + this.props.track.id);
+    // if (e.currentTarget.children[3].paused) {
+    //   e.currentTarget.children[3].play();
+    // }
+    // else {
+    //   e.currentTarget.children[3].pause();
+    // }
+    if (audio.paused) {
+      audio.play();
     }
     else {
-      e.currentTarget.children[3].pause();
+      audio.pause();
     }
   },
   linkToTrackShow: function () {
@@ -26,14 +30,15 @@ var TrackIndexItem = React.createClass({
     router.push("/users/" + this.props.track.artist_id);
   },
   render: function() {
-    var title = this.props.track && this.props.track.title;
-    var artist = this.props.track && this.props.track.artist;
+    var track = this.props.track;
+    var title = track && track.title;
+    var artist = track && track.artist;
     return (
       <li className="track" onClick={this.changePlayState}>
         <img></img>
         <h1><a onClick={this.linkToTrackShow}>{title}</a></h1>
-        <p><a onClick={this.linkToArtistShow}>{artist}</a></p>
-        <audio ref="audio_tag" src={this.props.track.audio}></audio>
+        <h2><a onClick={this.linkToArtistShow}>{artist}</a></h2>
+        <audio ref="audio_tag" id={"track-audio" + track.id} src={track.audio}></audio>
       </li>
     );
   }

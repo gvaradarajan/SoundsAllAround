@@ -27,12 +27,12 @@ var Track = React.createClass({
     var playlistItems = track && track.playlists && track.playlists.map(function (playlist) {
       return <li key={playlist.id}>{playlist.title}</li>;
     });
-    var el = this.state.track && this.state.track.audio && (<audio ref="audio_tag" src={this.state.track.audio} autoPlay="true" controls />);
+    var el = this.state.track && this.state.track.audio && (<audio ref="audio_tag" src={this.state.track.audio} controls />);
     return (
       <div>
         <h1>{title}</h1>
         <h2>{artist}</h2>
-        {el}
+        {el} 
         <ul>
           {playlistItems}
         </ul>

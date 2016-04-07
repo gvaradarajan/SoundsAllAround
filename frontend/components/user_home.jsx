@@ -45,7 +45,7 @@ var UserHome = React.createClass({
              onRequestClose={this.closeModal}
              style={modalStyleOptions}
              closeTimeoutMS={150}>
-                <UploadPhotoForm id={this.state.user.id} />
+                <UploadPhotoForm id={this.props.params.id} />
               </Modal>;
     }
     return modal;
@@ -55,7 +55,7 @@ var UserHome = React.createClass({
     return (
       <div className="user-profile">
         <header className="user-banner banner">
-          <h1 className="user-header page-header">{name}</h1>
+          <h1 className="user-heading">{name}</h1>
           <button className="upload-profile-pic" onClick={this.openModal}>Upload Photo</button>
           <img className="profile-pic home-profile-pic" src={this.state.user ? this.state.user.image : ""} />
         </header>
