@@ -37,10 +37,10 @@ var UserHome = React.createClass({
   generateUploadModal: function () {
     var modal = "";
     var currUser = CurrentUserStore.isLoggedIn();
-    var currentUserId = currUser ? currUser.id : NaN;
+    var currentUserId = currUser ? CurrentUserStore.currentUser().id : NaN;
     var pageUserId = this.props.params.id;
     pageUserId = pageUserId || NaN;
-    if (currentUserId === pageUserId) {
+    if (currentUserId == pageUserId) {
       modal = <Modal isOpen={this.state.uploadModalIsOpen}
              onRequestClose={this.closeModal}
              style={modalStyleOptions}
@@ -56,7 +56,7 @@ var UserHome = React.createClass({
       <div className="user-profile">
         <header className="user-banner banner">
           <h1 className="user-header page-header">{name}</h1>
-          <button className="upload-profile-pic">Upload Photo</button>
+          <button className="upload-profile-pic" onClick={this.openModal}>Upload Photo</button>
           <img className="profile-pic home-profile-pic" src={this.state.user ? this.state.user.image : ""} />
         </header>
         <UserNav user={this.state.user}/>

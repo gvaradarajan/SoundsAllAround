@@ -178,6 +178,7 @@ module.exports = {
     });
   },
   updateUser: function (data, callback) {
+    debugger
     $.ajax({
       type: 'PATCH',
       url: '/users/' + data.id,
