@@ -54,9 +54,6 @@ artists = User.create!([{username: 'Gluestick (feat. Vadim Fainberg)',
                        {username: 'RhythmAndJews',
                         email: 'rnj@gmail.com',
                         password: 'rhythmandjuice'},
-                       {username: 'Lee Rosevere',
-                        email: 'somedude@synth.io',
-                        password: 'electro'},
                        {username: 'Beethoven',
                         email: 'notthedog@timemachine.org',
                         password: 'notmozart'},
@@ -135,35 +132,6 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
-lee = artists[2]
-
-lee_pic = File.open('app/assets/images/lee_rosevere_cover.jpg')
-lee.image = lee_pic
-lee.save!
-
-track = lee.uploaded_tracks.create!(title: "Star Song")
-audio = File.open('app/assets/seeds/Lee_RosevereStar_Song.mp3')
-track.audio = audio
-track.image = lee_pic
-audio.close
-track.save!
-
-# track = lee.uploaded_tracks.create!(title: "Telecom")
-# audio = File.open('app/assets/seeds/Lee_RosevereTelecom.mp3')
-# track.audio = audio
-# track.image = lee_pic
-# audio.close
-# track.save!
-#
-# track = lee.uploaded_tracks.create!(title: "User Friendly (Future Mix)")
-# audio = File.open('app/assets/seeds/Lee_RosevereUser_Friendly_future_mix.mp3')
-# track.audio = audio
-# track.image = lee_pic
-# audio.close
-# track.save!
-
-lee_pic.close
-
 bee = artists[3]
 
 bee_pic = File.open('app/assets/images/beethoven.jpg')
@@ -196,13 +164,13 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
-track = bee.uploaded_tracks.create!(title: '5th Symphony')
-audio = File.open('app/assets/seeds/Symphony_No_5.mp3')
-track.audio = audio
-track.image = bee_pic;
-audio.close
-track.save!
-PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
+# track = bee.uploaded_tracks.create!(title: '5th Symphony')
+# audio = File.open('app/assets/seeds/Symphony_No_5.mp3')
+# track.audio = audio
+# track.image = bee_pic;
+# audio.close
+# track.save!
+# PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
 bee_pic.close
 
