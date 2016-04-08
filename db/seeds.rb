@@ -111,12 +111,12 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
-track = rnj.uploaded_tracks.create!(title: 'Title of the Song')
-audio = File.open('app/assets/seeds/Title_Of_The_Song.mp3')
-track.audio = audio
-audio.close
-track.save!
-PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
+# track = rnj.uploaded_tracks.create!(title: 'Title of the Song')
+# audio = File.open('app/assets/seeds/Title_Of_The_Song.mp3')
+# track.audio = audio
+# audio.close
+# track.save!
+# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
 # track = rnj.uploaded_tracks.create!(title: 'Lady Madonna')
 # audio = File.open('app/assets/seeds/Lady_Madonna.mp3')
