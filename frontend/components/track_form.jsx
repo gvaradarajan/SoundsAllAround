@@ -11,10 +11,10 @@ var TrackForm = React.createClass({
     return { title: "",
              artist_id: this.props.id,
              audioUrl: "",
-             audioFile: null,
+             audioFile: "",
              audioFileName: "",
              imageUrl: "",
-             imageFile: null,
+             imageFile: "",
              imageFileName: "" };
   },
   componentDidMount: function () {

@@ -12,7 +12,7 @@ var TrackIndexItem = React.createClass({
   },
   changePlayState: function (e) {
     var audio = document.getElementById("track-audio" + this.props.track.id);
-    audio.setAttribute("controls", "");
+    //audio.setAttribute("controls", "");
     // console.log(audio.duration);
     if (audio.paused) {
       audio.play();
@@ -21,9 +21,9 @@ var TrackIndexItem = React.createClass({
       audio.pause();
     }
   },
-  removeControls: function (e) {
-    e.currentTarget.removeAttribute("controls");
-  },
+  // removeControls: function (e) {
+  //   e.currentTarget.removeAttribute("controls");
+  // },
   linkToTrackShow: function () {
     var router = this.context.router;
     router.push("/tracks/" + this.props.track.id);
@@ -36,6 +36,29 @@ var TrackIndexItem = React.createClass({
     var tick = document.getElementById("small-rect " + this.props.track.id);
     tick.style['transition-duration'] = '0s';
     $(tick).removeClass('ended');
+  },
+  generatePlayButton: function () {
+    var button = "";
+    if (this.props.orientation === "landscape") {
+      button = (
+        <div className="play-button-container" onClick={this.sendTicker}>
+          <img className="play-button"></img>
+        </div>
+      );
+    }
+    return button;
+  },
+  producePlayer: function () {
+    var els = "";
+    if (this.props.orientation === "landscape") {
+      els = (
+        <div className="big-rect" onClick={this.sendTicker}>
+         <div className="small-rect move" id={"small-rect " + this.props.track.id} >
+         </div>
+       </div>
+      );
+    }
+    return els;
   },
   sendTicker: function (){
     var audio = document.getElementById("track-audio" + this.props.track.id);
@@ -63,20 +86,14 @@ var TrackIndexItem = React.createClass({
       <li className={"track-" + this.props.orientation + " group"} >
         <img src={track ? track.image : ""} onClick={this.changePlayState}></img>
         <div className="track-nopic">
-          <div className="play-button-container" onClick={this.sendTicker}>
-            <img className="play-button"></img>
-          </div>
+          {this.generatePlayButton()}
           <div className="track-info">
             <h2><a onClick={this.linkToArtistShow}>{artist}</a></h2>
             <h1><a onClick={this.linkToTrackShow}>{title}</a></h1>
             <audio ref="audio_tag"
                    id={"track-audio" + track.id}
-                   src={track.audio} ended={this.removeControls}
-                   volume="1"></audio>
-            <div className="big-rect" onClick={this.sendTicker}>
-             <div className="small-rect move" id={"small-rect " + this.props.track.id} >
-             </div>
-            </div>
+                   src={track.audio} ></audio>
+                 {this.producePlayer()}
           </div>
         </div>
       </li>

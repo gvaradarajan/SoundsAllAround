@@ -13,7 +13,7 @@ class Api::TracksController < ApplicationController
   def create
     @track = Track.new(track_params)
     if @track.save
-      redirect_to "/api/tracks/#{@track.id}"
+      render :show
     else
       render @track.errors.full_messages, status: 422
     end
