@@ -12,7 +12,10 @@ var TrackForm = React.createClass({
              artist_id: this.props.id,
              audioUrl: "",
              audioFile: null,
-             audioFileName: "" };
+             audioFileName: "",
+             imageUrl: "",
+             imageFile: null,
+             imageFileName: "" };
   },
   componentDidMount: function () {
     this.listenerToken = UserStore.addListener(this.resetForm);
@@ -31,6 +34,7 @@ var TrackForm = React.createClass({
     data.append("track[title]", this.state.title);
     data.append("track[artist_id]", this.state.artist_id);
     data.append("track[audio]", this.state.audioFile);
+    data.append("track[image]", this.state.imageFile);
     ApiUtil.createTrack(data, function (id) {
       router.push("/users/" + id + "/tracks");
     });
@@ -52,20 +56,42 @@ var TrackForm = React.createClass({
     }.bind(this);
     reader.readAsDataURL(file);
   },
+  updateImageFile: function (e) {
+    var reader = new FileReader();
+    var file = e.currentTarget.files[0];
+    reader.onloadend = function () {
+      this.setState({ imageFileUrl: reader.result,
+                      imageFile: file,
+                      imageFileName: file.name });
+    }.bind(this);
+    reader.readAsDataURL(file);
+  },
   render: function() {
     return (
       <section>
+        <h1 className="track-form-header page-header">Add New Track</h1>
         <form className="track-form cred-form">
-
-          <h1 className="track-form-header">Add New Track</h1>
-
           <label className="track-title label" htmlFor="title">
             Title:
           </label>
           <input onChange={this.updateTitle} className="track-title field"
             type="text" name="track[title]" value={this.state.title} />
 
+          <label className="track-audio label" htmlFor="title">
+            Audio File:
+          </label>
           <input type="file" onChange={this.updateAudioFile}/>
+
+          <label className="track-image label" htmlFor="title">
+            Album Picture:
+          </label>
+          <input type="file" onChange={this.updateImageFile}/>
+
+          <label className="preview label" htmlFor="title">
+            Preview:
+          </label>
+
+          <img className="profile-pic" src={this.state.imageFileUrl} />
 
           <input className="submit-button"
             type="submit" value="Create Track" onClick={this.handleSubmit}/>

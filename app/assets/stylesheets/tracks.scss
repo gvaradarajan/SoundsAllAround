@@ -12,8 +12,51 @@
   height: 260px;
 }
 
-.track > img {
+.track-portrait > img {
   width: 160px;
   height: 160px;
-  background: asset-url("original/missing.png") center no-repeat;
+}
+
+.track-landscape > .track-nopic > .play-button-container {
+  background: asset-url("play_baby_play.png") center no-repeat;
+  background-size: contain;
+}
+
+// .track-portrait > audio {
+//   width: 160px;
+// }
+
+.big-rect {
+  display: block;
+  position: relative;
+  height: 65px;
+  width: 300px;
+  background: #ccc;
+}
+
+.small-rect {
+  height: 65px;
+  width: 2px;
+  background: #f50;
+  position: absolute;
+}
+
+.small-rect {
+  -webkit-transition:left linear;
+  -moz-transition:left linear;
+  -ms-transition:left linear;
+  -o-transition:left linear;
+  transition:left linear;
+
+  -webkit-transition-duration: 3s;
+  -moz-transition-duration: 3s;
+  -ms-transition-duration: 3s;
+  -o-transition-duration: 3s;
+  transition-duration: 3s;
+
+  left: 0px;
+}
+
+.ended {
+  left: 300px;
 }

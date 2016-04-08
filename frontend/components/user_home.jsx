@@ -45,7 +45,7 @@ var UserHome = React.createClass({
              onRequestClose={this.closeModal}
              style={modalStyleOptions}
              closeTimeoutMS={150}>
-                <UploadPhotoForm id={this.props.params.id} />
+                <UploadPhotoForm id={this.props.params.id} fxn={this.closeModal} />
               </Modal>;
     }
     return modal;

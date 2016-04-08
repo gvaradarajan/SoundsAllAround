@@ -42,7 +42,7 @@ var PlaylistIndex = React.createClass({
     });
     return (
       <div className="playlists-index">
-        <h1 className="playlists-header">Playlists:</h1>
+        <h1 className="playlists-header page-header">Playlists:</h1>
         <ul>
           {playlistItems}
         </ul>

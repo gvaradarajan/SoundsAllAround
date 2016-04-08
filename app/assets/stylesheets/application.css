@@ -109,21 +109,10 @@
    box-sizing: border-box;
  }
 
- .playlists-index {
-   width: 600px;
-   margin: auto;
- }
-
  .all-playlists {
    width: 900px;
    margin: auto;
    padding: 20px;
- }
-
- .playlists-header {
-   font-weight: bold;
-   font-size: 24px;
-   padding-bottom: 20px;
  }
 
  .all-tracks {
@@ -134,7 +123,7 @@
    padding-left: 90px;
  }
 
- .playlist, .track {
+ .playlist, .track-portrait {
    width: 600px;
    height: 260px;
    display: block;
@@ -152,7 +141,7 @@
 
   }
 
- .track {
+ .track-portrait {
    width: 180px;
    float: left;
    display: block;
@@ -298,6 +287,76 @@
    padding: 5px 2px;
  }
 
+ .playlist-banner {
+   position: relative;
+   color: white;
+ }
+
+ .playlist-heading {
+   position: absolute;
+   left: 100px;
+   top: 60px;
+   display: inline-block;
+   font-weight: normal;
+   font-size: 24px;
+   background: black;
+   opacity: 70%;
+ }
+
+ .creator-heading {
+   position: absolute;
+   left: 100px;
+   top: 25px;
+   display: inline-block;
+   font-weight: normal;
+   font-size: 24px;
+   background: black;
+   opacity: 70%;
+ }
+
+ .description {
+   width: 700px;
+   padding-bottom: 30px;
+   margin: auto;
+ }
+
+ .track-landscape {
+   margin: auto;
+   width: 600px;
+   height: 200px;
+   display: block;
+ }
+
+ .track-landscape > img {
+   float: left;
+   padding-right: 15px;
+   width: 160px;
+   height: 160px;
+ }
+
+ .track-landscape > .track-nopic > div {
+   padding-right: 20px;
+ }
+
+ .track-landscape > .track-nopic {
+   float: right;
+   width: 420px;
+   height: 190px;
+ }
+
+ .track-landscape > .track-nopic > .track-info {
+   float: left;
+ }
+
+ .track-landscape > .track-nopic > .track-info > h1 {
+   padding-bottom: 20px;
+ }
+
+ .play-button-container {
+   float: left;
+   width: 40px;
+   height: 40px;
+ }
 
  .ReactModal__Overlay--after-open {
    opacity: 1;

@@ -100,23 +100,25 @@ var Playlist = React.createClass({
     var trackItems = playlist && playlist.tracks.map(
       function (track) {
         return (
-          <TrackIndexItem key={track.id} track={track}/>
+          <TrackIndexItem key={track.id} track={track} orientation={"landscape"}/>
         );
       }.bind(this)
     );
     var id = this.state.playlist && this.state.playlist.id;
 
     return (
-      <article className="playlist content">
-        <header></header>
-        <h1 className="playlists-header">{title}</h1>
-        <h2>{creator}</h2>
-        {this.createEditTitle()}
-        <p>{description}</p>
-        {this.createEditDesc()}
-        <ul>
+      <article className="playlist-show content">
+        <header className="playlist-banner banner">
+          <h1 className="playlist-heading">{title}</h1>
+          <h1 className="creator-heading">{creator}</h1>
+        </header>
+        <h1 className="page-header">Summary: </h1>
+        <p className="description">{description}</p>
+        <ul className="group">
           {trackItems}
         </ul>
+        {this.createEditTitle()}
+        {this.createEditDesc()}
         <PlaylistAddTrack id={id}/>
       </article>
     );

@@ -37,11 +37,11 @@ var TrackIndex = React.createClass({
     var id = this.state.user && this.state.user.id;
     var tracks = this.state.user && this.state.user.tracks;
     var trackItems = tracks && tracks.map(function (track) {
-      return <TrackIndexItem key={track.id} track={track} />;
+      return <TrackIndexItem key={track.id} orientation={"portrait"} track={track} />;
     });
     return (
       <div className="tracks-index">
-        <h1 className="tracks-header">Tracks:</h1>
+        <h1 className="tracks-header page-header">Tracks:</h1>
         <ul className="all-tracks group">
           {trackItems}
         </ul>

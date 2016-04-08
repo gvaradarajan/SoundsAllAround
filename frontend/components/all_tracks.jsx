@@ -21,7 +21,7 @@ var Tracks = React.createClass({
   render: function() {
     var tracks = this.state.tracks;
     var trackItems = tracks && tracks.map(function (track) {
-      return <TrackIndexItem key={track.id} track={track} />;
+      return <TrackIndexItem key={track.id} orientation={"portrait"} track={track} />;
     });
     return (
       <ul className="all-tracks group">

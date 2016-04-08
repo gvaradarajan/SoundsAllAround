@@ -24,12 +24,11 @@ var UploadForm = React.createClass({
     e.preventDefault();
     var router = this.context.router;
     var newImageData = new FormData();
-    newImageData.append("user_id", this.props.id);
     newImageData.append("user[image]", this.state.imageFile);
-    debugger
-    ApiUtil.updateUser(newImageData, function (id) {
+    ApiUtil.updateUser(this.props.id, newImageData, function (id) {
       router.push("/users/" + id);
-    });
+      this.props.fxn();
+    }.bind(this));
   },
   render: function() {
     return (
@@ -37,11 +36,11 @@ var UploadForm = React.createClass({
         <h1>Select a File To Upload</h1>
         <input type="file" onChange={this.handleChange}></input>
         <label className="selected-track label">
-          Selected Track:
+          Preview:
         </label>
         <img className="profile-pic" src={this.state.imageUrl} />
         <input className="submit-button"
-          type="submit" value="Create Track" onClick={this.handleSubmit}/>
+          type="submit" value="Update Picture" onClick={this.handleSubmit}/>
       </form>
     );
   }

@@ -3,5 +3,6 @@ json.image @user.image
 json.playlists @user.playlists
 json.tracks @user.uploaded_tracks.each do |track|
   json.extract! track, :id, :title, :artist_id
+  json.image track.image
   json.audio track.audio
 end

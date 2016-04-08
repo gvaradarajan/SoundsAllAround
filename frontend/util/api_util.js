@@ -32,7 +32,7 @@ module.exports = {
       method: 'GET',
       url: '/api/playlists/' + id,
       success: function (data) {
-        PlaylistActions.receiveSinglePlaylist(data.playlist);
+        PlaylistActions.receiveSinglePlaylist(data);
       },
       error: function () {
         console.log("YOU DONE FUCKED UP IN ApiUtil#fetchSinglePlaylist");
@@ -51,12 +51,13 @@ module.exports = {
       }
     });
   },
-  fetchSingleTrack: function (id) {
+  fetchSingleTrack: function (id, callback) {
     $.ajax({
       method: 'GET',
       url: '/api/tracks/' + id,
       success: function (track) {
         TrackActions.receiveSingleTrack(track);
+        callback && callback();
       },
       error: function () {
         console.log("YOU DONE FUCKED UP IN ApiUtil#fetchSingleTrack");
@@ -177,14 +178,13 @@ module.exports = {
       }
     });
   },
-  updateUser: function (data, callback) {
-    debugger
+  updateUser: function (id, data, callback) {
     $.ajax({
       type: 'PATCH',
-      url: '/users/' + data.id,
+      url: '/api/users/' + id,
       processData: false,
       contentType: false,
-      data: data.user,
+      data: data,
       dataType: 'json',
       success: function (user) {
         UserActions.receiveUpdatedUser(user);

@@ -58,7 +58,7 @@ var PlaylistForm = React.createClass({
     var selectedTrackItem = selectedTrack && <TrackIndexItem track={selectedTrack} />;
     return (
       <section>
-        <h1 className="playlist-form-header">Add New Playlist</h1>
+        <h1 className="playlist-form-header page-header">Add New Playlist</h1>
         <form className="playlist-form cred-form">
 
           <label className="playlist-title label" htmlFor="title">
