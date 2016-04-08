@@ -82,6 +82,9 @@ var TrackIndexItem = React.createClass({
     var track = this.props.track;
     var title = track && track.title;
     var artist = track && track.artist;
+    // if (track.title === "5th Symphony") {
+    //   debugger
+    // }
     return (
       <li className={"track-" + this.props.orientation + " group"} >
         <img src={track ? track.image : ""} onClick={this.changePlayState}></img>

@@ -88,56 +88,6 @@ glue_cover = File.open('app/assets/images/gluestick.jpg')
 gluestick.image = glue_cover
 gluestick.save!
 
-# glue = gluestick.playlists.create!(title: '[gluestick]')
-#
-# track = gluestick.uploaded_tracks.create!(title: 'Nevereverever')
-# audio = File.open('app/assets/seeds/gluestickADollarMakesMeSayYeah_05_Nevereverever.mp3')
-# track.audio = audio
-# track.image = glue_cover
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: glue.id, track_id: track.id)
-#
-# track = gluestick.uploaded_tracks.create!(title: '641')
-# audio = File.open('app/assets/seeds/gluestickADollarMakesMeSayYeah_06_641.mp3')
-# track.audio = audio
-# track.image = glue_cover
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: glue.id, track_id: track.id)
-#
-# track = gluestick.uploaded_tracks.create!(title: 'False Holds')
-# audio = File.open('app/assets/seeds/gluestickADollarMakesMeSayYeah_01_False_Holds.mp3')
-# track.audio = audio
-# track.image = glue_cover
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: glue.id, track_id: track.id)
-#
-# track = gluestick.uploaded_tracks.create!(title: 'Film Score')
-# audio = File.open('app/assets/seeds/gluestickADollarMakesMeSayYeah_02_Film_Score.mp3')
-# track.audio = audio
-# track.image = glue_cover
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: glue.id, track_id: track.id)
-#
-# track = gluestick.uploaded_tracks.create!(title: 'Rattlesnakes')
-# audio = File.open('app/assets/seeds/gluestickADollarMakesMeSayYeah_03_Rattlesnakes.mp3')
-# track.audio = audio
-# track.image = glue_cover
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: glue.id, track_id: track.id)
-#
-# track = gluestick.uploaded_tracks.create!(title: 'Kidnappings')
-# audio = File.open('app/assets/seeds/gluestickADollarMakesMeSayYeah_04_Kidnappings.mp3')
-# track.audio = audio
-# track.image = glue_cover
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: glue.id, track_id: track.id)
-
 glue_cover.close
 
 rnj = artists[1]
