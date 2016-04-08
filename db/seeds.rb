@@ -93,19 +93,19 @@ rnj = artists[1]
 
 cym = rnj.playlists.create!(title: 'Call Your Mother')
 
-track = rnj.uploaded_tracks.create!(title: "Ahava K'tana")
-audio = File.open('app/assets/seeds/AhavaKtana.mp3')
-track.audio = audio
-audio.close
-track.save!
-PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
-
-track = rnj.uploaded_tracks.create!(title: "Ani V'ata")
-audio = File.open('app/assets/seeds/AniVata.mp3')
-track.audio = audio
-audio.close
-track.save!
-PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
+# track = rnj.uploaded_tracks.create!(title: "Ahava K'tana")
+# audio = File.open('app/assets/seeds/AhavaKtana.mp3')
+# track.audio = audio
+# audio.close
+# track.save!
+# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
+#
+# track = rnj.uploaded_tracks.create!(title: "Ani V'ata")
+# audio = File.open('app/assets/seeds/AniVata.mp3')
+# track.audio = audio
+# audio.close
+# track.save!
+# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
 track = rnj.uploaded_tracks.create!(title: 'Killing Me Softly')
 audio = File.open('app/assets/seeds/Killing_Me_Softly.mp3')
@@ -148,19 +148,19 @@ track.image = lee_pic
 audio.close
 track.save!
 
-track = lee.uploaded_tracks.create!(title: "Telecom")
-audio = File.open('app/assets/seeds/Lee_RosevereTelecom.mp3')
-track.audio = audio
-track.image = lee_pic
-audio.close
-track.save!
-
-track = lee.uploaded_tracks.create!(title: "User Friendly (Future Mix)")
-audio = File.open('app/assets/seeds/Lee_RosevereUser_Friendly_future_mix.mp3')
-track.audio = audio
-track.image = lee_pic
-audio.close
-track.save!
+# track = lee.uploaded_tracks.create!(title: "Telecom")
+# audio = File.open('app/assets/seeds/Lee_RosevereTelecom.mp3')
+# track.audio = audio
+# track.image = lee_pic
+# audio.close
+# track.save!
+#
+# track = lee.uploaded_tracks.create!(title: "User Friendly (Future Mix)")
+# audio = File.open('app/assets/seeds/Lee_RosevereUser_Friendly_future_mix.mp3')
+# track.audio = audio
+# track.image = lee_pic
+# audio.close
+# track.save!
 
 lee_pic.close
 
