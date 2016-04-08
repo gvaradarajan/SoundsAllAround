@@ -118,12 +118,12 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
-track = rnj.uploaded_tracks.create!(title: 'Lady Madonna')
-audio = File.open('app/assets/seeds/Lady_Madonna.mp3')
-track.audio = audio
-audio.close
-track.save!
-PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
+# track = rnj.uploaded_tracks.create!(title: 'Lady Madonna')
+# audio = File.open('app/assets/seeds/Lady_Madonna.mp3')
+# track.audio = audio
+# audio.close
+# track.save!
+# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
 track = rnj.uploaded_tracks.create!(title: 'Kmo Gvarim')
 audio = File.open('app/assets/seeds/Kmo_Gvarim.mp3')
@@ -148,13 +148,13 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
-track = bee.uploaded_tracks.create!(title: "Fur Elise")
-audio = File.open('app/assets/seeds/Fur_Elise.mp3')
-track.audio = audio
-track.image = bee_pic;
-audio.close
-track.save!
-PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
+# track = bee.uploaded_tracks.create!(title: "Fur Elise")
+# audio = File.open('app/assets/seeds/Fur_Elise.mp3')
+# track.audio = audio
+# track.image = bee_pic;
+# audio.close
+# track.save!
+# PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
 track = bee.uploaded_tracks.create!(title: 'Moonlight Sonata')
 audio = File.open('app/assets/seeds/Moonlight_Sonata.mp3')
