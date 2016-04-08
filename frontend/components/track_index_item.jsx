@@ -8,11 +8,11 @@ var TrackIndexItem = React.createClass({
   },
   componentDidMount: function () {
     var audio = document.getElementById("track-audio" + this.props.track.id);
-    audio.addEventListener("ended", this.removeControls);
+    // audio.addEventListener("ended", this.removeControls);
   },
   changePlayState: function (e) {
     var audio = document.getElementById("track-audio" + this.props.track.id);
-    //audio.setAttribute("controls", "");
+    // audio.setAttribute("controls", "");
     // console.log(audio.duration);
     if (audio.paused) {
       audio.play();
@@ -95,7 +95,8 @@ var TrackIndexItem = React.createClass({
             <h1><a onClick={this.linkToTrackShow}>{title}</a></h1>
             <audio ref="audio_tag"
                    id={"track-audio" + track.id}
-                   src={track.audio} ></audio>
+                   src={track.audio}
+                   preload="metadata"></audio>
                  {this.producePlayer()}
           </div>
         </div>
