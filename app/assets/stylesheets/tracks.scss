@@ -57,6 +57,40 @@
   left: 0px;
 }
 
+.main-track-big-rect {
+  top: 220px;
+  left: 30px;
+  display: block;
+  position: relative;
+  height: 65px;
+  width: 520px;
+  background: #ccc;
+}
+
+.main-track-small-rect {
+  height: 65px;
+  width: 2px;
+  background: #f50;
+  position: absolute;
+}
+
+.main-track-small-rect {
+  -webkit-transition:left linear;
+  -moz-transition:left linear;
+  -ms-transition:left linear;
+  -o-transition:left linear;
+  transition:left linear;
+
+  -webkit-transition-duration: 3s;
+  -moz-transition-duration: 3s;
+  -ms-transition-duration: 3s;
+  -o-transition-duration: 3s;
+  transition-duration: 3s;
+
+  left: 0px;
+}
+
+
 .ended {
-  left: 300px;
+  left: 520px;
 }

@@ -1,7 +1,7 @@
 class Track < ActiveRecord::Base
   validates :title, :artist_id, presence: true
 
-  has_attached_file :image, default_url: "/assets/images/original/no_track.png"
+  has_attached_file :image, default_url: "/assets/original/no_track.png"
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   has_attached_file :audio, default_url: "Chain_Jingle.mp3"

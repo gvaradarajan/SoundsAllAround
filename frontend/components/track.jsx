@@ -24,6 +24,9 @@ var Track = React.createClass({
     //audio.removeEventListener(this.audioListenerToken);
     this.listenerToken.remove();
   },
+  linkToPlaylist: function (playlist_id) {
+    this.context.router.push("/playlists/" + playlist_id);
+  },
   receiveEndOfAudio: function (e) {
     $('.small-rect')[0].style['transition-duration'] = '0s';
     $('.small-rect').removeClass('ended');
@@ -50,21 +53,28 @@ var Track = React.createClass({
     var title = track && track.title;
     var artist = track && track.artist;
     var playlistItems = track && track.playlists && track.playlists.map(function (playlist) {
-      return <li key={playlist.id}>{playlist.title}</li>;
-    });
-    var el = this.state.track && this.state.track.audio && (<audio id="audio" ref="audio_tag" src={this.state.track.audio} />);
+      return <li key={playlist.id}
+              onClick={this.linkToPlaylist.bind(this, playlist.id)}>{playlist.title}</li>;
+    }.bind(this));
+    var el = track && track.audio && (<audio id="audio" ref="audio_tag" src={track.audio} />);
     return (
-      <div>
-        <h1>{title}</h1>
-        <h2>{artist}</h2>
+      <div className="track-show content">
+        <header className="track-banner banner">
+          <h1 className="track-heading">{title}</h1>
+          <h1 className="artist-heading">{artist}</h1>
+          <div className="main-track-big-rect" onClick={this.sendTicker}>
+            <div className="main-track-small-rect move" id="small-rect">
+            </div>
+          </div>
+          <div className="track-image-container">
+            <img src={track ? track.image : ""} />
+          </div>
+        </header>
         {el}
-        <ul>
+        <h1 className="page-header">Playlists That Include This Track: </h1>
+        <ul className="track-playlists group">
           {playlistItems}
         </ul>
-        <div className="big-rect" onClick={this.sendTicker}>
-          <div className="small-rect move" id="small-rect">
-          </div>
-        </div>
       </div>
     );
   }

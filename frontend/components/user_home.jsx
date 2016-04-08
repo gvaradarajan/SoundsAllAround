@@ -50,13 +50,25 @@ var UserHome = React.createClass({
     }
     return modal;
   },
+  generateUploadPhotoButton: function () {
+    var button = "";
+    var currUser = CurrentUserStore.isLoggedIn();
+    var currentUserId = currUser ? CurrentUserStore.currentUser().id : NaN;
+    var pageUserId = this.props.params.id;
+    pageUserId = pageUserId || NaN;
+    if (currentUserId == pageUserId) {
+      button = <button className="upload-profile-pic"
+                  onClick={this.openModal}>Upload Photo</button>;
+    }
+    return button;
+  },
   render: function() {
     var name = this.state.user ? this.state.user.username : "";
     return (
       <div className="user-profile">
         <header className="user-banner banner">
           <h1 className="user-heading">{name}</h1>
-          <button className="upload-profile-pic" onClick={this.openModal}>Upload Photo</button>
+          {this.generateUploadPhotoButton()}
           <img className="profile-pic home-profile-pic" src={this.state.user ? this.state.user.image : ""} />
         </header>
         <UserNav user={this.state.user}/>
