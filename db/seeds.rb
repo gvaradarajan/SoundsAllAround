@@ -79,30 +79,9 @@ kirk_pic = File.open('app/assets/images/captain-kirk1.jpg')
 kirk.image = kirk_pic
 kirk.save!
 
-gluestick = artists[0]
-glue_cover = File.open('app/assets/images/gluestick.jpg')
-gluestick.image = glue_cover
-gluestick.save!
-
-glue_cover.close
-
 rnj = artists[1]
 
 cym = rnj.playlists.create!(title: 'Call Your Mother')
-
-# track = rnj.uploaded_tracks.create!(title: "Ahava K'tana")
-# audio = File.open('app/assets/seeds/AhavaKtana.mp3')
-# track.audio = audio
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
-#
-# track = rnj.uploaded_tracks.create!(title: "Ani V'ata")
-# audio = File.open('app/assets/seeds/AniVata.mp3')
-# track.audio = audio
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
 track = rnj.uploaded_tracks.create!(title: 'Killing Me Softly')
 audio = File.open('app/assets/seeds/Killing_Me_Softly.mp3')
@@ -111,20 +90,6 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
-# track = rnj.uploaded_tracks.create!(title: 'Title of the Song')
-# audio = File.open('app/assets/seeds/Title_Of_The_Song.mp3')
-# track.audio = audio
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
-
-# track = rnj.uploaded_tracks.create!(title: 'Lady Madonna')
-# audio = File.open('app/assets/seeds/Lady_Madonna.mp3')
-# track.audio = audio
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
-
 track = rnj.uploaded_tracks.create!(title: 'Kmo Gvarim')
 audio = File.open('app/assets/seeds/Kmo_Gvarim.mp3')
 track.audio = audio
@@ -132,7 +97,7 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
-bee = artists[3]
+bee = artists[2]
 
 bee_pic = File.open('app/assets/images/beethoven.jpg')
 bee.image = bee_pic
@@ -148,14 +113,6 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
-# track = bee.uploaded_tracks.create!(title: "Fur Elise")
-# audio = File.open('app/assets/seeds/Fur_Elise.mp3')
-# track.audio = audio
-# track.image = bee_pic;
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
-
 track = bee.uploaded_tracks.create!(title: 'Moonlight Sonata')
 audio = File.open('app/assets/seeds/Moonlight_Sonata.mp3')
 track.audio = audio
@@ -164,17 +121,9 @@ audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
-# track = bee.uploaded_tracks.create!(title: '5th Symphony')
-# audio = File.open('app/assets/seeds/Symphony_No_5.mp3')
-# track.audio = audio
-# track.image = bee_pic;
-# audio.close
-# track.save!
-# PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
-
 bee_pic.close
 
-cho = artists[4]
+cho = artists[3]
 
 cho_pic = File.open('app/assets/images/Chopin.jpg')
 cho.image = cho_pic
