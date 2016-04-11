@@ -53,7 +53,7 @@ var TrackIndexItem = React.createClass({
     if (this.props.orientation === "landscape") {
       els = (
         <div className="big-rect" onClick={this.sendTicker}>
-         <div className="small-rect move" id={"small-rect " + this.props.track.id} >
+         <div className="small-rect" id={"small-rect " + this.props.track.id} >
          </div>
        </div>
       );
@@ -63,18 +63,22 @@ var TrackIndexItem = React.createClass({
   sendTicker: function (){
     var audio = document.getElementById("track-audio" + this.props.track.id);
     var tick = document.getElementById("small-rect " + this.props.track.id);
-    tick.style['transition-duration'] = Math.floor(audio.duration).toString() + "s";
+    $(tick).addClass('move');
+    var pos = parseInt($(tick).css('left').slice(0,-2));
+    var duration = Math.floor(audio.duration)
+    var timeRemaining = duration - Math.floor((pos / 300) * duration);
+    tick.style['transition-duration'] = timeRemaining.toString() + "s";
     this.audioListenerToken = audio.addEventListener("ended", this.receiveEndOfAudio);
     if (audio.paused) {
-      // $('.small-rect').addClass('move');
       audio.play();
-      $(tick).toggleClass('ended');
+      $(tick).addClass('ended');
     }
     else {
-      // var left = window.getComputedStyle($('.small-rect')[0]).getPropertyValue('left');
-      // var left = $('.small-rect')[0].css('left');
-      // $('.small-rect').removeClass('move');
-      // $('.small-rect').css('left', left);
+      // var leftUncomp = $(tick)[0].style.left
+      // debugger
+      // var left = window.getComputedStyle(leftUncomp);
+      $(tick).removeClass('move')
+      $(tick).toggleClass('ended');
       audio.pause();
     }
   },
