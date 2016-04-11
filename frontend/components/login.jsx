@@ -27,8 +27,16 @@ var Login = React.createClass({
   updatePassword: function(e) {
     this.setState({ password: e.currentTarget.value });
   },
+  signInAsGuest: function (e) {
+    e.preventDefault();
 
-
+    var router = this.context.router;
+    var credentials = { user: { email: "guest@whatever.nope",
+                                password: "iamtheguest" } };
+    ApiUtil.login(credentials, function(id) {
+      router.push("/users/" + id);
+    });
+  },
   render: function() {
     return (
       <section>
@@ -49,6 +57,8 @@ var Login = React.createClass({
           <input className="submit-button"
             type="submit" value="Sign In" onClick={this.handleSubmit}/>
         </form>
+
+        <button className="submit-button" onClick={this.signInAsGuest}>Guest</button>
       </section>
     );
   }

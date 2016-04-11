@@ -59,7 +59,10 @@ artists = User.create!([{username: 'Gluestick (feat. Vadim Fainberg)',
                         password: 'notmozart'},
                        {username: 'Chopin',
                         email: 'chopin@chopin.chopin',
-                        password: 'notmozart'}])
+                        password: 'notmozart'},
+                       {username: 'Guest',
+                        email: 'guest@whatever.nope',
+                        password: 'iamtheguest'}])
 
 fans = User.create!([{username: 'Kirk',
                       email: 'boldlygo@enterprise.io',
