@@ -407,6 +407,16 @@
    margin: auto;
  }
 
+ .playlist-show > a {
+   display: block;
+   background: #f50;
+   text-align: center;
+   color: white;
+   padding: 10px 20px;
+   border-radius: 10px;
+   box-sizing: border-box;
+ }
+
  .ReactModal__Overlay--after-open {
    opacity: 1;
    transition: opacity 150ms ease-out;

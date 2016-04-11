@@ -48,6 +48,9 @@ var TrackIndexItem = React.createClass({
     }
     return button;
   },
+  generateDeleteButton: function () {
+    var button = "";
+  },
   producePlayer: function () {
     var els = "";
     if (this.props.orientation === "landscape") {

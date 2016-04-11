@@ -87,16 +87,14 @@ rnj = artists[1]
 cym = rnj.playlists.create!(title: 'Call Your Mother')
 
 track = rnj.uploaded_tracks.create!(title: 'Killing Me Softly')
-# audio = File.open('app/assets/seeds/Killing_Me_Softly.mp3')
-# track.audio = audio
-# audio.close
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Killing_Me_Softly.mp3"
+track.audio = audio
 track.save!
 PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
 track = rnj.uploaded_tracks.create!(title: 'Kmo Gvarim')
-# audio = File.open('app/assets/seeds/Kmo_Gvarim.mp3')
-# track.audio = audio
-# audio.close
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Kmo_Gvarim.mp3"
+track.audio = audio
 track.save!
 PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
@@ -109,16 +107,15 @@ bee.save!
 sym = bee.playlists.create!(title: 'My Stuff')
 
 track = bee.uploaded_tracks.create!(title: "9th Symphony Finale")
-# audio = File.open('app/assets/seeds/9th_Symphony_Finale.mp3')
-# track.audio = audio
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/9th_Symphony_Finale.mp3"
+track.audio = audio
 track.image = bee_pic;
-# audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
 track = bee.uploaded_tracks.create!(title: 'Moonlight Sonata')
-# audio = File.open('app/assets/seeds/Moonlight_Sonata.mp3')
-# track.audio = audio
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Moonlight_Sonata.mp3"
+track.audio = audio
 track.image = bee_pic;
 # audio.close
 track.save!
@@ -135,16 +132,16 @@ cho.save!
 sym = cho.playlists.create!(title: 'Chopin')
 
 track = cho.uploaded_tracks.create!(title: "E Minor Prelude")
-# audio = File.open('app/assets/seeds/E_Minor_Prelude.mp3')
-# track.audio = audio
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/E_Minor_Prelude.mp3"
+track.audio = audio
 track.image = cho_pic;
 # audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
 track = cho.uploaded_tracks.create!(title: "Funeral March")
-# audio = File.open('app/assets/seeds/Funeral_March_by_Chopin.mp3')
-# track.audio = audio
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Funeral_March_by_Chopin.mp3"
+track.audio = audio
 track.image = cho_pic;
 # audio.close
 track.save!
