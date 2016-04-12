@@ -25,5 +25,10 @@ module.exports = {
       actionType: TrackConstants.SEARCHED_TRACKS_RECEIVED,
       searchResults: searchResults
     });
+  },
+  clearSearchResults: function () {
+    AppDispatcher.dispatch({
+      actionType: TrackConstants.CLEAR_SEARCH
+    });
   }
 };

@@ -1,7 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var PlaylistStore = require('../stores/playlist_store');
-var CurrentUserStore = require('../stores/user_store');
+var CurrentUserStore = require('../stores/current_user_store');
 var TrackIndexItem = require('./track_index_item');
 var EditField = require('./edit_field');
 var ApiUtil = require('../util/api_util');
@@ -15,7 +15,10 @@ var Playlist = React.createClass({
   },
 
   _belongsToCurrentUser: function () {
-    return CurrentUserStore.currentUser().id === this.state.playlist.user_id;
+    if (CurrentUserStore.isLoggedIn() && this.state.playlist) {
+      return CurrentUserStore.currentUser().id === this.state.playlist.user_id;
+    }
+    return false;
   },
 
   _onChange: function () {
@@ -38,23 +41,31 @@ var Playlist = React.createClass({
   },
 
   createEditTitle: function () {
-    if (this.state.titleEditState) {
-      return <EditField field={this.state.playlist.title}
-                handleSubmit={this.handleSubmit.bind(null, "title")} />;
+    if (this._belongsToCurrentUser()) {
+      if (this.state.titleEditState) {
+        return <EditField field={this.state.playlist.title}
+          handleSubmit={this.handleSubmit.bind(null, "title")} />;
+      }
+      else {
+        return <a className="edit-title"
+                  onClick={this.toggleTitleEditState}>Edit Title</a>;
+        }
     }
-    else {
-      return <a onClick={this.toggleTitleEditState}>Edit Title</a>;
-    }
+    return "";
   },
 
   createEditDesc: function () {
-    if (this.state.descEditState) {
-      return <EditField field={this.state.playlist.description}
-                handleSubmit={this.handleSubmit.bind(this, "description")} />;
+    if (this._belongsToCurrentUser()) {
+      if (this.state.descEditState) {
+        return <EditField field={this.state.playlist.description}
+          handleSubmit={this.handleSubmit.bind(this, "description")} />;
+      }
+      else {
+        return <a className="edit-desc"
+                  onClick={this.toggleDescEditState}>Edit Description</a>;
+        }
     }
-    else {
-      return <a onClick={this.toggleDescEditState}>Edit Description</a>;
-    }
+    return "";
   },
 
   createRemoveTrackButton: function (track) {
@@ -69,6 +80,14 @@ var Playlist = React.createClass({
         onClick={this.handleTrackRemoval.bind(this, track.id)} />;
     }
     return button;
+  },
+
+  createTrackForm: function () {
+    if (this._belongsToCurrentUser()) {
+      var id = this.state.playlist && this.state.playlist.id;
+      return <PlaylistAddTrack id={id}/>
+    }
+    return "";
   },
 
   handleTrackRemoval: function (trackId, e) {
@@ -119,7 +138,7 @@ var Playlist = React.createClass({
         </ul>
         {this.createEditTitle()}
         {this.createEditDesc()}
-        <PlaylistAddTrack id={id}/>
+        {this.createTrackForm()}
       </article>
     );
   }

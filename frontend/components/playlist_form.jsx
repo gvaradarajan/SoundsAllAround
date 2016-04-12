@@ -55,7 +55,8 @@ var PlaylistForm = React.createClass({
   },
   render: function() {
     var selectedTrack = this.state.chosenTrack;
-    var selectedTrackItem = selectedTrack && <TrackIndexItem track={selectedTrack} />;
+    var selectedTrackItem = selectedTrack && <TrackIndexItem track={selectedTrack}
+                                                orientation={"portrait"}/>;
     return (
       <section>
         <h1 className="playlist-form-header page-header">Add New Playlist</h1>

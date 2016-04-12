@@ -6,7 +6,7 @@ var ApiUtil = require('../util/api_util');
 
 var SearchTracksForm = React.createClass({
   getInitialState: function () {
-    return { searchResults: [], chosenTrack: null, field: "" };
+    return { searchResults: [], field: "" };
   },
   componentDidMount: function () {
     this.listenerToken = TrackStore.addListener(this._onSearch);
@@ -22,11 +22,14 @@ var SearchTracksForm = React.createClass({
     if (e.currentTarget.value.length > 2) {
       ApiUtil.getSearchResults({ search: { query: e.currentTarget.value } });
     }
+    else {
+      ApiUtil.clearSearchResults();
+    }
     this.setState({ field: e.currentTarget.value });
   },
   chooseTrack: function (e) {
-    var track = TrackStore.find(e.currentTarget.id);
-    this.setState({chosenTrack: track});
+    this.props.chooseTrack(e);
+    this.setState({field: ""});
   },
   render: function () {
     var searchArr = this.state.searchResults;

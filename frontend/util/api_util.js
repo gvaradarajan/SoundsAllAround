@@ -72,7 +72,7 @@ module.exports = {
       dataType: 'json',
       success: function (data) {
         PlaylistActions.receivePlaylistCreation(data);
-        callback && callback(data.playlist.user_id);
+        callback && callback(data.user_id);
       },
       error: function () {
         console.log("YOU DONE FUCKED UP IN ApiUtil#createPlaylist");
@@ -226,5 +226,8 @@ module.exports = {
   },
   registerAddedTrack: function (playlist_id, track) {
     PlaylistActions.updateAddedTrack(playlist_id, track);
+  },
+  clearSearchResults: function () {
+    TrackActions.clearSearchResults();
   }
 };
