@@ -100,7 +100,8 @@ PlaylistTrack.create!(playlist_id: cym.id, track_id: track.id)
 
 bee = artists[2]
 
-bee_pic = File.open('app/assets/images/beethoven.jpg')
+bee_pic = "https://s3.amazonaws.com/soundsallaround-pro/seeds/beethoven.jpg"
+# bee_pic = File.open('app/assets/images/beethoven.jpg')
 bee.image = bee_pic
 bee.save!
 
@@ -125,7 +126,8 @@ bee_pic.close
 
 cho = artists[3]
 
-cho_pic = File.open('app/assets/images/Chopin.jpg')
+cho_pic = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Chopin.jpg"
+# cho_pic = File.open('app/assets/images/Chopin.jpg')
 cho.image = cho_pic
 cho.save!
 

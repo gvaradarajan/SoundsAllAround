@@ -5,7 +5,8 @@
   width: 900px;
   height: 450px;
   margin: 0;
-  background: asset-url("banner.jpg") center no-repeat;
+  // background: asset-url("banner.jpg") center no-repeat;
+  background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/banner.jpg") center no-repeat;
 }
 
 .user-banner {
@@ -30,7 +31,7 @@
   height: 60px;
   border-radius: 50%;
   z-index: -5;
-  background: asset-url("play_baby_play.png") center no-repeat;
+  background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/play_baby_play.png") center no-repeat;
   background-size: contain;
 }
 
@@ -40,7 +41,7 @@
 
 .track-portrait > .playing {
   z-index: 3;
-  background: asset-url("pause_button.png") center no-repeat;
+  background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/pause_button.png") center no-repeat;
   background-size: contain;
 }
 
@@ -48,12 +49,12 @@
   width: 40px;
   height: 40px;
   margin-right: 10px;
-  background: asset-url("play_baby_play.png") center no-repeat;
+  background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/play_baby_play.png") center no-repeat;
   background-size: contain;
 }
 
 .track-landscape > .track-nopic > .playing {
-  background: asset-url("pause_button.png") center no-repeat;
+  background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/pause_button.png") center no-repeat;
   background-size: contain;
 }
 
