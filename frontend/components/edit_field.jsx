@@ -13,14 +13,12 @@ var EditField = React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <form>
+        <form className="edit-field">
           <input className="edit field" value={this.state.field}
             onChange={this.handleChange} />
           <input className="submit-button"
-            type="submit" value="" onClick={this.handleSubmit}/>
+            type="submit" value="Save" onClick={this.handleSubmit}/>
         </form>
-      </div>
     );
   }
 

@@ -57,8 +57,8 @@ var Playlist = React.createClass({
   createEditDesc: function () {
     if (this._belongsToCurrentUser()) {
       if (this.state.descEditState) {
-        return <EditField field={this.state.playlist.description}
-          handleSubmit={this.handleSubmit.bind(this, "description")} />;
+        return <div className="desc"><EditField field={this.state.playlist.description}
+          handleSubmit={this.handleSubmit.bind(this, "description")} /></div>;
       }
       else {
         return <a className="edit-desc"
@@ -129,15 +129,16 @@ var Playlist = React.createClass({
       <article className="playlist-show content">
         <header className="playlist-banner banner">
           <h1 className="playlist-heading">{title}</h1>
+          {this.createEditTitle()}
           <h1 className="creator-heading">{creator}</h1>
         </header>
         <h1 className="page-header">Summary: </h1>
         <p className="description">{description}</p>
+        {this.createEditDesc()}
+        <h1 className="page-header">Tracks: </h1>
         <ul className="group">
           {trackItems}
         </ul>
-        {this.createEditTitle()}
-        {this.createEditDesc()}
         {this.createTrackForm()}
       </article>
     );

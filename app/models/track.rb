@@ -24,4 +24,6 @@ class Track < ActiveRecord::Base
   has_many :playlist_tracks
 
   has_many :playlists, :through => :playlist_tracks, :source => :playlist
+
+  has_many :playlisted_users, :through => :playlists, :source => :user
 end

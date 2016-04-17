@@ -255,6 +255,23 @@
    background: #f50;
  }
 
+ .edit-title {
+   display: inline-block;
+   /*position: absolute;*/
+   /*right: 665px;
+   top: 220px;*/
+   width: 60px;
+   height: 20px;
+   text-align: center;
+   font-size: 13px;
+   border-radius: 5px;
+   color: white;
+   background: #f50;
+   cursor: pointer
+   /*padding-top: 5px;*/
+ }
+
+
  .index-track-header {
    width: 860px;
    font-size: 24px;
@@ -296,7 +313,7 @@
  .playlist-heading {
    position: absolute;
    left: 100px;
-   top: 60px;
+   top: 110px;
    display: inline-block;
    font-weight: normal;
    font-size: 24px;
@@ -307,7 +324,7 @@
  .creator-heading {
    position: absolute;
    left: 100px;
-   top: 25px;
+   top: 75px;
    display: inline-block;
    font-weight: normal;
    font-size: 24px;
@@ -408,15 +425,43 @@
  }
 
  .playlist-show > a {
-   display: block;
+   /*display: block;
    background: #f50;
    text-align: center;
    color: white;
    padding: 10px 20px;
    border-radius: 10px;
-   box-sizing: border-box;
+   box-sizing: border-box;*/
  }
 
+ .edit-desc {
+   display: block;
+   margin-left: 130px;
+   margin-bottom: 20px;
+   padding: 5px;
+   width: 150px;
+   height: 20px;
+   text-align: center;
+   font-size: 16px;
+   border-radius: 5px;
+   color: white;
+   background: #f50;
+   box-sizing: content-box;
+   cursor: pointer;
+ }
+
+ .edit-field > input {
+   display: inline-block;
+   color: black;
+ }
+
+ .edit-field > .submit-button {
+   color: white;
+ }
+
+ .desc {
+   margin-left: 130px;
+ }
 
  .ReactModal__Overlay--after-open {
    opacity: 1;

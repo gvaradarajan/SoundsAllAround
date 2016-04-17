@@ -6,6 +6,7 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.includes(playlists: :user)
+                .includes(tracks_on_playlists: :playlisted_users)
                 .includes(uploaded_tracks: :artist)
                 .find(params[:id])
   end

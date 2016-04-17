@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
     foreign_key: :artist_id
   )
 
+  has_many(
+    :tracks_on_playlists,
+    through: :playlists,
+    source: :tracks
+  )
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
     user && (user.is_password?(password) ? user : nil)
