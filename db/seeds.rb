@@ -77,10 +77,10 @@ fans = User.create!([{username: 'Kirk',
                       email: 'thebest@enterprise.io',
                       password: 'clearly'}])
 
-kirk = fans[0]
-kirk_pic = File.open('app/assets/images/captain-kirk1.jpg')
-kirk.image = kirk_pic
-kirk.save!
+# kirk = fans[0]
+# kirk_pic = File.open('app/assets/images/captain-kirk1.jpg')
+# kirk.image = kirk_pic
+# kirk.save!
 
 rnj = artists[1]
 
@@ -122,8 +122,6 @@ track.image = bee_pic;
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
 
-bee_pic.close
-
 cho = artists[3]
 
 cho_pic = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Chopin.jpg"
@@ -148,5 +146,3 @@ track.image = cho_pic;
 # audio.close
 track.save!
 PlaylistTrack.create!(playlist_id: sym.id, track_id: track.id)
-
-cho_pic.close
