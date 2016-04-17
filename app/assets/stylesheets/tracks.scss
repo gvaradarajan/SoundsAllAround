@@ -12,13 +12,48 @@
   height: 260px;
 }
 
+.track-portrait {
+  position: relative;
+}
+
 .track-portrait > img {
   width: 160px;
   height: 160px;
+  z-index: 1;
+}
+
+.track-portrait > .play-button-container {
+  position: absolute;
+  right: 60px;
+  top: 60px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: -5;
+  background: asset-url("play_baby_play.png") center no-repeat;
+  background-size: contain;
+}
+
+.track-img:hover {
+  z-index: -100;
+}
+
+.track-portrait > .playing {
+  z-index: 3;
+  background: asset-url("pause_button.png") center no-repeat;
+  background-size: contain;
 }
 
 .track-landscape > .track-nopic > .play-button-container {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
   background: asset-url("play_baby_play.png") center no-repeat;
+  background-size: contain;
+}
+
+.track-landscape > .track-nopic > .playing {
+  background: asset-url("pause_button.png") center no-repeat;
   background-size: contain;
 }
 

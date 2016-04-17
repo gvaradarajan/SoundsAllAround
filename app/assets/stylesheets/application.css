@@ -353,7 +353,7 @@
  }
 
  .track-landscape > .track-nopic > div {
-   padding-right: 20px;
+   /*padding-right: 20px;*/
  }
 
  .track-landscape > .track-nopic {
@@ -371,8 +371,10 @@
  }
 
  .play-button-container {
+   display: inline-block;
    float: left;
-   width: 40px;
+   cursor: pointer;
+   border-radius: 50%
    height: 40px;
  }
 

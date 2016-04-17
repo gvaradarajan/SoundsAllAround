@@ -30,7 +30,7 @@ var Track = React.createClass({
   },
   componentWillUnmount: function () {
     var audio = document.getElementById('audio');
-    audio.removeEventListener("ended");
+    audio.removeEventListener("ended", this.audioListenerToken);
     this.listenerToken.remove();
   },
   linkToPlaylist: function (playlist_id) {

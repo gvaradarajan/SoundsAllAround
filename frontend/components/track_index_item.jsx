@@ -14,6 +14,9 @@ var TrackIndexItem = React.createClass({
     var audio = document.getElementById("track-audio" + this.props.track.id);
     // audio.setAttribute("controls", "");
     // console.log(audio.duration);
+    var orient = this.props.orientation;
+    $($("#" + this.props.track.id).children()[1]).toggleClass("playing");
+    // $('.play-button-container').toggleClass("playing");
     if (audio.paused) {
       audio.play();
     }
@@ -39,10 +42,15 @@ var TrackIndexItem = React.createClass({
   },
   generatePlayButton: function () {
     var button = "";
-    if (this.props.orientation === "landscape") {
+    if (this.props.orientation === "portrait") {
+      button = (
+        <div className="play-button-container" onClick={this.changePlayState}>
+        </div>
+      );
+    }
+    else {
       button = (
         <div className="play-button-container" onClick={this.sendTicker}>
-          <img className="play-button"></img>
         </div>
       );
     }
@@ -63,7 +71,8 @@ var TrackIndexItem = React.createClass({
     }
     return els;
   },
-  sendTicker: function (){
+  sendTicker: function (e){
+    $(e.currentTarget).toggleClass("playing");
     var audio = document.getElementById("track-audio" + this.props.track.id);
     var tick = document.getElementById("small-rect " + this.props.track.id);
     $(tick).addClass('move');
@@ -86,6 +95,7 @@ var TrackIndexItem = React.createClass({
     }
   },
   render: function() {
+    var orient = this.props.orientation;
     var track = this.props.track;
     var title = track && track.title;
     var artist = track && track.artist;
@@ -93,10 +103,12 @@ var TrackIndexItem = React.createClass({
     //   debugger
     // }
     return (
-      <li className={"track-" + this.props.orientation + " group"} >
-        <img src={track ? track.image : ""} onClick={this.changePlayState}></img>
+      <li className={"track-" + orient + " group"} id={track.id}>
+        <img className="track-img" src={track ? track.image : ""}
+              onClick={this.changePlayState} />
+        {orient === "portrait" ? this.generatePlayButton() : ""}
         <div className="track-nopic">
-          {this.generatePlayButton()}
+          {orient === "landscape" ? this.generatePlayButton() : ""}
           <div className="track-info">
             <h2><a onClick={this.linkToArtistShow}>{artist}</a></h2>
             <h1><a onClick={this.linkToTrackShow}>{title}</a></h1>
