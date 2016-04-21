@@ -55,7 +55,6 @@ PlaylistStore.__onDispatch = function (payload) {
       PlaylistStore.__emitChange();
       break;
     default:
-
   }
 };
 

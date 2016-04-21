@@ -3,7 +3,7 @@
 SoundsAllAround is a web application for sharing and listening to music. It was
  inspired by SoundCloud and built using Ruby on Rails and React.js.
 
-Explore and Listen [here](http://www.soundsallaround.herokuapp.com/)
+Explore and Listen [here](http://www.soundsallaround.space/)
 
 ###Landing Page:
 

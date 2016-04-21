@@ -11,7 +11,8 @@ var UserNav = React.createClass({
   render: function() {
     var pageUserId = this.props.user && this.props.user.id;
     var currentUserId = CurrentUserStore.isLoggedIn() && CurrentUserStore.currentUser().id;
-    var tabs = ["playlists", "tracks", "follows", "likes"];
+    var tabs = ["playlists", "tracks"];
+    // var tabs = ["playlists", "tracks", "follows", "likes"];
     var links = tabs.map(this._generateLink);
     return (
       <header className="user-header group">

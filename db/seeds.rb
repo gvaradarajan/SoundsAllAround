@@ -6,48 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# test_users = User.create!([{username: 'Kirk',
-#                             email: 'boldlygo@enterprise.io',
-#                             password: 'shatner'},
-#                            {username: 'Spock',
-#                             email: 'LLAP@enterprise.io',
-#                             password: 'logical'},
-#                            {username: 'Uhura',
-#                             email: 'thebest@enterprise.io',
-#                             password: 'clearly'}])
-#
-#
-# scotty = User.create!({username: 'Scotty',
-#                        email: 'beamMeup@enterprise.io',
-#                        password: 'allshesgot'})
-#
-# scotty.playlists.create!({title: 'Music of the Highlanders',
-#                           description: 'The music of my people'})
-# scotty.playlists.create!({title: 'People Yelling Things'})
-#
-# scotPlay = scotty.playlists.first
-#
-# spock = test_users[1]
-# kirk = test_users[0]
-# uhura = test_users[2]
-#
-# spock.playlists.create!({title: 'Sounds that Volcanoes Make'})
-#
-# scotty.uploaded_tracks.create!([{title: 'Loch Lomond'},
-#                                 {title: 'Whoa Nessie'}])
-#
-#
-# kirk.uploaded_tracks.create!([{title: 'Alien Strange'},
-#                               {title: 'I Shatnered Myself'}])
-#
-# uhura.uploaded_tracks.create!([{title: 'Zoe Saldana is Overrated'}])
-#
-# PlaylistTrack.create!(playlist_id: scotty.playlists.first.id,
-#   track_id: scotty.uploaded_tracks.first.id)
-#
-# PlaylistTrack.create!(playlist_id: scotty.playlists.first.id,
-#   track_id: scotty.uploaded_tracks.second.id)
-
 artists = User.create!([{username: 'Gluestick (feat. Vadim Fainberg)',
                         email: 'vadim@punk.com',
                         password: 'manmythlegend'},
@@ -70,17 +28,37 @@ fans = User.create!([{username: 'Kirk',
                      {username: 'Spock',
                       email: 'LLAP@enterprise.io',
                       password: 'logical'},
-                     {username: 'guest',
-                      email: 'guest@enterprise.io',
-                      password: 'imaguest'},
                      {username: 'Uhura',
                       email: 'thebest@enterprise.io',
                       password: 'clearly'}])
 
-# kirk = fans[0]
-# kirk_pic = File.open('app/assets/images/captain-kirk1.jpg')
-# kirk.image = kirk_pic
-# kirk.save!
+guest = artists[4]
+
+rev = guest.playlists.create!(title: 'Next Level Music')
+
+track = guest.uploaded_tracks.create!(title: 'Plane & Car: The Remix')
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Airplane_Taxi_Long.mp3"
+track.audio = audio
+track.save!
+PlaylistTrack.create!(playlist_id: rev.id, track_id: track.id)
+
+track = guest.uploaded_tracks.create!(title: 'WeeOooo')
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Ambulance_Drive_Siren.mp3"
+track.audio = audio
+track.save!
+PlaylistTrack.create!(playlist_id: rev.id, track_id: track.id)
+
+track = guest.uploaded_tracks.create!(title: 'Bowling For Poop')
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Bowling_pin_set.mp3"
+track.audio = audio
+track.save!
+PlaylistTrack.create!(playlist_id: rev.id, track_id: track.id)
+
+track = guest.uploaded_tracks.create!(title: 'This Music Is Garbage')
+audio = "https://s3.amazonaws.com/soundsallaround-pro/seeds/Cans_into_Bag.mp3"
+track.audio = audio
+track.save!
+PlaylistTrack.create!(playlist_id: rev.id, track_id: track.id)
 
 rnj = artists[1]
 
