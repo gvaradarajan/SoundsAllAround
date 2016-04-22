@@ -229,5 +229,8 @@ module.exports = {
   },
   clearSearchResults: function () {
     TrackActions.clearSearchResults();
+  },
+  newTrackPlaying: function (id) {
+    TrackActions.newTrackPlaying(id);
   }
 };

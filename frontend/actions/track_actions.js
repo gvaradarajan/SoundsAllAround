@@ -30,5 +30,11 @@ module.exports = {
     AppDispatcher.dispatch({
       actionType: TrackConstants.CLEAR_SEARCH
     });
+  },
+  newTrackPlaying: function (id) {
+    AppDispatcher.dispatch({
+      actionType: TrackConstants.NEW_TRACK_PLAYING,
+      id: id
+    });
   }
 };
