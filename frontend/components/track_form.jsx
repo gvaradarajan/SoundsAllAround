@@ -13,7 +13,7 @@ var TrackForm = React.createClass({
              audioUrl: "",
              audioFile: "",
              audioFileName: "",
-             imageUrl: "",
+             imageFileUrl: "",
              imageFile: "",
              imageFileName: "" };
   },
@@ -44,7 +44,10 @@ var TrackForm = React.createClass({
                     artist_id: this.props.id,
                     audioUrl: "",
                     audioFile: null,
-                    audioFileName: "" });
+                    audioFileName: "",
+                    imageFileUrl: "",
+                    imageFile: "",
+                    imageFileName: "" });
   },
   updateAudioFile: function (e) {
     var reader = new FileReader();

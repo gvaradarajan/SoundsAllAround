@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var TrackStore = require('../stores/track_store');
 var TrackIndexItem = require('./track_index_item');
 var ApiUtil = require('../util/api_util');
+var UserStore = require('../stores/user_store');
 
 var SearchTracksForm = React.createClass({
   getInitialState: function () {
@@ -10,13 +11,18 @@ var SearchTracksForm = React.createClass({
   },
   componentDidMount: function () {
     this.listenerToken = TrackStore.addListener(this._onSearch);
+    this.searchResetToken = UserStore.addListener(this.resetForm);
     ApiUtil.fetchAllTracks();
   },
   componentWillUnmount: function () {
     this.listenerToken.remove();
+    ApiUtil.clearSearchResults();
   },
   _onSearch: function () {
     this.setState({ searchResults: TrackStore.searchResults() });
+  },
+  resetForm: function () {
+    this.setState({ searchResults: [], field: "" })
   },
   updateField: function (e) {
     if (e.currentTarget.value.length > 2) {

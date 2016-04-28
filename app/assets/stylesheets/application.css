@@ -105,6 +105,7 @@
    text-align: center;
    color: white;
    padding: 10px 20px;
+   margin-right: 20px;
    border-radius: 10px;
    box-sizing: border-box;
    cursor: pointer;
@@ -124,7 +125,15 @@
    padding-left: 90px;
  }
 
- .playlist, .track-portrait {
+ .playlist {
+   width: 600px;
+   height: 100px;
+   display: block;
+   margin: auto;
+   box-sizing: border-box;
+ }
+
+ .track-portrait {
    width: 600px;
    height: 260px;
    display: block;

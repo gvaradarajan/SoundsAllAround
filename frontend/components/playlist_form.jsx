@@ -51,7 +51,7 @@ var PlaylistForm = React.createClass({
     this.setState({ description: e.currentTarget.value });
   },
   resetForm: function () {
-    this.setState({ title: "", description: "", user_id: this.props.id });
+    this.setState({ title: "", description: "", user_id: this.props.id, chosenTrack: null });
   },
   render: function() {
     var selectedTrack = this.state.chosenTrack;

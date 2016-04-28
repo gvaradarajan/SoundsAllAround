@@ -56,9 +56,11 @@ var Login = React.createClass({
 
           <input className="submit-button"
             type="submit" value="Sign In" onClick={this.handleSubmit}/>
+
+          <button className="submit-button" onClick={this.signInAsGuest}>Guest</button>
+
         </form>
 
-        <button className="submit-button" onClick={this.signInAsGuest}>Guest</button>
       </section>
     );
   }

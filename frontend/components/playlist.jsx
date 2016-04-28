@@ -116,7 +116,7 @@ var Playlist = React.createClass({
     var title = playlist && playlist.title;
     var creator = playlist && playlist.creator;
     var description = playlist && playlist.description;
-    var trackItems = playlist && playlist.tracks.map(
+    var trackItems = playlist && playlist.tracks && playlist.tracks.map(
       function (track) {
         return (
           <TrackIndexItem key={track.id} track={track} orientation={"landscape"}/>

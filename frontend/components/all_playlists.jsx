@@ -9,8 +9,11 @@ var AllPlaylists = React.createClass({
     return { playlists: PlaylistStore.all() };
   },
   componentDidMount: function () {
-    PlaylistStore.addListener(this._onChange);
+    this.listenerToken = PlaylistStore.addListener(this._onChange);
     ApiUtil.fetchAllPlaylists();
+  },
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
   },
   _onChange: function () {
     this.setState({playlists: PlaylistStore.all()});
@@ -21,7 +24,8 @@ var AllPlaylists = React.createClass({
       return <PlaylistIndexItem key={playlist.id} playlist={playlist} />;
     });
     return (
-      <ul className="all-playlists">
+      <ul className="playlists-index">
+        <h1 className="playlists-header page-header">Top Playlists:</h1>
         {playlistItems}
       </ul>
     );

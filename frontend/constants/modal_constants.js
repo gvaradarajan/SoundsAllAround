@@ -12,7 +12,7 @@ module.exports = {
     content : {
       position                   : 'absolute',
       width                      : '600px',
-      height                     : '600px',
+      height                     : '700px',
       border                     : '1px solid #ccc',
       background                 : '#fff',
       overflow                   : 'auto',
