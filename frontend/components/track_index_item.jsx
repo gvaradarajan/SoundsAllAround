@@ -14,6 +14,7 @@ var TrackIndexItem = React.createClass({
   },
   componentWillUnmount: function () {
     this.listenerToken.remove();
+    var audio = document.getElementById("track-audio" + this.props.track.id);
     audio.removeEventListener("ended", this.receiveEndOfAudio);
   },
   stopTrack: function () {
