@@ -98,6 +98,17 @@ var NavBar = React.createClass({
     }
     return signoutOrSignIn;
   },
+  createGuestSessionButton: function () {
+    var button = "";
+    if (!this.state.signedIn) {
+      button = (
+        <li>
+          <a onClick={this.signInAsGuest}>Enter As Guest</a>
+        </li>
+      );
+    }
+    return button;
+  },
   createNewSessionButton: function () {
     var button = "";
     if (!this.state.signedIn) {
@@ -110,6 +121,16 @@ var NavBar = React.createClass({
     }
     return button;
   },
+  signInAsGuest: function (e) {
+    e.preventDefault();
+
+    var router = this.context.router;
+    var credentials = { user: { email: "guest@whatever.nope",
+                                password: "iamtheguest" } };
+    ApiUtil.login(credentials, function(id) {
+      router.push("/users/" + id);
+    });
+  },
   toggleState: function () {
     this.setState({ signedIn: CurrentUserStore.isLoggedIn(), modalIsOpen: false });
   },
@@ -119,7 +140,7 @@ var NavBar = React.createClass({
     var signUpComp = <SignUp />;
     if (this.state.signedIn) {
       welcomeMessage = (
-        <li><a>Welcome {CurrentUserStore.currentUser().username}!</a></li>
+        <li><a href="/">Welcome {CurrentUserStore.currentUser().username}!</a></li>
       );
     }
     else {
@@ -133,6 +154,7 @@ var NavBar = React.createClass({
           </h1>
           <ul className="nav-bar group">
             {welcomeMessage}
+            {this.createGuestSessionButton()}
             {this.createNewSessionButton()}
             {this.createSessionButton()}
           </ul>
