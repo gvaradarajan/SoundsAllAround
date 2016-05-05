@@ -48,7 +48,7 @@ var PlaylistAddTrack = React.createClass({
 
   render: function() {
     var selectedTrack = this.state.chosenTrack;
-    var selectedTrackItem = selectedTrack && <TrackIndexItem track={selectedTrack} />;
+    var selectedTrackItem = selectedTrack && <TrackIndexItem track={selectedTrack} orientation={"portrait"} />;
     return (
       <form className="track-form cred-form">
         <SearchTracksForm chooseTrack={this.chooseTrack} />

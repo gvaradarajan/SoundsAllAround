@@ -20,7 +20,7 @@ class Api::PlaylistsController < ApplicationController
 
   def update
     # debugger
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.includes(tracks: :playlists).find(params[:id])
     if @playlist.update(playlist_params[:creation_params])
       render :show
     else
