@@ -127,7 +127,7 @@
 
  .playlist {
    width: 600px;
-   height: 100px;
+   height: 300px;
    display: block;
    margin: auto;
    box-sizing: border-box;
@@ -141,8 +141,29 @@
    box-sizing: border-box;
  }
 
- .playlist > h1 {
+ .playlist-item-info {
+   display: block;
+   float: left;
+   padding-left: 30px;
+ }
+
+ .playlist > .playlist-item-info > h1 {
    cursor: pointer;
+   /*float: left;*/
+   display: block;
+   font-size: 20px;
+   /*width: auto;
+   height: auto;*/
+   /*padding-bottom: 30px;*/
+ }
+
+ .playlist > .playlist-item-info > h2 {
+   cursor: pointer;
+   /*float: left;*/
+   display: block;
+   font-size: 16px;
+   /*padding-top: 30px;
+   margin-right: 30px;*/
  }
 
  .all-tracks > li {
@@ -421,6 +442,14 @@
  .track-banner > .track-image-container > img {
    width: 100%;
    height: auto;
+ }
+
+
+ .playlist-image {
+   width: 200px;
+   height: 200px;
+   display: inline;
+   float: left;
  }
 
  .artist-heading {

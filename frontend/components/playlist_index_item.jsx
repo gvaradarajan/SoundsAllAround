@@ -36,10 +36,14 @@ var PlaylistIndexItem = React.createClass({
     var title = this.props.playlist && this.props.playlist.title;
     // var des = this.props.playlist && this.props.playlist.description;
     var creator = this.props.playlist && this.props.playlist.creator;
+    var image = this.props.playlist && this.props.playlist.image;
     return (
-      <li className="playlist">
-        <h1 onClick={this.linkToPlaylist}>{title}</h1>
-        <h2>{creator}</h2>
+      <li className="playlist group">
+        <img src={image} className="playlist-image"/>
+        <div className="playlist-item-info">
+          <h1 onClick={this.linkToPlaylist}>{title}</h1>
+          <h2>{creator}</h2>
+        </div>
         {this.createDeleteForCurrentUser()}
       </li>
     );
