@@ -35,13 +35,13 @@ var SearchTracksForm = React.createClass({
   },
   chooseTrack: function (e) {
     this.props.chooseTrack(e);
-    this.setState({field: ""});
+    this.setState({field: "", searchResults: []});
   },
   render: function () {
     var searchArr = this.state.searchResults;
     var searchResultItems = searchArr && searchArr.map(function (track) {
       return (
-        <li key={track.id} id={track.id} onClick={this.props.chooseTrack}
+        <li key={track.id} id={track.id} onClick={this.chooseTrack}
           className="search-result-item">
           {track.title}: {track.artist}
         </li>

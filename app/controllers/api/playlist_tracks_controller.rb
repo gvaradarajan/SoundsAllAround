@@ -3,7 +3,9 @@ class Api::PlaylistTracksController < ApplicationController
   def create
     @playlist_track = PlaylistTrack.new(playlist_track_params)
     if @playlist_track.save
-      render json: @playlist_track.track
+      id = @playlist_track.track.id
+      # debugger
+      redirect_to "/api/tracks/#{id}"
     else
       render @playlist_track.errors.full_messages, status: 422
     end
