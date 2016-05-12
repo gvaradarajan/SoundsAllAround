@@ -11,30 +11,6 @@ var modalStyleOptions = require('../constants/modal_constants').session;
 var Login = require('./login');
 var SignUp = require('./sign_up');
 
-// var modalStyleOptions = {
-//   overlay : {
-//     position          : 'fixed',
-//     top               : 0,
-//     left              : 0,
-//     right             : 0,
-//     bottom            : 0,
-//     backgroundColor   : 'rgba(255, 255, 255, 0.75)'
-//   },
-//   content : {
-//     position                   : 'absolute',
-//     width                      : '600px',
-//     height                     : '600px',
-//     border                     : '1px solid #ccc',
-//     background                 : '#fff',
-//     overflow                   : 'auto',
-//     WebkitOverflowScrolling    : 'touch',
-//     borderRadius               : '4px',
-//     outline                    : 'none',
-//     padding                    : '20px',
-//     margin                     : 'auto'
-//   }
-// };
-
 var NavBar = React.createClass({
   contextTypes: {
     router: PropTypes.object.isRequired
@@ -42,7 +18,7 @@ var NavBar = React.createClass({
   getInitialState: function () {
     return { signedIn: CurrentUserStore.isLoggedIn(),
              signInModalOpen: false,
-             signUpModalOpen: false,};
+             signUpModalOpen: false };
   },
   componentWillMount: function () {
     Modal.setAppElement(document.body);
@@ -132,7 +108,8 @@ var NavBar = React.createClass({
     });
   },
   toggleState: function () {
-    this.setState({ signedIn: CurrentUserStore.isLoggedIn(), modalIsOpen: false });
+    this.setState({ signedIn: CurrentUserStore.isLoggedIn(),
+                    modalIsOpen: false });
   },
   render: function() {
     var welcomeMessage = "";

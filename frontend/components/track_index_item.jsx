@@ -115,7 +115,7 @@ var TrackIndexItem = React.createClass({
     var duration = Math.floor(audio.duration)
     var timeRemaining = duration - Math.floor((pos / 300) * duration);
     tick.style['transition-duration'] = timeRemaining.toString() + "s";
-    this.audioListenerToken = audio.addEventListener("ended", this.receiveEndOfAudio);
+    // this.audioListenerToken = audio.addEventListener("ended", this.receiveEndOfAudio);
     if (audio.paused) {
       ApiUtil.newTrackPlaying(this.props.track.id);
       audio.play();
@@ -151,7 +151,8 @@ var TrackIndexItem = React.createClass({
             <audio ref="audio_tag"
                    id={"track-audio" + track.id}
                    src={track.audio}
-                   preload="metadata"></audio>
+                   preload="metadata"
+                   onEnded={this.receiveEndOfAudio}></audio>
                  {this.producePlayer()}
           </div>
         </div>
