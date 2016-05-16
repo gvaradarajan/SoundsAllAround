@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  include PgSearch
+
+  multisearchable :against => [:username]
+
   has_many :playlists
 
   has_many(

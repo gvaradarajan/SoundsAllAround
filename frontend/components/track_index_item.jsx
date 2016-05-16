@@ -10,7 +10,6 @@ var TrackIndexItem = React.createClass({
   componentDidMount: function () {
     var audio = document.getElementById("track-audio" + this.props.track.id);
     this.listenerToken = PlayStore.addListener(this.stopTrack);
-    // audio.addEventListener("ended", this.removeControls);
   },
   componentWillUnmount: function () {
     this.listenerToken.remove();
@@ -21,7 +20,9 @@ var TrackIndexItem = React.createClass({
     var audio = document.getElementById("track-audio" + this.props.track.id);
     if (this.props.track.id !== PlayStore.currentlyPlayingId && !audio.paused) {
       if (this.props.orientation === "portrait") {
-        $($("#" + this.props.track.id).children()[1]).toggleClass("playing");
+        var trackItemChildren = document.getElementById('' + this.props.track.id).children;
+        $(trackItemChildren[1]).toggleClass("playing");
+        // $($("#" + this.props.track.id).children()[1]).toggleClass("playing");
         audio.pause();
       }
       else {
@@ -32,10 +33,8 @@ var TrackIndexItem = React.createClass({
         var duration = Math.floor(audio.duration)
         var timeRemaining = duration - Math.floor((pos / 300) * duration);
         tick.style['transition-duration'] = timeRemaining.toString() + "s";
-        this.audioListenerToken = audio.addEventListener("ended", this.receiveEndOfAudio);
         $(tick).removeClass('move');
         $(tick).toggleClass('ended');
-        // debugger
         $('#play-'+ this.props.track.id).removeClass('playing');
         audio.pause();
       }
@@ -43,11 +42,9 @@ var TrackIndexItem = React.createClass({
   },
   changePlayState: function (e) {
     var audio = document.getElementById("track-audio" + this.props.track.id);
-    // audio.setAttribute("controls", "");
-    // console.log(audio.duration);
     var orient = this.props.orientation;
-    $($("#" + this.props.track.id).children()[1]).toggleClass("playing");
-    // $('.play-button-container').toggleClass("playing");
+    var trackItemChildren = document.getElementById('' + this.props.track.id).children;
+    $(trackItemChildren[1]).toggleClass("playing");
     if (audio.paused) {
       ApiUtil.newTrackPlaying(this.props.track.id);
       audio.play();
@@ -56,9 +53,6 @@ var TrackIndexItem = React.createClass({
       audio.pause();
     }
   },
-  // removeControls: function (e) {
-  //   e.currentTarget.removeAttribute("controls");
-  // },
   linkToTrackShow: function () {
     var router = this.context.router;
     router.push("/tracks/" + this.props.track.id);
@@ -69,6 +63,7 @@ var TrackIndexItem = React.createClass({
   },
   receiveEndOfAudio: function (e) {
     var tick = document.getElementById("small-rect " + this.props.track.id);
+    $('.play-button-container').removeClass('playing');
     tick.style['transition-duration'] = '0s';
     $(tick).removeClass('ended');
   },
@@ -98,7 +93,7 @@ var TrackIndexItem = React.createClass({
     var els = "";
     if (this.props.orientation === "landscape") {
       els = (
-        <div className="big-rect" onClick={this.sendTicker}>
+        <div className="big-rect" onClick={function() {return;}}>
          <div className="small-rect" id={"small-rect " + this.props.track.id} >
          </div>
        </div>
@@ -106,8 +101,12 @@ var TrackIndexItem = React.createClass({
     }
     return els;
   },
-  sendTicker: function (e){
-    $(e.currentTarget).toggleClass("playing");
+  sendTicker: function (e, bool) {
+    // debugger
+    bool = bool || false;
+    if (e.currentTarget.classList[0] === 'play-button-container') {
+      $(e.currentTarget).toggleClass("playing");
+    }
     var audio = document.getElementById("track-audio" + this.props.track.id);
     var tick = document.getElementById("small-rect " + this.props.track.id);
     $(tick).addClass('move');
@@ -115,29 +114,41 @@ var TrackIndexItem = React.createClass({
     var duration = Math.floor(audio.duration)
     var timeRemaining = duration - Math.floor((pos / 300) * duration);
     tick.style['transition-duration'] = timeRemaining.toString() + "s";
-    // this.audioListenerToken = audio.addEventListener("ended", this.receiveEndOfAudio);
     if (audio.paused) {
-      ApiUtil.newTrackPlaying(this.props.track.id);
+      if (!bool) ApiUtil.newTrackPlaying(this.props.track.id);
       audio.play();
       $(tick).addClass('ended');
     }
     else {
-      // var leftUncomp = $(tick)[0].style.left
-      // debugger
-      // var left = window.getComputedStyle(leftUncomp);
       $(tick).removeClass('move')
       $(tick).toggleClass('ended');
       audio.pause();
     }
+  },
+  seek: function (e) {
+    var audio = document.getElementById("track-audio" + this.props.track.id);
+    if (audio.paused) return;
+    // audio.pause();
+    var tick = document.getElementById("small-rect " + this.props.track.id);
+    var bounds = e.currentTarget.getBoundingClientRect();
+    var playerLength = bounds.right - bounds.left;
+    var newTime = Math.floor(((e.clientX - bounds.left) / playerLength) * audio.duration);
+    var newTransDuration = Math.floor(audio.duration - newTime);
+    $(tick).toggleClass('ended');
+    $(tick).toggleClass('move');
+    tick.style['left'] = (e.clientX - bounds.left).toString() + "px";
+    tick.style['transition-duration'] = newTransDuration.toString() + "s";
+    $(tick).toggleClass('move');
+    $(tick).toggleClass('ended');
+    tick.style['left'] = '300px';
+    audio.currentTime = newTime;
+    // this.sendTicker(e, true);
   },
   render: function() {
     var orient = this.props.orientation;
     var track = this.props.track;
     var title = track && track.title;
     var artist = track && track.artist;
-    // if (track.title === "5th Symphony") {
-    //   debugger
-    // }
     return (
       <li className={"track-" + orient + " group"} id={track.id}>
         <img className="track-img" src={track ? track.image : ""}

@@ -25,8 +25,14 @@ var CurrentUserStore = require("./stores/current_user_store");
 var ApiUtil = require('./util/api_util');
 
 var _requireLoggedIn = function (nextState, replace, asyncCallback) {
+  var intendedPath = nextState.location.pathname;
   if (!CurrentUserStore.currentUserFetched()) {
-    ApiUtil.fetchCurrentUser(_notLoggedInRedirect.bind(null, nextState, replace, asyncCallback));
+    if (intendedPath.includes("/users")) {
+      ApiUtil.fetchCurrentUser(_rerouteProfileView.bind(null, nextState, replace, asyncCallback));
+    }
+    else {
+      ApiUtil.fetchCurrentUser(_notLoggedInRedirect.bind(null, nextState, replace, asyncCallback));
+    }
   }
   asyncCallback();
 };
@@ -37,9 +43,25 @@ var _notLoggedInRedirect = function (nextState, replace, asyncCallback) {
     replace(intendedPath);
   }
   else {
+    var id = CurrentUserStore.currentUser().id;
     if (intendedPath === "/") {
-      var id = CurrentUserStore.currentUser().id;
       replace("/users/" + id);
+    }
+    else {
+      replace(intendedPath);
+    }
+  }
+  asyncCallback();
+};
+
+var _rerouteProfileView = function (nextState, replace, asyncCallback) {
+  var intendedPath = nextState.location.pathname;
+  // debugger
+  if (intendedPath.split("/").length == 3) {
+    var id = CurrentUserStore.currentUser() && CurrentUserStore.currentUser().id;
+    var profileId = parseInt(intendedPath.split("/").pop());
+    if (!CurrentUserStore.isLoggedIn() || id !== profileId) {
+      replace(intendedPath + "/playlists");
     }
     else {
       replace(intendedPath);
@@ -61,7 +83,7 @@ var routes = (
     <IndexRoute component={Home} />
     <Route path="signup" component={SignUpForm} />
     <Route path="login" component={Login} />
-    <Route path="users/:id" component={UserHome} >
+    <Route path="users/:id" component={UserHome} onEnter={_rerouteProfileView} >
       <IndexRoute component={UserChart} />
       <Route path="playlists" component={PlaylistIndex} />
       <Route path="tracks" component={TrackIndex} />

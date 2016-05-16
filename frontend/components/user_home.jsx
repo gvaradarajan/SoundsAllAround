@@ -9,6 +9,9 @@ var UserNav = require('./user_navbar');
 var UploadPhotoForm = require('./upload_photo_form');
 
 var UserHome = React.createClass({
+  contextTypes: {
+    router: PropTypes.object.isRequired
+  },
   getInitialState: function () {
     return { user: UserStore.find(this.props.params.id), uploadModalIsOpen: false };
   },

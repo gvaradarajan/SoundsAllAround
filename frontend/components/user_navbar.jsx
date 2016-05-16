@@ -18,7 +18,7 @@ var UserNav = React.createClass({
       <header className="user-header group">
         <nav className="user-header-nav group">
           <ul className="user-nav-bar group">
-            <li><a href={"/users/" + pageUserId}>Chart</a></li>
+            {pageUserId === currentUserId ? <li><a href={"/users/" + pageUserId}>Chart</a></li> : ""}
             {links}
           </ul>
         </nav>

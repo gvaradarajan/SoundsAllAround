@@ -14,6 +14,8 @@ class Track < ActiveRecord::Base
                   :associated_against => { :artist => [:username] },
                   :using => { :tsearch => {:prefix => true} })
 
+  multisearchable :against => [:title]
+
   belongs_to(
     :artist,
     class_name: "User",
