@@ -1,4 +1,4 @@
-class Api::SearchController < ApplicationController
+class Api::TrackSearchController < ApplicationController
 
   def index
     @tracks = Track.search_tracks(search_params[:query])

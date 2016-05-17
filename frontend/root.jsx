@@ -28,7 +28,8 @@ var _requireLoggedIn = function (nextState, replace, asyncCallback) {
   var intendedPath = nextState.location.pathname;
   if (!CurrentUserStore.currentUserFetched()) {
     if (intendedPath.includes("/users")) {
-      ApiUtil.fetchCurrentUser(_rerouteProfileView.bind(null, nextState, replace, asyncCallback));
+      // ApiUtil.fetchCurrentUser(_rerouteProfileView.bind(null, nextState, replace, asyncCallback));
+      ApiUtil.fetchCurrentUser(_notLoggedInRedirect.bind(null, nextState, replace, asyncCallback));
     }
     else {
       ApiUtil.fetchCurrentUser(_notLoggedInRedirect.bind(null, nextState, replace, asyncCallback));
@@ -67,6 +68,9 @@ var _rerouteProfileView = function (nextState, replace, asyncCallback) {
       replace(intendedPath);
     }
   }
+  else {
+    replace(intendedPath);
+  }
   asyncCallback();
 };
 
@@ -83,7 +87,7 @@ var routes = (
     <IndexRoute component={Home} />
     <Route path="signup" component={SignUpForm} />
     <Route path="login" component={Login} />
-    <Route path="users/:id" component={UserHome} onEnter={_rerouteProfileView} >
+    <Route path="users/:id" component={UserHome}>
       <IndexRoute component={UserChart} />
       <Route path="playlists" component={PlaylistIndex} />
       <Route path="tracks" component={TrackIndex} />

@@ -186,7 +186,7 @@
  .header {
    background: #333;
    color: #fff;
-   border-bottom: 1px solid #ccc;
+   /*border-bottom: 1px solid #ccc;*/
  }
 
  .header-nav {
@@ -208,8 +208,13 @@
 
  .nav-bar > li {
    float: left;
+   height: 42px;
    border-left: 1px solid #111;
    color: #ccc;
+ }
+
+ .nav-bar > li:first-child {
+   width: 300px;
  }
 
  .header a {
@@ -220,6 +225,19 @@
  .header a:hover {
    background: black;
    cursor: pointer;
+ }
+
+ .all-search-field {
+   width: 75%;
+   height: 50%;
+   margin: 5px auto;
+   display: block;
+   padding: 5px 10px;
+   background: #ccc;
+   border-top-left-radius: 5px;
+   border-bottom-left-radius: 5px;
+   border-top-right-radius: 5px;
+   border-bottom-right-radius: 5px;
  }
 
  .playlist-form-header {

@@ -130,6 +130,7 @@ var NavBar = React.createClass({
             <a href="/">SoundsAllAround</a>
           </h1>
           <ul className="nav-bar group">
+            <li><input type="text" className="all-search-field"></input></li>
             {welcomeMessage}
             {this.createGuestSessionButton()}
             {this.createNewSessionButton()}

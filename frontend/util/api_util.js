@@ -198,7 +198,7 @@ module.exports = {
   getSearchResults: function (searchParams) {
     $.ajax({
       type: 'GET',
-      url: '/api/search',
+      url: '/api/track_search',
       data: searchParams,
       dataType: 'json',
       success: function (searchResults) {

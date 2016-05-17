@@ -8,13 +8,6 @@ class Track < ActiveRecord::Base
   #validates_attachment_presence :audio
   validates_attachment_content_type :audio, content_type: /\Aaudio\/.*\Z/
 
-  include PgSearch
-  pg_search_scope(:search_tracks,
-                  :against => :title,
-                  :associated_against => { :artist => [:username] },
-                  :using => { :tsearch => {:prefix => true} })
-
-  multisearchable :against => [:title]
 
   belongs_to(
     :artist,
@@ -28,4 +21,32 @@ class Track < ActiveRecord::Base
   has_many :playlists, :through => :playlist_tracks, :source => :playlist
 
   has_many :playlisted_users, :through => :playlists, :source => :user
+
+  def artist_name
+    artist.name
+  end
+
+  include PgSearch
+  pg_search_scope(:search_tracks,
+  :against => :title,
+  :associated_against => { :artist => [:username] },
+  :using => { :tsearch => {:prefix => true} })
+
+  multisearchable :against => [:title, :artist_name]
+
+  def self.rebuild_pg_search_documents
+    connection.execute <<-SQL
+     INSERT INTO pg_search_documents (searchable_type, searchable_id, content, created_at, updated_at)
+       SELECT 'Track' AS searchable_type,
+              tracks.id AS searchable_id,
+              (tracks.title || ' ' || users.username) AS content,
+              now() AS created_at,
+              now() AS updated_at
+       FROM tracks
+       LEFT JOIN users
+         ON users.id = tracks.artist_id
+    SQL
+  end
+
+
 end
