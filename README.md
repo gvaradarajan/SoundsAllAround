@@ -21,11 +21,78 @@ In order to minimize the number of React components required in the application,
  is the component used to display tracks in a collection (called `TrackIndexItem`).
  It takes as one of its props a string with one of two values ("portrait" or "landscape").
  Based on the prop, the component returns a different set of HTML elements in its
- `render` function.
+ `render` function, as can be seen in the below functions belonging to the component.
 
 ```
-To be replaced with key portions of code
+generatePlayButton: function () {
+  var button = "";
+  var id = this.props.track.id;
+  if (this.props.orientation === "portrait") {
+    button = (
+      <div id={'play-'+id} className="play-button-container"
+        onClick={this.changePlayState}>
+      </div>
+    );
+  }
+  else {
+    button = (
+      <div id={'play-'+id} className="play-button-container"
+        onClick={this.sendTicker}>
+      </div>
+    );
+  }
+  return button;
+}
+
+...
+
+producePlayer: function () {
+  var els = "";
+  // the track player doesn't get produced when not in a playlist
+  if (this.props.orientation === "landscape") {
+    els = (
+      <div className="big-rect" onClick={function() {return;}}>
+       <div className="small-rect" id={"small-rect " + this.props.track.id} >
+       </div>
+     </div>
+    );
+  }
+  return els;
+}
+
+...
+
+render: function() {
+  var orient = this.props.orientation;
+  var track = this.props.track;
+  var title = track && track.title;
+  var artist = track && track.artist;
+  return (
+    <li className={"track-" + orient + " group"} id={track.id}>
+      <img className="track-img" src={track ? track.image : ""}
+            onClick={this.changePlayState} />
+      {orient === "portrait" ? this.generatePlayButton() : ""}
+      <div className="track-nopic">
+        {orient === "landscape" ? this.generatePlayButton() : ""}
+        <div className="track-info">
+          <h2><a onClick={this.linkToArtistShow}>{artist}</a></h2>
+          <h1><a onClick={this.linkToTrackShow}>{title}</a></h1>
+          <audio ref="audio_tag"
+                 id={"track-audio" + track.id}
+                 src={track.audio}
+                 preload="metadata"
+                 onEnded={this.receiveEndOfAudio}></audio>
+               {this.producePlayer()}
+        </div>
+      </div>
+    </li>
+  );
+}
 ```
+
+Landscape views are for viewing tracks of a particular playlist and include a track
+ player. The portrait views are for viewing all of the recent tracks or the tracks
+ of a particular artist. All of these cases are handled by a single component.  
 
 
 ###Features

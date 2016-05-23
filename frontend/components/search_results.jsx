@@ -5,6 +5,7 @@ var SearchStore = require('../stores/search_store');
 
 var PlaylistIndexItem = require('./playlist_index_item');
 var TrackIndexItem = require('./track_index_item');
+var UserIndexItem = require('./user_index_item');
 
 var SearchResults = React.createClass({
   contextTypes: {
@@ -64,7 +65,7 @@ var SearchResults = React.createClass({
     );
   },
   playlistResults: function () {
-    var playlists = this.state.searchResults.playlists
+    var playlists = this.state.searchResults.playlists;
     var playlistItems = playlists && playlists.map(function (playlist) {
       return <PlaylistIndexItem key={playlist.id} playlist={playlist} />;
     });
@@ -74,7 +75,22 @@ var SearchResults = React.createClass({
       </ul>
     );
   },
+  userResults: function () {
+    var users = this.state.searchResults.users;
+    var userItems = users && users.map(function (user) {
+      return <UserIndexItem key={user.id} user={user} />;
+    });
+    return (
+      <ul className="all-tracks group">
+        {userItems}
+      </ul>
+    )
+  },
   render: function() {
+    var noResults = "No Results Found"
+    var noTracks = this.state.searchResults.tracks.length === 0;
+    var noPlaylists = this.state.searchResults.playlists.length === 0;
+    var noUsers = this.state.searchResults.users.length === 0;
     return (
       <div>
         <h1 className="page-header">Search Results</h1>
@@ -86,14 +102,12 @@ var SearchResults = React.createClass({
                  className="all-search-field"
                  id="search"/>
         </form>
-        <h1 className="page-header">Tracks: </h1>
+        <h1 className="page-header">Tracks: {noTracks ? noResults : ""}</h1>
         {this.trackResults()}
-        <h1 className="page-header">Playlists: </h1>
+        <h1 className="page-header">Playlists: {noPlaylists ? noResults : ""}</h1>
         {this.playlistResults()}
-        <h1 className="page-header">Artists: </h1>
-        <ul>
-
-        </ul>
+        <h1 className="page-header">Artists: {noUsers ? noResults : ""}</h1>
+        {this.userResults()}
       </div>
     );
   }
