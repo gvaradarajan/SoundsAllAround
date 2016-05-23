@@ -15,10 +15,14 @@ var NavBar = React.createClass({
   contextTypes: {
     router: PropTypes.object.isRequired
   },
+  _onChange: function (e) {
+    this.setState({ searchString: e.currentTarget.value })
+  },
   getInitialState: function () {
     return { signedIn: CurrentUserStore.isLoggedIn(),
              signInModalOpen: false,
-             signUpModalOpen: false };
+             signUpModalOpen: false,
+             searchString: "" };
   },
   componentWillMount: function () {
     Modal.setAppElement(document.body);
@@ -97,6 +101,12 @@ var NavBar = React.createClass({
     }
     return button;
   },
+  search: function (e) {
+    if (this.state.searchString === "") return;
+    e.preventDefault();
+    var router = this.context.router;
+    router.push("/search?" + this.state.searchString);
+  },
   signInAsGuest: function (e) {
     e.preventDefault();
 
@@ -130,7 +140,12 @@ var NavBar = React.createClass({
             <a href="/">SoundsAllAround</a>
           </h1>
           <ul className="nav-bar group">
-            <li><input type="text" className="all-search-field"></input></li>
+            <li>
+              <form onSubmit={this.search}>
+                <input type="text" className="all-search-field"
+                       onChange={this._onChange}/>
+              </form>
+            </li>
             {welcomeMessage}
             {this.createGuestSessionButton()}
             {this.createNewSessionButton()}

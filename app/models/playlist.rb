@@ -3,7 +3,14 @@ class Playlist < ActiveRecord::Base
 
   include PgSearch
 
-  multisearchable :against => [:title, :description]
+  PgSearch.multisearch_options = {
+    :using => [:tsearch, :trigram]
+  }
+
+  multisearchable :against => [:title, :description], :using => :trigram
+
+  #
+  # multisearchable :against => [:title, :description]
 
   belongs_to :user
 

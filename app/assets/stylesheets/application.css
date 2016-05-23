@@ -231,6 +231,7 @@
    width: 75%;
    height: 50%;
    margin: 5px auto;
+   color: black;
    display: block;
    padding: 5px 10px;
    background: #ccc;
@@ -321,7 +322,6 @@
    color: white;
    background: #f50;
    cursor: pointer
-   /*padding-top: 5px;*/
  }
 
 
@@ -331,6 +331,11 @@
    margin: auto;
    text-align: center;
    padding: 20px;
+ }
+
+ .search {
+   width: 700px;
+   margin: auto;
  }
 
  .search-result-item {

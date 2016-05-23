@@ -2,6 +2,7 @@ var UserActions = require('../actions/user_actions');
 var PlaylistActions = require('../actions/playlist_actions');
 var TrackActions = require('../actions/track_actions');
 var SessionActions = require('../actions/session_actions');
+var SearchActions = require('../actions/search_actions');
 
 module.exports = {
   fetchSingleUser: function (id) {
@@ -221,6 +222,21 @@ module.exports = {
       },
       error: function () {
         console.log("YOU DONE FUCKED UP IN ApiUtil#addTrackToPlaylist");
+      }
+    });
+  },
+  multisearch: function (params, callback) {
+    $.ajax({
+      type: 'GET',
+      url: '/api/searches',
+      data: params,
+      dataType: 'json',
+      success: function (results) {
+        SearchActions.receiveSearchResults(results);
+        callback && callback();
+      },
+      error: function () {
+        console.log("YOU DONE FUCKED UP IN ApiUtil#multisearch");
       }
     });
   },

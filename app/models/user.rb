@@ -11,9 +11,6 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
-  include PgSearch
-
-  multisearchable :against => [:username]
 
   has_many :playlists
 
@@ -29,6 +26,14 @@ class User < ActiveRecord::Base
     through: :playlists,
     source: :tracks
   )
+
+  include PgSearch
+
+  PgSearch.multisearch_options = {
+    :using => [:tsearch, :trigram]
+  }
+
+  multisearchable :against => [:username]
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

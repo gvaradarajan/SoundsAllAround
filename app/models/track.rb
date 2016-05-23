@@ -23,7 +23,7 @@ class Track < ActiveRecord::Base
   has_many :playlisted_users, :through => :playlists, :source => :user
 
   def artist_name
-    artist.name
+    self.artist.username
   end
 
   include PgSearch
@@ -31,6 +31,10 @@ class Track < ActiveRecord::Base
   :against => :title,
   :associated_against => { :artist => [:username] },
   :using => { :tsearch => {:prefix => true} })
+
+  PgSearch.multisearch_options = {
+    :using => [:tsearch, :trigram]
+  }
 
   multisearchable :against => [:title, :artist_name]
 

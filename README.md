@@ -14,7 +14,14 @@ Explore and Listen [here](http://www.soundsallaround.space/)
 ![userhome]
 
 ###Technical Details:
-* Under Construction
+
+####Track Items
+In order to minimize the number of React components required in the application,
+ many of the components have been designed to be reusable. Perhaps the best example
+ is the component used to display tracks in a collection (called `TrackIndexItem`).
+ It takes as one of its props a string with one of two values ("portrait" or "landscape").
+ Based on the prop, the component returns a different set of HTML elements in its
+ `render` function.
 
 ```
 To be replaced with key portions of code
