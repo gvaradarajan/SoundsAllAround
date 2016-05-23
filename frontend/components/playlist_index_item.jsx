@@ -9,7 +9,6 @@ var PlaylistIndexItem = React.createClass({
   },
   createDeleteForCurrentUser: function () {
     var button = "";
-    //debugger
     var currentUserId = (
       !CurrentUserStore.currentUser() ? NaN : CurrentUserStore.currentUser().id
     );

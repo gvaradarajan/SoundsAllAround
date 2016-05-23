@@ -22,7 +22,6 @@ var TrackIndexItem = React.createClass({
       if (this.props.orientation === "portrait") {
         var trackItemChildren = document.getElementById('' + this.props.track.id).children;
         $(trackItemChildren[1]).toggleClass("playing");
-        // $($("#" + this.props.track.id).children()[1]).toggleClass("playing");
         audio.pause();
       }
       else {

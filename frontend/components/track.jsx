@@ -19,11 +19,6 @@ var Track = React.createClass({
   },
   componentDidMount: function () {
     var audio = document.getElementById('audio');
-    // audio.addEventListener('metadataloaded', function (e) {
-    //   var bar = $('.main-track-small-rect')[0];
-    //   var time = e.currentTarget.duration;
-    //   bar.style['transition-duration'] = Math.floor(time).toString() + "s";
-    // });
     this.listenerToken = TrackStore.addListener(this._onChange);
     ApiUtil.fetchSingleTrack(this.props.params.id, function () {
     });
@@ -77,7 +72,7 @@ var Track = React.createClass({
     var title = track && track.title;
     var artist = track && track.artist;
     var playlistItems = track && track.playlists && track.playlists.map(function (playlist) {
-      return <PlaylistIndexItem key={playlist.id} 
+      return <PlaylistIndexItem key={playlist.id}
               playlist={playlist}
               onClick={this.linkToPlaylist.bind(this, playlist.id)} />;
     }.bind(this));

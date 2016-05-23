@@ -12,7 +12,6 @@ var SearchResults = React.createClass({
     router: PropTypes.object.isRequired
   },
   _fillResults: function (query) {
-    // debugger
     this.setState({
       searchString: query,
       searchResults: { tracks: SearchStore.trackResults(),
@@ -54,7 +53,6 @@ var SearchResults = React.createClass({
   },
   trackResults: function () {
     var tracks = this.state.searchResults.tracks
-    // debugger
     var trackItems = tracks && tracks.map(function (track) {
       return <TrackIndexItem key={track.id} orientation={"portrait"} track={track} />;
     });
