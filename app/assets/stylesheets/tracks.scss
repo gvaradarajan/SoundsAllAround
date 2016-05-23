@@ -53,7 +53,21 @@
   background-size: contain;
 }
 
+.track-banner > .play-button-container {
+  width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  margin-top: 20px;
+  background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/play_baby_play.png") center no-repeat;
+  background-size: contain;
+}
+
 .track-landscape > .track-nopic > .playing {
+  background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/pause_button.png") center no-repeat;
+  background-size: contain;
+}
+
+.track-banner > .playing {
   background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/pause_button.png") center no-repeat;
   background-size: contain;
 }
@@ -94,6 +108,24 @@
 //   left: 0px;
 // }
 
+.main-track-big-rect {
+  top: 220px;
+  left: 30px;
+  display: block;
+  position: relative;
+  height: 65px;
+  width: 520px;
+  background: #ccc;
+}
+
+.main-track-small-rect {
+  height: 65px;
+  width: 2px;
+  background: #f50;
+  position: absolute;
+  left: 0px;
+}
+
 .move {
   -webkit-transition:left linear;
   -moz-transition:left linear;
@@ -113,22 +145,10 @@
   left: 300px;
 }
 
-.main-track-big-rect {
-  top: 220px;
-  left: 30px;
-  display: block;
-  position: relative;
-  height: 65px;
-  width: 520px;
-  background: #ccc;
+.big-ended {
+  left: 520px;
 }
 
-.main-track-small-rect {
-  height: 65px;
-  width: 2px;
-  background: #f50;
-  position: absolute;
-}
 
 // .main-track-small-rect {
 //   -webkit-transition:left linear;

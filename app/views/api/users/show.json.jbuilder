@@ -1,6 +1,6 @@
 json.extract! @user, :id, :username, :email
 json.image @user.image
-json.playlists @user.playlists do |playlist|
+json.playlists @user.playlists.each do |playlist|
   json.extract! playlist, :id, :title, :description, :user_id
   json.creator playlist.user.username
   json.image playlist.tracks.first.image

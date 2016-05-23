@@ -32,6 +32,9 @@ var PlaylistIndexItem = React.createClass({
   linkToPlaylist: function (e) {
     this.context.router.push("/playlists/" + this.props.playlist.id);
   },
+  linkToUserShow: function (e) {
+    this.context.router.push("/users/" + this.props.playlist.user_id)
+  },
   render: function() {
     var title = this.props.playlist && this.props.playlist.title;
     // var des = this.props.playlist && this.props.playlist.description;
@@ -42,7 +45,7 @@ var PlaylistIndexItem = React.createClass({
         <img src={image} className="playlist-image"/>
         <div className="playlist-item-info">
           <h1 onClick={this.linkToPlaylist}>{title}</h1>
-          <h2>{creator}</h2>
+          <h2 onClick={this.linkToUserShow}>{creator}</h2>
         </div>
         {this.createDeleteForCurrentUser()}
       </li>
