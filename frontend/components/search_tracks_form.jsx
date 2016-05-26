@@ -16,6 +16,7 @@ var SearchTracksForm = React.createClass({
   },
   componentWillUnmount: function () {
     this.listenerToken.remove();
+    this.searchResetToken.remove();
     ApiUtil.clearSearchResults();
   },
   _onSearch: function () {
@@ -52,7 +53,7 @@ var SearchTracksForm = React.createClass({
           <label className="search label" >
             Search For A Track By Title or Artist:
           </label>
-          <input onChange={this.updateField} className="search field"
+          <input onChange={this.updateField} className="field"
             type="text" name="search[query]" value={this.state.field} />
           <ul className="search-result-list">
             {searchResultItems}

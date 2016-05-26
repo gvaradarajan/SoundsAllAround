@@ -15,7 +15,8 @@ var PlaylistForm = React.createClass({
              description: "",
              chosenTrack: null,
              user_id: this.props.id,
-             track_error: ""};
+             track_error: "",
+             title_error: ""};
   },
   componentDidMount: function () {
     this.listenerToken = UserStore.addListener(this.resetForm);
@@ -25,6 +26,10 @@ var PlaylistForm = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
+    if (this.state.title === "") {
+      this.setState({title_error: "Playlists need titles"})
+      return;
+    }
     if (this.state.chosenTrack) {
       var router = this.context.router;
       var p_params = {title: this.state.title,
@@ -51,7 +56,12 @@ var PlaylistForm = React.createClass({
     this.setState({ description: e.currentTarget.value });
   },
   resetForm: function () {
-    this.setState({ title: "", description: "", user_id: this.props.id, chosenTrack: null });
+    this.setState({ title: "",
+                    description: "",
+                    user_id: this.props.id,
+                    chosenTrack: null,
+                    title_error: "",
+                    track_error: "" });
   },
   render: function() {
     var selectedTrack = this.state.chosenTrack;
@@ -79,7 +89,8 @@ var PlaylistForm = React.createClass({
           {selectedTrackItem}
           <input className="submit-button"
             type="submit" value="Create Playlist" onClick={this.handleSubmit}/>
-          {this.state.track_error}
+          <label className="label">{this.state.track_error}</label>
+          <label className="label">{this.state.title_error}</label>
         </form>
       </section>
     );

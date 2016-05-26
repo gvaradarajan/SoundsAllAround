@@ -58,7 +58,6 @@ var _notLoggedInRedirect = function (nextState, replace, asyncCallback) {
 
 var _rerouteProfileView = function (nextState, replace, asyncCallback) {
   var intendedPath = nextState.location.pathname;
-  // debugger
   if (intendedPath.split("/").length == 3) {
     var id = CurrentUserStore.currentUser() && CurrentUserStore.currentUser().id;
     var profileId = parseInt(intendedPath.split("/").pop());

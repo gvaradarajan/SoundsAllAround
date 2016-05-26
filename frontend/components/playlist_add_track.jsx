@@ -12,7 +12,8 @@ var PlaylistAddTrack = React.createClass({
   },
   getInitialState: function() {
     return {
-      chosenTrack: null
+      chosenTrack: null,
+      track_error: ""
     };
   },
 

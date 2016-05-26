@@ -15,7 +15,8 @@ var TrackForm = React.createClass({
              audioFileName: "",
              imageFileUrl: "",
              imageFile: "",
-             imageFileName: "" };
+             imageFileName: "",
+             error: "" };
   },
   componentDidMount: function () {
     this.listenerToken = UserStore.addListener(this.resetForm);
@@ -29,7 +30,11 @@ var TrackForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     var router = this.context.router;
-    // var data = { track: this.state };
+    // debugger
+    if (!this.state.audioFile || this.state.title === "") {
+      this.setState({error: "Error: Title or Audio Missing"})
+      return;
+    }
     var data = new FormData();
     data.append("track[title]", this.state.title);
     data.append("track[artist_id]", this.state.artist_id);
@@ -47,7 +52,8 @@ var TrackForm = React.createClass({
                     audioFileName: "",
                     imageFileUrl: "",
                     imageFile: "",
-                    imageFileName: "" });
+                    imageFileName: "",
+                    error: "" });
   },
   updateAudioFile: function (e) {
     var reader = new FileReader();
@@ -98,6 +104,8 @@ var TrackForm = React.createClass({
 
           <input className="submit-button"
             type="submit" value="Create Track" onClick={this.handleSubmit}/>
+
+          <label className="label">{this.state.error}</label>
         </form>
       </section>
     );
