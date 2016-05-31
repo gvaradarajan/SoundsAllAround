@@ -33,7 +33,7 @@ class Track < ActiveRecord::Base
   :using => { :tsearch => {:prefix => true} })
 
   PgSearch.multisearch_options = {
-    :using => [:tsearch, :trigram]
+    :using => { :tsearch => {:prefix => true} }
   }
 
   multisearchable :against => [:title, :artist_name]
