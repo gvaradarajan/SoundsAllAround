@@ -28,8 +28,8 @@ var SearchResults = React.createClass({
     if (this.state.searchString === undefined) return;
     e && e.preventDefault();
     var searchString = this.state.searchString;
-    var searchParams = { search: { query: searchString } };
-    ApiUtil.multisearch(searchParams, this._fillResults.bind(this, searchString));
+    var router = this.context.router;
+    router.push("/search?" + this.state.searchString);
   },
   getInitialState: function() {
     var query = Object.keys(this.props.location.query)[0];
