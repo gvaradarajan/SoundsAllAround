@@ -16,7 +16,7 @@ var NavBar = React.createClass({
     router: PropTypes.object.isRequired
   },
   _onChange: function (e) {
-    this.setState({ searchString: e.currentTarget.value })
+    this.setState({ searchString: e.currentTarget.value });
   },
   getInitialState: function () {
     return { signedIn: CurrentUserStore.isLoggedIn(),
@@ -101,11 +101,15 @@ var NavBar = React.createClass({
     }
     return button;
   },
+  resetSearchBar: function () {
+    this.setState({ searchString: "" });
+  },
   search: function (e) {
     if (this.state.searchString === "") return;
     e.preventDefault();
     var router = this.context.router;
     router.push("/search?" + this.state.searchString);
+    this.resetSearchBar();
   },
   signInAsGuest: function (e) {
     e.preventDefault();
@@ -143,7 +147,7 @@ var NavBar = React.createClass({
             <li>
               <form onSubmit={this.search}>
                 <input type="text" className="all-search-field"
-                       onChange={this._onChange}/>
+                       onChange={this._onChange} value={this.state.searchString}/>
               </form>
             </li>
             {welcomeMessage}
