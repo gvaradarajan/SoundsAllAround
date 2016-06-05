@@ -24,11 +24,13 @@ var UploadForm = React.createClass({
     e.preventDefault();
     var router = this.context.router;
     var newImageData = new FormData();
-    newImageData.append("user[image]", this.state.imageFile);
-    ApiUtil.updateUser(this.props.id, newImageData, function (id) {
-      router.push("/users/" + id);
-      this.props.fxn();
-    }.bind(this));
+    if (this.state.imageFile) {
+      newImageData.append("user[image]", this.state.imageFile);
+      ApiUtil.updateUser(this.props.id, newImageData, function (id) {
+        router.push("/users/" + id);
+        this.props.fxn();
+      }.bind(this));
+    }
   },
   render: function() {
     return (
