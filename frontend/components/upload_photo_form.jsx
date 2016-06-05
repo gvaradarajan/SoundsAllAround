@@ -34,16 +34,18 @@ var UploadForm = React.createClass({
   },
   render: function() {
     return (
-      <form>
-        <h1>Select a File To Upload</h1>
-        <input type="file" onChange={this.handleChange}></input>
-        <label className="selected-track label">
-          Preview:
-        </label>
-        <img className="profile-pic" src={this.state.imageUrl} />
-        <input className="submit-button"
-          type="submit" value="Update Picture" onClick={this.handleSubmit}/>
-      </form>
+      <section>
+        <h1 className="track-form-header page-header">Upload a Picture</h1>
+        <form className="track-form cred-form">
+          <input type="file" onChange={this.handleChange}></input>
+          <label className="selected-track label">
+            Preview:
+          </label>
+          <img className="profile-pic" src={this.state.imageUrl} />
+          <input className="submit-button"
+            type="submit" value="Update Picture" onClick={this.handleSubmit}/>
+        </form>
+      </section>
     );
   }
 
