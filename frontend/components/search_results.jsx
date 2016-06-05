@@ -91,6 +91,7 @@ var SearchResults = React.createClass({
     var noUsers = this.state.searchResults.users.length === 0;
     return (
       <div>
+        <header className="banner" />
         <h1 className="page-header">Search Results</h1>
         <form onSubmit={this._onSearch}>
           <label htmlFor="search" className="search label">Search: </label>
