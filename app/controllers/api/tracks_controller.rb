@@ -12,6 +12,35 @@ class Api::TracksController < ApplicationController
 
   def create
     @track = Track.new(track_params)
+    `ffmpeg -i #{track_params['audio'].path} -ac 1 -filter:a aresample=8000 -map 0:a -c:a pcm_s16le -f data - > temp.txt`
+    contents = IO.binread("temp.txt").unpack('s*')
+
+    arr = []
+
+    amps = []
+
+    contents.each_index do |i|
+      if i % 2 == 0
+        if contents[i] && contents[i+1]
+          arr.push((contents[i] - contents[i+1]).abs)
+        end
+      end
+    end
+
+    segsize = arr.length / 140
+
+    (0...140).each do |i|
+      j = i * segsize
+      total = 0
+      while j < ((i+1) * segsize)
+        total += arr[j]
+        j += 1
+      end
+      amps.push(total / segsize)
+    end
+
+    @track.amplitudes = amps
+
     if @track.save
       render :show
     else

@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516154957) do
+ActiveRecord::Schema.define(version: 20160629193056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160516154957) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "amplitudes",                      array: true
   end
 
   add_index "tracks", ["album_id"], name: "index_tracks_on_album_id", using: :btree
