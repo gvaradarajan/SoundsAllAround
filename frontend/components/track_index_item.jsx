@@ -16,13 +16,14 @@ var TrackIndexItem = React.createClass({
       var ctx = canvas.getContext('2d');
       var width = 500;
       var height = 100;
+      ctx.clearRect(0,0,width,height);
       var barWidth = width / 140 - 2;
       for (var k = 0; k < amps.length; k++) {
         ctx.fillStyle = "#3F3D3B";
         ctx.fillRect(1 + k * width / 140,
-                     (height / 2) - (amps[k] / 100),
+                     (height / 2) - (amps[k] / 150),
                      barWidth,
-                     (amps[k] / 100) * 2);
+                     (amps[k] / 150) * 2);
       }
     }
   },
@@ -80,6 +81,22 @@ var TrackIndexItem = React.createClass({
     $('.play-button-container').removeClass('playing');
     tick.style['transition-duration'] = '0s';
     $(tick).removeClass('ended');
+    var amps = this.props.track.amplitudes;
+    if (amps) {
+      var canvas = document.getElementById('canvas-'+this.props.track.id);
+      var ctx = canvas.getContext('2d');
+      var width = 500;
+      var height = 100;
+      ctx.clearRect(0,0,width,height);
+      var barWidth = width / 140 - 2;
+      for (var k = 0; k < amps.length; k++) {
+        ctx.fillStyle = "#3F3D3B";
+        ctx.fillRect(1 + k * width / 140,
+                     (height / 2) - (amps[k] / 150),
+                     barWidth,
+                     (amps[k] / 150) * 2);
+      }
+    }
   },
   generatePlayButton: function () {
     var button = "";
@@ -133,7 +150,6 @@ var TrackIndexItem = React.createClass({
     // console.log(totalTime);
     var timePerBar = totalTime / 140;
     var framesPerBar = timePerBar / 20;
-    console.log(framesPerBar);
     var widthPerFrame = barWidth / framesPerBar;
     var i = 0;
     var counter = 0;
@@ -149,26 +165,26 @@ var TrackIndexItem = React.createClass({
         ctx.fillStyle = "#F46A0D";
         // debugger;
         ctx.fillRect(1 + j * width / 140,
-          (height / 2) - (amps[j] / 100),
+          (height / 2) - (amps[j] / 150),
           barWidth,
-          (amps[j] / 100) * 2);
+          (amps[j] / 150) * 2);
       }
       ctx.fillStyle = "#F46A0D";
       ctx.fillRect(1 + i * width / 140,
-        (height / 2) - (amps[i] / 100),
+        (height / 2) - (amps[i] / 150),
         counter * widthPerFrame,
-        (amps[i] / 100) * 2);
+        (amps[i] / 150) * 2);
       ctx.fillStyle = "#3F3D3B";
       ctx.fillRect(1 + i * width / 140 + counter * widthPerFrame,
-        (height / 2) - (amps[i] / 100),
+        (height / 2) - (amps[i] / 150),
         barWidth - counter * widthPerFrame,
-        (amps[i] / 100) * 2);
+        (amps[i] / 150) * 2);
       for (var k = i + 1; k < amps.length; k++) {
         ctx.fillStyle = "#3F3D3B";
         ctx.fillRect(1 + k * width / 140,
-          (height / 2) - (amps[k] / 100),
+          (height / 2) - (amps[k] / 150),
           barWidth,
-          (amps[k] / 100) * 2);
+          (amps[k] / 150) * 2);
       }
       counter++;
       if (counter >= Math.floor(framesPerBar)) {
