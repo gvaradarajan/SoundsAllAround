@@ -413,7 +413,7 @@
 
  .track-landscape {
    margin: auto;
-   width: 600px;
+   width: 800px;
    height: 200px;
    display: block;
  }
@@ -430,8 +430,8 @@
  }
 
  .track-landscape > .track-nopic {
-   float: right;
-   width: 420px;
+   float: left;
+   width: 600px;
    height: 190px;
  }
 

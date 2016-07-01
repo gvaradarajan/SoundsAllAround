@@ -84,6 +84,14 @@
   background: #ccc;
 }
 
+canvas {
+  display: block;
+  position: relative;
+  // height: 65px;
+  // width: 300px;
+  // background: #ccc;
+}
+
 .small-rect {
   height: 65px;
   width: 2px;

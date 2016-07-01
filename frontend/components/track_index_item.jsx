@@ -10,6 +10,21 @@ var TrackIndexItem = React.createClass({
   componentDidMount: function () {
     var audio = document.getElementById("track-audio" + this.props.track.id);
     this.listenerToken = PlayStore.addListener(this.stopTrack);
+    var amps = this.props.track.amplitudes;
+    if (amps) {
+      var canvas = document.getElementById('canvas-'+this.props.track.id);
+      var ctx = canvas.getContext('2d');
+      var width = 500;
+      var height = 100;
+      var barWidth = width / 140 - 2;
+      for (var k = 0; k < amps.length; k++) {
+        ctx.fillStyle = "#3F3D3B";
+        ctx.fillRect(1 + k * width / 140,
+                     (height / 2) - (amps[k] / 100),
+                     barWidth,
+                     (amps[k] / 100) * 2);
+      }
+    }
   },
   componentWillUnmount: function () {
     this.listenerToken.remove();
@@ -79,7 +94,7 @@ var TrackIndexItem = React.createClass({
     else {
       button = (
         <div id={'play-'+id} className="play-button-container"
-          onClick={this.sendTicker}>
+          onClick={this.canvasPlay}>
         </div>
       );
     }
@@ -90,15 +105,79 @@ var TrackIndexItem = React.createClass({
   },
   producePlayer: function () {
     var els = "";
+    var id = this.props.track.id;
     if (this.props.orientation === "landscape") {
       els = (
-        <div className="big-rect" onClick={function() {return;}}>
-         <div className="small-rect" id={"small-rect " + this.props.track.id} >
-         </div>
-       </div>
+        <canvas id={"canvas-" + id} width="500" height="100" onClick={this.canvasPlay} />
       );
+      // els = (
+      //   <div className="big-rect" onClick={function() {return;}}>
+      //    <div className="small-rect" id={"small-rect " + this.props.track.id} >
+      //    </div>
+      //  </div>
+      // );
     }
     return els;
+  },
+  canvasPlay: function (e) {
+    if (e.currentTarget.classList[0] === 'play-button-container') {
+      $(e.currentTarget).toggleClass("playing");
+    }
+    var audio = document.getElementById("track-audio" + this.props.track.id);
+    var canvas = document.getElementById('canvas-'+this.props.track.id);
+    var ctx = canvas.getContext('2d');
+    var width = 500;
+    var height = 100;
+    var barWidth = width / 140 - 2;
+    var totalTime = audio.duration * 1000;
+    // console.log(totalTime);
+    var timePerBar = totalTime / 140;
+    var framesPerBar = timePerBar / 20;
+    console.log(framesPerBar);
+    var widthPerFrame = barWidth / framesPerBar;
+    var i = 0;
+    var counter = 0;
+    var amps = this.props.track.amplitudes;
+    var renderWF = function () {
+      // console.log(amps.length)
+      if (i > amps.length) {
+        clearInterval(interval);
+        return;
+      }
+      ctx.clearRect(0,0,width,height);
+      for (var j = 0; j < i; j++) {
+        ctx.fillStyle = "#F46A0D";
+        // debugger;
+        ctx.fillRect(1 + j * width / 140,
+          (height / 2) - (amps[j] / 100),
+          barWidth,
+          (amps[j] / 100) * 2);
+      }
+      ctx.fillStyle = "#F46A0D";
+      ctx.fillRect(1 + i * width / 140,
+        (height / 2) - (amps[i] / 100),
+        counter * widthPerFrame,
+        (amps[i] / 100) * 2);
+      ctx.fillStyle = "#3F3D3B";
+      ctx.fillRect(1 + i * width / 140 + counter * widthPerFrame,
+        (height / 2) - (amps[i] / 100),
+        barWidth - counter * widthPerFrame,
+        (amps[i] / 100) * 2);
+      for (var k = i + 1; k < amps.length; k++) {
+        ctx.fillStyle = "#3F3D3B";
+        ctx.fillRect(1 + k * width / 140,
+          (height / 2) - (amps[k] / 100),
+          barWidth,
+          (amps[k] / 100) * 2);
+      }
+      counter++;
+      if (counter >= Math.floor(framesPerBar)) {
+        i++;
+        counter = 0;
+      }
+    };
+    var interval = setInterval(renderWF, 20);
+    audio.play();
   },
   sendTicker: function (e, bool) {
     // debugger
@@ -147,6 +226,7 @@ var TrackIndexItem = React.createClass({
     var orient = this.props.orientation;
     var track = this.props.track;
     var title = track && track.title;
+    var amps = orient == "landscape" ? (track && track.amplitudes) : [];
     var artist = track && track.artist;
     return (
       <li className={"track-" + orient + " group"} id={track.id}>
