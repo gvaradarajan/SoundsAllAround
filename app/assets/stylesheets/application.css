@@ -475,16 +475,16 @@
  }
 
  .track-banner > .track-image-container {
-   width: 260px;
-   height: 260px;
+   width: 200px;
+   height: 200px;
    position: absolute;
-   left: 600px;
-   bottom: 20px;
+   left: 700px;
+   bottom: 100px;
  }
 
  .track-banner > .track-image-container > img {
    width: 100%;
-   height: auto;
+   height: 100%;
  }
 
 

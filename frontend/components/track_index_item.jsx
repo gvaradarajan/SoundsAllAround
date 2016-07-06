@@ -10,8 +10,17 @@ var TrackIndexItem = React.createClass({
   componentDidMount: function () {
     var audio = document.getElementById("track-audio" + this.props.track.id);
     this.listenerToken = PlayStore.addListener(this.stopTrack);
+    var amps = this.props.track && this.props.track.amplitudes;
+    this.drawWaveform();
+  },
+  componentWillUnmount: function () {
+    this.listenerToken.remove();
+    var audio = document.getElementById("track-audio" + this.props.track.id);
+    audio.removeEventListener("ended", this.receiveEndOfAudio);
+  },
+  drawWaveform: function () {
     var amps = this.props.track.amplitudes;
-    if (amps) {
+    if (amps && this.props.orientation == "landscape") {
       var canvas = document.getElementById('canvas-'+this.props.track.id);
       var ctx = canvas.getContext('2d');
       var width = 500;
@@ -27,45 +36,19 @@ var TrackIndexItem = React.createClass({
       }
     }
   },
-  componentWillUnmount: function () {
-    this.listenerToken.remove();
-    var audio = document.getElementById("track-audio" + this.props.track.id);
-    audio.removeEventListener("ended", this.receiveEndOfAudio);
-  },
   stopTrack: function () {
     var audio = document.getElementById("track-audio" + this.props.track.id);
-    if (this.props.track.id !== PlayStore.currentlyPlayingId && !audio.paused) {
+    if (this.props.track.id !== PlayStore.currentlyPlayingId() && !audio.paused) {
       if (this.props.orientation === "portrait") {
         var trackItemChildren = document.getElementById('' + this.props.track.id).children;
         $(trackItemChildren[1]).toggleClass("playing");
         audio.pause();
       }
       else {
-        var audio = document.getElementById("track-audio" + this.props.track.id);
-        var tick = document.getElementById("small-rect " + this.props.track.id);
-        $(tick).addClass('move');
-        var pos = parseInt($(tick).css('left').slice(0,-2));
-        var duration = Math.floor(audio.duration)
-        var timeRemaining = duration - Math.floor((pos / 300) * duration);
-        tick.style['transition-duration'] = timeRemaining.toString() + "s";
-        $(tick).removeClass('move');
-        $(tick).toggleClass('ended');
-        $('#play-'+ this.props.track.id).removeClass('playing');
+        var play = document.getElementById("play-" + this.props.track.id);
+        $(play).removeClass('playing');
         audio.pause();
       }
-    }
-  },
-  changePlayState: function (e) {
-    var audio = document.getElementById("track-audio" + this.props.track.id);
-    var orient = this.props.orientation;
-    var trackItemChildren = document.getElementById('' + this.props.track.id).children;
-    $(trackItemChildren[1]).toggleClass("playing");
-    if (audio.paused) {
-      ApiUtil.newTrackPlaying(this.props.track.id);
-      audio.play();
-    }
-    else {
-      audio.pause();
     }
   },
   linkToTrackShow: function () {
@@ -78,24 +61,12 @@ var TrackIndexItem = React.createClass({
   },
   receiveEndOfAudio: function (e) {
     var tick = document.getElementById("small-rect " + this.props.track.id);
-    $('.play-button-container').removeClass('playing');
-    tick.style['transition-duration'] = '0s';
-    $(tick).removeClass('ended');
+    var play = document.getElementById("play-" + this.props.track.id);
+    $(play).removeClass('playing');
     var amps = this.props.track.amplitudes;
     if (amps) {
-      var canvas = document.getElementById('canvas-'+this.props.track.id);
-      var ctx = canvas.getContext('2d');
-      var width = 500;
-      var height = 100;
-      ctx.clearRect(0,0,width,height);
-      var barWidth = width / 140 - 2;
-      for (var k = 0; k < amps.length; k++) {
-        ctx.fillStyle = "#3F3D3B";
-        ctx.fillRect(1 + k * width / 140,
-                     (height / 2) - (amps[k] / 150),
-                     barWidth,
-                     (amps[k] / 150) * 2);
-      }
+      clearInterval(this.canvasPlayToken);
+      this.drawWaveform();
     }
   },
   generatePlayButton: function () {
@@ -125,14 +96,9 @@ var TrackIndexItem = React.createClass({
     var id = this.props.track.id;
     if (this.props.orientation === "landscape") {
       els = (
-        <canvas id={"canvas-" + id} width="500" height="100" onClick={this.canvasPlay} />
+        <canvas id={"canvas-" + id} className="index-canvas" width="500" height="100"
+                onClick={this.seek} />
       );
-      // els = (
-      //   <div className="big-rect" onClick={function() {return;}}>
-      //    <div className="small-rect" id={"small-rect " + this.props.track.id} >
-      //    </div>
-      //  </div>
-      // );
     }
     return els;
   },
@@ -141,102 +107,78 @@ var TrackIndexItem = React.createClass({
       $(e.currentTarget).toggleClass("playing");
     }
     var audio = document.getElementById("track-audio" + this.props.track.id);
+    if (!audio.paused) {
+      audio.pause();
+      return;
+    }
+    else {
+      audio.play();
+      ApiUtil.newTrackPlaying(this.props.track.id);
+    }
     var canvas = document.getElementById('canvas-'+this.props.track.id);
     var ctx = canvas.getContext('2d');
     var width = 500;
     var height = 100;
     var barWidth = width / 140 - 2;
     var totalTime = audio.duration * 1000;
-    // console.log(totalTime);
     var timePerBar = totalTime / 140;
     var framesPerBar = timePerBar / 20;
     var widthPerFrame = barWidth / framesPerBar;
-    var i = 0;
-    var counter = 0;
+    this.currBar = 0;
+    this.counter = 0;
     var amps = this.props.track.amplitudes;
     var renderWF = function () {
-      // console.log(amps.length)
-      if (i > amps.length) {
-        clearInterval(interval);
+      if (audio.paused) {
+        return;
+      }
+      var elapsed = audio.currentTime * 1000;
+      if (this.currBar !== Math.floor(elapsed / timePerBar)) {
+        this.currBar = Math.floor(elapsed / timePerBar);
+        this.counter = Math.floor((elapsed - (this.currBar * timePerBar)) / 20);
+      }
+      if (this.currBar > amps.length) {
+        clearInterval(this.canvasPlayToken);
         return;
       }
       ctx.clearRect(0,0,width,height);
-      for (var j = 0; j < i; j++) {
+      for (var j = 0; j < this.currBar; j++) {
         ctx.fillStyle = "#F46A0D";
-        // debugger;
         ctx.fillRect(1 + j * width / 140,
           (height / 2) - (amps[j] / 150),
           barWidth,
           (amps[j] / 150) * 2);
       }
       ctx.fillStyle = "#F46A0D";
-      ctx.fillRect(1 + i * width / 140,
-        (height / 2) - (amps[i] / 150),
-        counter * widthPerFrame,
-        (amps[i] / 150) * 2);
+      ctx.fillRect(1 + this.currBar * width / 140,
+        (height / 2) - (amps[this.currBar] / 150),
+        this.counter * widthPerFrame,
+        (amps[this.currBar] / 150) * 2);
       ctx.fillStyle = "#3F3D3B";
-      ctx.fillRect(1 + i * width / 140 + counter * widthPerFrame,
-        (height / 2) - (amps[i] / 150),
-        barWidth - counter * widthPerFrame,
-        (amps[i] / 150) * 2);
-      for (var k = i + 1; k < amps.length; k++) {
+      ctx.fillRect(1 + this.currBar * width / 140 + this.counter * widthPerFrame,
+        (height / 2) - (amps[this.currBar] / 150),
+        barWidth - this.counter * widthPerFrame,
+        (amps[this.currBar] / 150) * 2);
+      for (var k = this.currBar + 1; k < amps.length; k++) {
         ctx.fillStyle = "#3F3D3B";
         ctx.fillRect(1 + k * width / 140,
           (height / 2) - (amps[k] / 150),
           barWidth,
           (amps[k] / 150) * 2);
       }
-      counter++;
-      if (counter >= Math.floor(framesPerBar)) {
-        i++;
-        counter = 0;
+      this.counter++;
+      if (this.counter >= Math.floor(framesPerBar)) {
+        this.currBar++;
+        this.counter = 0;
       }
     };
-    var interval = setInterval(renderWF, 20);
-    audio.play();
-  },
-  sendTicker: function (e, bool) {
-    // debugger
-    bool = bool || false;
-    if (e.currentTarget.classList[0] === 'play-button-container') {
-      $(e.currentTarget).toggleClass("playing");
-    }
-    var audio = document.getElementById("track-audio" + this.props.track.id);
-    var tick = document.getElementById("small-rect " + this.props.track.id);
-    $(tick).addClass('move');
-    var pos = parseInt($(tick).css('left').slice(0,-2));
-    var duration = Math.floor(audio.duration)
-    var timeRemaining = duration - Math.floor((pos / 300) * duration);
-    tick.style['transition-duration'] = timeRemaining.toString() + "s";
-    if (audio.paused) {
-      if (!bool) ApiUtil.newTrackPlaying(this.props.track.id);
-      audio.play();
-      $(tick).addClass('ended');
-    }
-    else {
-      $(tick).removeClass('move')
-      $(tick).toggleClass('ended');
-      audio.pause();
-    }
+    this.canvasPlayToken = setInterval(renderWF.bind(this), 20);
   },
   seek: function (e) {
+    var container = e.currentTarget.getBoundingClientRect();
+    var leftDis = e.clientX - container.left;
+    var ratio = (leftDis - 1) / 500;
     var audio = document.getElementById("track-audio" + this.props.track.id);
-    if (audio.paused) return;
-    // audio.pause();
-    var tick = document.getElementById("small-rect " + this.props.track.id);
-    var bounds = e.currentTarget.getBoundingClientRect();
-    var playerLength = bounds.right - bounds.left;
-    var newTime = Math.floor(((e.clientX - bounds.left) / playerLength) * audio.duration);
-    var newTransDuration = Math.floor(audio.duration - newTime);
-    $(tick).toggleClass('ended');
-    $(tick).toggleClass('move');
-    tick.style['left'] = (e.clientX - bounds.left).toString() + "px";
-    tick.style['transition-duration'] = newTransDuration.toString() + "s";
-    $(tick).toggleClass('move');
-    $(tick).toggleClass('ended');
-    tick.style['left'] = '300px';
-    audio.currentTime = newTime;
-    // this.sendTicker(e, true);
+    audio.currentTime = audio.duration * ratio;
   },
   render: function() {
     var orient = this.props.orientation;
