@@ -48,18 +48,15 @@ generatePlayButton: function () {
 
 producePlayer: function () {
   var els = "";
-  // the track player doesn't get produced when not in a playlist
+  var id = this.props.track.id;
   if (this.props.orientation === "landscape") {
     els = (
-      <div className="big-rect" onClick={function() {return;}}>
-       <div className="small-rect" id={"small-rect " + this.props.track.id} >
-       </div>
-     </div>
+      <canvas id={"canvas-" + id} className="index-canvas" width="500" height="100"
+              onClick={this.seek} />
     );
   }
   return els;
 }
-
 ...
 
 render: function() {
