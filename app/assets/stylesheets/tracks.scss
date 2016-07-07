@@ -5,7 +5,6 @@
   width: 900px;
   height: 450px;
   margin: 0;
-  // background: asset-url("banner.jpg") center no-repeat;
   background: url("https://s3.amazonaws.com/soundsallaround-pro/seeds/banner3.jpg") center no-repeat;
 }
 
@@ -72,21 +71,13 @@
   background-size: contain;
 }
 
-// .track-portrait > audio {
-//   width: 160px;
-// }
-
 canvas {
   display: block;
   position: relative;
-  // height: 65px;
-  // width: 300px;
-  // background: #ccc;
 }
 
 .show-canvas {
   top: 200px;
-  // left: 10px;
   display: block;
   position: relative;
 }
