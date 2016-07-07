@@ -15,6 +15,83 @@ Explore and Listen [here](http://www.soundsallaround.space/)
 
 ###Technical Details:
 
+####Generating Waveforms
+One aspect of SoundCloud that I felt would be interesting to replicate is the use
+of a track's waveform as an audio player.
+
+#####Caching The Waveform Data
+Originally the plan was to use a library like wavesurfer.js in order to draw the
+waveforms on a canvas element. However, such libraries tend to require the buffering
+of the entire audio from the source in order to dynamically draw the waveforms.
+This leads to egregiously high load times for a page where multiple waveforms need
+to be displayed. Instead, I decided to use the ffmpeg library to decode amplitude
+information from the track upon upload and then store the amplitudes in database as
+part of the track's record.
+
+Below is the additional migration used to support amplitude storage in the database:
+
+```
+class AddAmplitudesToTracks < ActiveRecord::Migration
+  def change
+    add_column :tracks, :amplitudes, :integer, array: true
+  end
+end
+
+```
+
+To decode the track's amplitudes on upload, it was necessary to run a console
+command from within the track controller's create action. In the same function,
+I also average over equal sized portions of the raw amplitude list to produce an
+array of 140 amplitudes.
+
+```
+def create
+  @track = Track.new(track_params)
+
+  `ffmpeg -i #{track_params['audio'].path} -ac 1 -filter:a aresample=8000 -map 0:a -c:a pcm_s16le -f data - > temp.txt`
+
+  contents = IO.binread("temp.txt").unpack('s*')
+
+  arr = []
+
+  amps = []
+
+  contents.each_index do |i|
+    if i % 2 == 0
+      if contents[i] && contents[i+1]
+        arr.push((contents[i] - contents[i+1]).abs)
+      end
+    end
+  end
+
+  segsize = arr.length / 140
+
+  (0...140).each do |i|
+    j = i * segsize
+    total = 0
+    while j < ((i+1) * segsize)
+      total += arr[j]
+      j += 1
+    end
+    amps.push(total / segsize)
+  end
+
+  @track.amplitudes = amps
+
+  `rm temp.txt`
+
+  if @track.save
+    render :show
+  else
+    render @track.errors.full_messages, status: 422
+  end
+end
+
+```
+
+#####Creating The Waveform
+Section to be added soon!
+
 ####Track Items
 In order to minimize the number of React components required in the application,
  many of the components have been designed to be reusable. Perhaps the best example
